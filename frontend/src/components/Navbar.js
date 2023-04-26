@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu, AiOutlineKey } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import SearchBar from './home components/SearchBar';
 
 function Navbar() {
@@ -36,7 +37,7 @@ function Navbar() {
     <nav className='fixed z-50 w-full'>
       {/* ********** DESKTOP NAV ********** */}
       <div className="flex justify-between content-center p-2">
-      <h1 className='tracking-wider p-2 text-4xl text-white font-bold'>POPFLIX</h1>
+      <Link to='/'><h1 className='tracking-wider p-2 text-4xl text-white font-bold'>POPFLIX</h1></Link>
       <div className='nav-links'>
         <ul className='gap-x-4 hidden md:flex'>
           <li

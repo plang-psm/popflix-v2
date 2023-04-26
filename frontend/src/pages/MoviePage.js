@@ -7,12 +7,18 @@ import {
   AiFillTwitterSquare,
 } from 'react-icons/ai';
 import { FaImdb } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { FreeMode } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/free-mode';
 
 function MoviePage() {
   let { id } = useParams();
   const [moviesArr, setMoviesArr] = useState([]);
   const [genres, setGenres] = useState([]);
   const [media, setMedia] = useState([]);
+  const [credits, setCredits] = useState([]);
+  const [suggested, setSuggested] = useState([]);
 
   const BACKDROP_IMG = 'https://image.tmdb.org/t/p/original';
   const POSTER_IMG = 'https://image.tmdb.org/t/p/w200';
@@ -21,47 +27,52 @@ function MoviePage() {
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&page=1`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
       );
       const data = await res.json();
       setMoviesArr(data);
       setGenres(data.genres);
     };
     fetchMovies();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${process.env.REACT_APP_TMDB_KEY}&page=1`
+        `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${process.env.REACT_APP_TMDB_KEY}`
       );
       const data = await res.json();
       setMedia(data);
     };
     fetchMovies();
-  }, []);
+  }, [id]);
 
-  // console.log(moviesArr)
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      );
+      const data = await res.json();
+      setCredits(data.cast);
+    };
+    fetchMovies();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      );
+      const data = await res.json();
+      setSuggested(data.results);
+    };
+    fetchMovies();
+  }, [id]);
 
   return (
     <>
-      <div className='container w-100 mx-auto py-20 px-2 '>
-        {/* col | MD - row  - container
-      Image
-      Description
-       - title
-       - release date | runtime | review
-       - Add to watchlist button
-       - social medias
-      
-      col | md row - conatiner
-      cast
-      rev | budget | statyst
-
-      production companies ?
-
-       */}
-        <div className='top-container max-w-[950px] mx-auto text-center font-thin flex flex-col md:flex-row md:justify-around'>
+      <div className='container w-100 max-w-[900px] mx-auto py-20 px-2'>
+        <div className='top-container mx-auto text-center font-thin flex flex-col md:flex-row md:justify-around'>
           <div className='media-image mx-auto md:w-full max-w-[300px]'>
             <img
               src={POSTER_IMG + moviesArr.poster_path}
@@ -154,7 +165,10 @@ function MoviePage() {
                   to={`https://www.facebook.com/${media.facebook_id}`}
                   target='_blank'
                 >
-                  <AiFillFacebook size='40px' className='m-1 text-gray-300 hover:text-white' />
+                  <AiFillFacebook
+                    size='40px'
+                    className='m-1 text-gray-300 hover:text-white'
+                  />
                 </Link>
               </i>
               <i>
@@ -162,7 +176,10 @@ function MoviePage() {
                   to={`https://www.instagram.com/${media.instagram_id}`}
                   target='_blank'
                 >
-                  <AiFillInstagram size='40px' className='m-1  text-gray-300 hover:text-white' />
+                  <AiFillInstagram
+                    size='40px'
+                    className='m-1  text-gray-300 hover:text-white'
+                  />
                 </Link>
               </i>
               <i>
@@ -170,7 +187,10 @@ function MoviePage() {
                   to={`https://www.twitter.com/${media.twitter_id}`}
                   target='_blank'
                 >
-                  <AiFillTwitterSquare size='40px' className='m-1  text-gray-300 hover:text-white' />
+                  <AiFillTwitterSquare
+                    size='40px'
+                    className='m-1  text-gray-300 hover:text-white'
+                  />
                 </Link>
               </i>
               <i>
@@ -178,14 +198,105 @@ function MoviePage() {
                   to={`https://www.imdb.com/${media.imdb_id}`}
                   target='_blank'
                 >
-                  <FaImdb size='40px' className='m-1  text-gray-300 hover:text-white' />
+                  <FaImdb
+                    size='40px'
+                    className='m-1  text-gray-300 hover:text-white'
+                  />
                 </Link>
               </i>
             </div>
           </div>
         </div>
+        <div className='mid-container md:flex my-8'>
+          <div className='credits-container md:max-w-[70%] text-center'>
+            <h2 className='text-start font-bold mb-2'>Cast</h2>
+            <Swiper
+              slidesPerView={2}
+              spaceBetween={10}
+              freeMode={true}
+              modules={[FreeMode]}
+              breakpoints={{
+              450: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+                640: {
+                  slidesPerView: 4,
+                  spaceBetween: 10,
+                },
+              }}
+              className='mySwiper'
+            >
+              {credits.map((credit, index) => (
+                <SwiperSlide key={index}>
+                  <img
+                    className='object-cover h-full'
+                    src={POSTER_IMG + credit.profile_path}
+                    alt={`${
+                      credit.title === undefined
+                        ? 'No title image'
+                        : `${credit.title} image`
+                    }`}
+                  />
+                  <h3>{credit.character}</h3>
+                  <h3><span className='font-thin'>{credit.original_name}</span></h3>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+
+          <div className='side-info-container font-thin w-full pl-4'>
+            <div className="genre flex justify-between items-center md:flex-col md:items-end"> <h2 className='text-start font-bold mb-2'>Genres:</h2> {genres.map(genre => (
+              <p className='p-1.5 md:my-1 bg-red-700' key={genre.name}>{genre.name}</p>
+            ))}</div>
+            <div className='status-budget-revenue flex text-center justify-between md:flex-col md:items-end pb-2'>
+              <p className='md:my-1'> <span className='font-bold'>Status: </span> {moviesArr.status}</p>
+              <p  className='md:my-1'> <span className='font-bold'>Budget: </span> {moviesArr.budget}</p>
+              <p  className='md:my-1'> <span className='font-bold'>Revenue: </span> {moviesArr.revenue}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className='bottom-container md:flex my-8 border-t-[.001px] py-8 border-gray-100'>
+          <div className='suggestion-container text-center max-w-full'>
+            <h2 className='text-start font-bold mb-2'>Suggestions</h2>
+            <Swiper
+              slidesPerView={2}
+              spaceBetween={10}
+              freeMode={true}
+              modules={[FreeMode]}
+              breakpoints={{
+                450: {
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                640: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+              }}
+              className='mySwiper'
+            >
+              {suggested.map((movie, index) => (
+                <SwiperSlide key={index}>
+                 <Link to={`/movie/${movie.id}`}>
+                  <img
+                    className='object-cover h-full'
+                    src={movie.backdrop_path && BACKDROP_IMG + movie.backdrop_path }
+                    alt={`${
+                      movie.title === undefined
+                        ? 'No title image'
+                        : `${movie.title} image`
+                    }`}
+                  />
+                  <h3>{movie.title}</h3>
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
       </div>
-      <p></p>
     </>
   );
 }

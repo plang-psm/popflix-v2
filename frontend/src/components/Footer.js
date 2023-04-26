@@ -8,7 +8,7 @@ import {
 
 function Footer() {
   return (
-    <div className='text-center bg-red-700'>
+    <div className=' py-20 text-center bg-red-700'>
       <h3
         className='text-lg
       '

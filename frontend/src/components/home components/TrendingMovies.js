@@ -71,7 +71,8 @@ function TrendingMovies(props) {
         <div className='relative md:overflow-x-auto'>
           {trendingMoviesArr.map((movie, index) => (
             <SwiperSlide key={index}>
-              <Link to={`movie/${movie.key}`}>
+              {/* <Link to={`movie/${movie.key}`}> */}
+              <Link to={`/movie/${movie.key}`}>
                 <img
                   className='object-cover h-full'
                   src={props.apiImg + movie.poster}
