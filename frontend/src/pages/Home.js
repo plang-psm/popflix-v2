@@ -13,7 +13,7 @@ const API_IMG = 'https://image.tmdb.org/t/p/w200';
 function MovieHome() {
 
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen pb-14'>
       <NowPlaying
         api={API_KEY}
         apiImg={API_IMG}
@@ -27,7 +27,6 @@ function MovieHome() {
         api={API_KEY}
         apiImg={API_IMG}
       />
-      <h1>ON AIR TV SHOWS</h1>
     </div>
   );
 }
