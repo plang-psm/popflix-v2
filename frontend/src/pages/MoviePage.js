@@ -224,7 +224,7 @@ function MoviePage() {
               {credits.map((credit, index) => (
                 <SwiperSlide key={index}>
                   <img
-                    className='object-cover h-full'
+                    className='object-cover w-full max-h-[247px]'
                     src={
                       credit.profile_path !== null
                         ? POSTER_IMG + credit.profile_path
@@ -276,27 +276,27 @@ function MoviePage() {
           <div className='suggestion-container text-center max-w-full'>
             <h2 className='text-start font-bold mb-2'>Suggestions</h2>
             <Swiper
-              slidesPerView={2}
+              slidesPerView={1}
               spaceBetween={10}
               freeMode={true}
               modules={[FreeMode]}
               breakpoints={{
-                450: {
+                600: {
                   slidesPerView: 2,
-                  spaceBetween: 10,
+                  spaceBetween: 5,
                 },
-                640: {
+                900: {
                   slidesPerView: 3,
-                  spaceBetween: 10,
+                  spaceBetween: 5,
                 },
               }}
               className='mySwiper'
             >
               {suggested.map((movie, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={index} className='h-full'>
                   <Link to={`/movie/${movie.id}`}>
                     <img
-                      className='object-cover h-full w-full max-h-[132px]'
+                      className='object-cover w-full max-h-[180px]'
                       src={
                         movie.backdrop_path
                           ? BACKDROP_IMG + movie.backdrop_path

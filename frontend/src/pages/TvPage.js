@@ -202,22 +202,24 @@ function TvPage() {
           <div className='credits-container md:max-w-[70%] text-center'>
             <h2 className='text-start font-bold mb-2'>Cast</h2>
             <Swiper
-              slidesPerView={3}
+              slidesPerView={2}
               spaceBetween={10}
               freeMode={true}
               modules={[FreeMode]}
-              breakpoints={{
-                450: {
-                  slidesPerView: 2,
-                  spaceBetween: 10,
-                },
-              }}
+              breakpoints={
+                {
+                  // 450: {
+                  //   slidesPerView: 3,
+                  //   spaceBetween: 10,
+                  // },
+                }
+              }
               className='mySwiper'
             >
               {credits.map((credit, index) => (
                 <SwiperSlide key={index}>
                   <img
-                    className='object-cover mx-auto max-h-[300px]'
+                    className='object-cover mx-auto w-full max-h-[247px]'
                     src={
                       credit.profile_path !== null
                         ? POSTER_IMG + credit.profile_path
@@ -271,18 +273,18 @@ function TvPage() {
           <div className='suggestion-container text-center max-w-full'>
             <h2 className='text-start font-bold mb-2'>Suggestions</h2>
             <Swiper
-              slidesPerView={2}
+              slidesPerView={1}
               spaceBetween={10}
               freeMode={true}
               modules={[FreeMode]}
               breakpoints={{
-                450: {
+                600: {
                   slidesPerView: 2,
-                  spaceBetween: 10,
+                  spaceBetween: 5,
                 },
-                640: {
+                900: {
                   slidesPerView: 3,
-                  spaceBetween: 10,
+                  spaceBetween: 5,
                 },
               }}
               className='mySwiper'
@@ -291,7 +293,7 @@ function TvPage() {
                 <SwiperSlide key={index}>
                   <Link to={`/tv/${show.id}`}>
                     <img
-                      className='object-cover h-full w-full max-h-[132px]'
+                      className='object-cover w-full max-h-[180px]'
                       src={
                         show.backdrop_path !== null
                           ? BACKDROP_IMG + show.backdrop_path
