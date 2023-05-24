@@ -1,6 +1,6 @@
 import axios from 'axios';
-
-const API_URL = '/watchlist';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:4000';
+const API_URL = `${BASE_URL}/watchlist`;
 
 // Add to watchlist
 const addToWatchlist = async (mediaData, token) => {

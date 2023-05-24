@@ -1,10 +1,10 @@
 import axios from 'axios';
-
-const API_URL = '/users/';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:4000';
+const API_URL = `${BASE_URL}/users`;
 
 // Register user
 const register = async (userData) => {
-  const res = await axios.post(API_URL + 'signup', userData);
+  const res = await axios.post(API_URL + '/signup', userData);
   if (res.data) {
     localStorage.setItem('user', JSON.stringify(res.data));
   }
@@ -13,7 +13,7 @@ const register = async (userData) => {
 
 // Login user
 const login = async (userData) => {
-  const res = await axios.post(API_URL + 'login', userData);
+  const res = await axios.post(API_URL + '/login', userData);
   if (res.data) {
     localStorage.setItem('user', JSON.stringify(res.data));
   }
