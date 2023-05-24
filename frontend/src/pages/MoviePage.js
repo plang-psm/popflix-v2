@@ -36,6 +36,8 @@ function MoviePage() {
   // URL needed to bring images from TMDB API
   const BACKDROP_IMG = 'https://image.tmdb.org/t/p/original';
   const POSTER_IMG = 'https://image.tmdb.org/t/p/w200';
+  const NO_IMAGE =
+    'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
 
   // Fetch movies and store in moviesArr.
   useEffect(() => {
@@ -223,7 +225,11 @@ function MoviePage() {
                 <SwiperSlide key={index}>
                   <img
                     className='object-cover h-full'
-                    src={POSTER_IMG + credit.profile_path}
+                    src={
+                      credit.profile_path !== null
+                        ? POSTER_IMG + credit.profile_path
+                        : NO_IMAGE
+                    }
                     alt={`${
                       credit.title === undefined
                         ? 'No title image'
@@ -290,10 +296,11 @@ function MoviePage() {
                 <SwiperSlide key={index}>
                   <Link to={`/movie/${movie.id}`}>
                     <img
-                      className='object-cover h-full'
+                      className='object-cover h-full w-full max-h-[132px]'
                       src={
-                        movie.backdrop_path &&
-                        BACKDROP_IMG + movie.backdrop_path
+                        movie.backdrop_path
+                          ? BACKDROP_IMG + movie.backdrop_path
+                          : NO_IMAGE
                       }
                       alt={`${
                         movie.title === undefined

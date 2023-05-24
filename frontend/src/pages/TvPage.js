@@ -36,6 +36,8 @@ function TvPage() {
   // URL needed to bring images from TMDB API
   const BACKDROP_IMG = 'https://image.tmdb.org/t/p/original';
   const POSTER_IMG = 'https://image.tmdb.org/t/p/w200';
+  const NO_IMAGE =
+    'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
 
   // Fetch shows and store in tvArr.
   useEffect(() => {
@@ -215,11 +217,11 @@ function TvPage() {
               {credits.map((credit, index) => (
                 <SwiperSlide key={index}>
                   <img
-                    className='object-cover mx-auto h-full'
+                    className='object-cover mx-auto max-h-[300px]'
                     src={
-                      POSTER_IMG !== ''
+                      credit.profile_path !== null
                         ? POSTER_IMG + credit.profile_path
-                        : 'https://images.unsplash.com/photo-1683555084143-6287662b9719?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80'
+                        : NO_IMAGE
                     }
                     alt={`${
                       credit.title === undefined
@@ -289,9 +291,11 @@ function TvPage() {
                 <SwiperSlide key={index}>
                   <Link to={`/tv/${show.id}`}>
                     <img
-                      className='object-cover h-full'
+                      className='object-cover h-full w-full max-h-[132px]'
                       src={
-                        show.backdrop_path && BACKDROP_IMG + show.backdrop_path
+                        show.backdrop_path !== null
+                          ? BACKDROP_IMG + show.backdrop_path
+                          : NO_IMAGE
                       }
                       alt={`${
                         show.name === undefined
