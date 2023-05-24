@@ -6,21 +6,7 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* .embla {
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  color: white;
 }
-.embla__viewport {
-  overflow: hidden;
-
-}
-
-.embla__container {
-  display: flex;
-}
-
-.embla__slide {
-  flex: 0 0 auto; 
-  min-width: 0;
-  max-width: 100%;
-
-} */
-.swiper-button-next { color: red; }

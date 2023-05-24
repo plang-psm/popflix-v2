@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper';
 
 function NowPlaying(props) {
+  const navigate = useNavigate();
   let API_IMG = 'https://image.tmdb.org/t/p/original';
   const [nowPlayingArr, setNowPlayingArr] = useState([]);
 
@@ -19,7 +21,7 @@ function NowPlaying(props) {
         setNowPlayingArr(
           data.results.map((movie) => {
             return {
-              key: movie.id,
+              movieid: movie.id,
               poster: movie.backdrop_path,
               title: movie.title,
               vote: movie.vote_average,
@@ -35,8 +37,8 @@ function NowPlaying(props) {
   return (
     <>
       <Swiper navigation={true} modules={[Navigation]} className='mySwiper'>
-        {nowPlayingArr.map((movie, index) => (
-          <SwiperSlide key={index}>
+        {nowPlayingArr.map((movie, movieid) => (
+          <SwiperSlide key={movieid}>
             <img
               className='brightness-75'
               src={API_IMG + movie.poster}
@@ -50,7 +52,14 @@ function NowPlaying(props) {
             >
               <h2 className='pt-4 sm:text-2xl lg:text-3xl font-bold'>
                 {movie.title}
+                <button
+                  className='bg-gray-700 hover:bg-red-600 uppercase text-sm p-2 mx-2 font-normal'
+                  onClick={() => navigate(`/movie/${movie.movieid}`)}
+                >
+                  Visit
+                </button>
               </h2>
+
               <p className='pt-2 invisible sm:visible sm:text-sm'>
                 {movie.overview}
               </p>

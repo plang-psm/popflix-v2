@@ -1,10 +1,12 @@
 import { CircularProgressbar } from 'react-circular-progressbar';
 
+// Error Message Handling
 export function extractErrorMessage(error) {
   return error.response?.data?.message || error.message || error.toString();
 }
 
-export function ReviewBar(props) {
+// Review bar for the main page.
+export function ReviewBarABS(props) {
   return (
     <CircularProgressbar
       className='w-[75px] absolute'
@@ -25,7 +27,9 @@ export function ReviewBar(props) {
               ? `rgba(255, 0, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
               : Math.ceil((props.vote / 10) * 100) < 75
               ? `rgba(255, 165, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
-              : `rgba(60, 179, 113, ${Math.ceil((props.vote / 10) * 100) / 100}`,
+              : `rgba(60, 179, 113, ${
+                  Math.ceil((props.vote / 10) * 100) / 100
+                }`,
           // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
           strokeLinecap: 'butt',
           // Customize transition animation
@@ -62,10 +66,11 @@ export function ReviewBar(props) {
   );
 }
 
-export function SmallerReviewBar(props) {
+// Review bar for the movies page.
+export function ReviewBar(props) {
   return (
     <CircularProgressbar
-      className='w-[60px]'
+      className='w-[75px]'
       background={true}
       value={`${Math.ceil((props.vote / 10) * 100)}`}
       text={`${Math.ceil((props.vote / 10) * 100)}%`}
@@ -83,7 +88,9 @@ export function SmallerReviewBar(props) {
               ? `rgba(255, 0, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
               : Math.ceil((props.vote / 10) * 100) < 75
               ? `rgba(255, 165, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
-              : `rgba(60, 179, 113, ${Math.ceil((props.vote / 10) * 100) / 100}`,
+              : `rgba(60, 179, 113, ${
+                  Math.ceil((props.vote / 10) * 100) / 100
+                }`,
           // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
           strokeLinecap: 'butt',
           // Customize transition animation

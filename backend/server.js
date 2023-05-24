@@ -7,7 +7,7 @@ const cors = require("cors");
 const { errorHandler } = require('./middleware/errorMiddleware')
 const mainRoutes = require('./routes/main')
 const usersRoutes = require('./routes/users')
-// const watchlistRoutes = require('./routes/watchlist')
+const watchlistRoutes = require('./routes/watchlist')
 
 require('dotenv').config({path: 'config.env'})
 
@@ -23,7 +23,7 @@ app.use(logger('dev'))
 
 app.use('/', mainRoutes)
 app.use('/users', usersRoutes)
-// app.use('/watchlist', watchlistRoutes)
+app.use('/watchlist', watchlistRoutes)
  
 app.use(errorHandler)
 app.listen(process.env.PORT, ()=>{

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToWatchlist } from '../features/watchlist/watchlistSlice';
+import { toast } from 'react-toastify';
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -11,15 +13,27 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/free-mode';
+import { ReviewBar } from '../util/utils';
+import Spinner from '../components/Spinner';
 
 function MoviePage() {
-  let { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Pull movie id from params for request
+  // Pull user/isLoading from state
+  const { id } = useParams();
+  const { user } = useSelector((state) => state.auth);
+  let { isLoading } = useSelector((state) => state.auth);
+
+  // Holds and sets data
   const [moviesArr, setMoviesArr] = useState([]);
   const [genres, setGenres] = useState([]);
   const [media, setMedia] = useState([]);
   const [credits, setCredits] = useState([]);
   const [suggested, setSuggested] = useState([]);
 
+  // URL needed to bring images from TMDB API
   const BACKDROP_IMG = 'https://image.tmdb.org/t/p/original';
   const POSTER_IMG = 'https://image.tmdb.org/t/p/w200';
 
@@ -36,6 +50,7 @@ function MoviePage() {
     fetchMovies();
   }, [id]);
 
+  // Fetch movie socials and store in media.
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
@@ -47,6 +62,7 @@ function MoviePage() {
     fetchMovies();
   }, [id]);
 
+  // Fetch movie credits and store in credits.
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
@@ -58,6 +74,7 @@ function MoviePage() {
     fetchMovies();
   }, [id]);
 
+  // Fetch movie reccomendations and store in suggested.
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
@@ -69,9 +86,39 @@ function MoviePage() {
     fetchMovies();
   }, [id]);
 
+  // Function to add media to our watchlist
+  const addMovie = (e) => {
+    e.preventDefault();
+
+    // Checks for user first via state
+    if (!user) {
+      return toast.error('You need an account to create a watchlist');
+    }
+
+    let movieData = {
+      image: BACKDROP_IMG + moviesArr.backdrop_path,
+      title: moviesArr.original_title,
+      mediaId: id.toString(),
+      type: 'movie',
+      user: user._id,
+    };
+    // dispatch the data to watchlistslice
+    dispatch(addToWatchlist(movieData))
+      .unwrap()
+      .then(() => {
+        navigate('/watchlist');
+        toast.success('New Movie added!');
+      })
+      .catch(toast.error);
+  };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <>
-      <div className='container w-100 max-w-[900px] mx-auto py-20 px-2'>
+      <div className='container w-100 max-w-[1000px] mx-auto py-36 px-2 md:text-xl lg:text-2xl'>
         <div className='top-container mx-auto text-center font-thin flex flex-col md:flex-row md:justify-around'>
           <div className='media-image mx-auto md:w-full max-w-[300px]'>
             <img
@@ -92,71 +139,16 @@ function MoviePage() {
                 <span className='font-bold'>Runtime: </span>
                 {moviesArr.runtime}mins
               </p>
-              <CircularProgressbar
-                className='w-[60px]'
-                background={true}
-                value={`${Math.ceil((moviesArr.vote_average / 10) * 100)}`}
-                text={`${Math.ceil((moviesArr.vote_average / 10) * 100)}%`}
-                styles={{
-                  // Customize the root svg element
-                  root: {
-                    bottom: '0',
-                    padding: '5px',
-                  },
-                  // Customize the path, i.e. the "completed progress"
-                  path: {
-                    // Path color
-                    stroke:
-                      Math.ceil((moviesArr.vote_average / 10) * 100) < 55
-                        ? `rgba(255, 0, 0, ${
-                            Math.ceil((moviesArr.vote_average / 10) * 100) / 100
-                          }`
-                        : Math.ceil((moviesArr.vote_average / 10) * 100) < 75
-                        ? `rgba(255, 165, 0, ${
-                            Math.ceil((moviesArr.vote_average / 10) * 100) / 100
-                          }`
-                        : `rgba(60, 179, 113, ${
-                            Math.ceil((moviesArr.vote_average / 10) * 100) / 100
-                          }`,
-                    // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-                    strokeLinecap: 'butt',
-                    // Customize transition animation
-                    transition: 'stroke-dashoffset 0.5s ease 0s',
-                    // Rotate the path
-                    transform: 'rotate(0.25turn)',
-                    transformOrigin: 'center center',
-                  },
-                  // Customize the circle behind the path, i.e. the "total progress"
-                  trail: {
-                    // Trail color
-                    stroke: '#d6d6d6',
-                    // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-                    strokeLinecap: 'butt',
-                    // Rotate the trail
-                    transform: 'rotate(0.25turn)',
-                    transformOrigin: 'center center',
-                  },
-                  // Customize the text
-                  text: {
-                    // Text color
-                    fill: 'white',
-
-                    // Text size
-                    fontSize: '24px',
-                    transform: 'translate(-23px, 8px)',
-                  },
-                  // Customize background - only used when the `background` prop is true
-                  background: {
-                    fill: '#000000',
-                  },
-                }}
-              />
+              <ReviewBar vote={moviesArr.vote_average} />
             </div>
             <div className='overview'>
               <span className='font-bold  my-2'>Overview: </span>
               {moviesArr.overview}
             </div>
-            <button className='bg-red-700 p-2 font-normal my-4'>
+            <button
+              className='bg-red-700 hover:bg-red-600 p-2 font-normal my-4'
+              onClick={addMovie}
+            >
               Add to watchlist
             </button>
             <div className='media-socials flex justify-center p-1'>
@@ -216,7 +208,7 @@ function MoviePage() {
               freeMode={true}
               modules={[FreeMode]}
               breakpoints={{
-              450: {
+                450: {
                   slidesPerView: 3,
                   spaceBetween: 10,
                 },
@@ -239,20 +231,37 @@ function MoviePage() {
                     }`}
                   />
                   <h3>{credit.character}</h3>
-                  <h3><span className='font-thin'>{credit.original_name}</span></h3>
+                  <h3>
+                    <span className='font-thin'>{credit.original_name}</span>
+                  </h3>
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
 
           <div className='side-info-container font-thin w-full pl-4'>
-            <div className="genre flex justify-between items-center md:flex-col md:items-end"> <h2 className='text-start font-bold mb-2'>Genres:</h2> {genres.map(genre => (
-              <p className='p-1.5 md:my-1 bg-red-700' key={genre.name}>{genre.name}</p>
-            ))}</div>
-            <div className='status-budget-revenue flex text-center justify-between md:flex-col md:items-end pb-2'>
-              <p className='md:my-1'> <span className='font-bold'>Status: </span> {moviesArr.status}</p>
-              <p  className='md:my-1'> <span className='font-bold'>Budget: </span> {moviesArr.budget}</p>
-              <p  className='md:my-1'> <span className='font-bold'>Revenue: </span> {moviesArr.revenue}</p>
+            <div className='genre my-8 md:my-0 flex justify-between flex-wrap items-center md:flex-col md:items-end'>
+              {' '}
+              <h2 className='text-start font-bold mb-2 w-1/5'>Genres:</h2>{' '}
+              {genres.map((genre) => (
+                <p className='p-1.5 md:my-1 bg-red-700' key={genre.name}>
+                  {genre.name}
+                </p>
+              ))}
+            </div>
+            <div className='status-budget-revenue my-8 md:my-0 flex text-center justify-between md:flex-col md:items-end pb-2'>
+              <p className='md:my-1'>
+                {' '}
+                <span className='font-bold'>Status: </span> {moviesArr.status}
+              </p>
+              <p className='md:my-1'>
+                {' '}
+                <span className='font-bold'>Budget: </span> {moviesArr.budget}
+              </p>
+              <p className='md:my-1'>
+                {' '}
+                <span className='font-bold'>Revenue: </span> {moviesArr.revenue}
+              </p>
             </div>
           </div>
         </div>
@@ -279,17 +288,20 @@ function MoviePage() {
             >
               {suggested.map((movie, index) => (
                 <SwiperSlide key={index}>
-                 <Link to={`/movie/${movie.id}`}>
-                  <img
-                    className='object-cover h-full'
-                    src={movie.backdrop_path && BACKDROP_IMG + movie.backdrop_path }
-                    alt={`${
-                      movie.title === undefined
-                        ? 'No title image'
-                        : `${movie.title} image`
-                    }`}
-                  />
-                  <h3>{movie.title}</h3>
+                  <Link to={`/movie/${movie.id}`}>
+                    <img
+                      className='object-cover h-full'
+                      src={
+                        movie.backdrop_path &&
+                        BACKDROP_IMG + movie.backdrop_path
+                      }
+                      alt={`${
+                        movie.title === undefined
+                          ? 'No title image'
+                          : `${movie.title} image`
+                      }`}
+                    />
+                    <h3>{movie.title}</h3>
                   </Link>
                 </SwiperSlide>
               ))}

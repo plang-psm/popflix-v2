@@ -13,11 +13,16 @@ const WatchlistSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: 'User',
     },
-    movieid: {
+    mediaId: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
