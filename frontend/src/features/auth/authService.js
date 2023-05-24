@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = process.env.BASE_URL || 'http://localhost:4000';
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:4000';
 const API_URL = `${BASE_URL}/users`;
 
 // Register user
