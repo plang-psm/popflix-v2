@@ -53,7 +53,7 @@ function Navbar() {
       <div className='flex justify-between content-center p-2'>
         <Link to='/'>
           <h1 className='tracking-wider p-2 text-4xl text-white font-bold'>
-            POPFLIX
+            POPFLIIX
           </h1>
         </Link>
         <div className='nav-links'>
@@ -128,7 +128,7 @@ function Navbar() {
         }
       >
         <Link to='/'>
-          <h1 className='tracking-wider p-4 text-4xl font-bold'>POPFLIX</h1>
+          <h1 className='tracking-wider p-4 text-4xl font-bold'>POPFLIIX</h1>
         </Link>
         <ul className='pt-6 uppercase'>
           {/* <li className='search'>{search && <SearchBar />}</li> */}
