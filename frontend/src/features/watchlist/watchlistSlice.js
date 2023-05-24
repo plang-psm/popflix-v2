@@ -29,7 +29,6 @@ export const getWatchlists = createAsyncThunk(
       const token = thunkAPI.getState().auth.user.token;
       return await watchlistService.getWatchlists(token);
     } catch (error) {
-      console.log('error here');
       return thunkAPI.rejectWithValue(extractErrorMessage(error));
     }
   }
