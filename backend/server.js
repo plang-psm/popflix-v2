@@ -13,7 +13,11 @@ require('dotenv').config({ path: 'config.env' });
 
 connectDB();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ['https://popfliix.vercel.app', 'http://localhost:3000'],
+  })
+);
 // app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
