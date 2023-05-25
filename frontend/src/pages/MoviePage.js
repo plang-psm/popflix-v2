@@ -245,12 +245,11 @@ function MoviePage() {
             </Swiper>
           </div>
 
-          <div className='side-info-container font-thin w-full pl-4'>
-            <div className='genre my-8 md:my-0 flex justify-between flex-wrap items-center md:flex-col md:items-end'>
-              {' '}
-              <h2 className='text-start font-bold mb-2 w-1/5'>Genres:</h2>{' '}
+          <div className='side-info-container font-thin w-full md:pl-4 py-4 md:py-0'>
+            <div className='genre flex justify-between items-center md:flex-col md:items-end'>
+              <h2 className='text-start font-bold mb-2'>Genres:</h2>
               {genres.map((genre) => (
-                <p className='p-1.5 md:my-1 bg-red-700' key={genre.name}>
+                <p className='py-1 px-4 md:my-1 bg-red-700' key={genre.name}>
                   {genre.name}
                 </p>
               ))}
