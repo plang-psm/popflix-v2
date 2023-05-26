@@ -48,7 +48,7 @@ function LogIn() {
   }
 
   return (
-    <>
+    <div className='bg-gradient-to-t from-slate-900 to-black'>
       <div className='container w-full h-screen py-14 px-10 flex flex-col justify-center text-black max-w-[525px] mx-auto'>
         <h1 className='tracking-wider p-2 text-4xl text-white font-bold uppercase text-center mb-4'>
           Login
@@ -84,7 +84,7 @@ function LogIn() {
           Signup
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

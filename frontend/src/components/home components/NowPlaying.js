@@ -53,7 +53,7 @@ function NowPlaying(props) {
               <h2 className='pt-4 sm:text-2xl lg:text-3xl font-bold'>
                 {movie.title}
                 <button
-                  className='bg-gray-700 hover:bg-red-600 uppercase text-sm p-2 mx-2 font-normal'
+                  className=' hover:text-red-500 uppercase text-sm p-2 mx-2 font-normal'
                   onClick={() => navigate(`/movie/${movie.movieid}`)}
                 >
                   Visit

@@ -80,7 +80,7 @@ function Header() {
           </div>
         </div>
       ) : (
-        <div className='title pb-5 text-center'>
+        <div className='title p-5 text-center'>
           <h1 className='my-2 text-6xl font-bold uppercase text-red-700'>
             Welcome
           </h1>
@@ -88,17 +88,17 @@ function Header() {
           <h3 className='my-2 text-xl uppercase'>
             <span className='text-4xl uppercase text-red-700 font-semibold'>
               Browse
-            </span>{' '}
+            </span>
             through your favorite movies and shows
           </h3>
           <h2 className='my-2 text-xl uppercase'>
-            Create your own{' '}
+            Create your own
             <span className='text-4xl uppercase text-red-700 font-semibold'>
               Watchlist
             </span>
           </h2>
           <button
-            className='p-3 my-2 border-2 border-red-700 uppercase'
+            className='p-3 my-2 border-2 border-red-700 hover:bg-red-700 uppercase'
             onClick={() => navigate('/users/signup')}
           >
             Sign up
