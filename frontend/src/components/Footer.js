@@ -4,7 +4,7 @@ import { AiFillLinkedin, AiFillGithub, AiFillRocket } from 'react-icons/ai';
 
 function Footer() {
   return (
-    <div className='min-h-100 py-16 text-center bg-slate-900'>
+    <div className='min-h-100 py-8 text-center bg-transparent'>
       <div className='socials flex justify-center pt-2'>
         <Link
           to={`https://www.linkedin.com/in/plang-psm/`}

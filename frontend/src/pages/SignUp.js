@@ -28,6 +28,9 @@ function SignUp() {
       [e.target.name]: e.target.value,
     }));
   };
+  const mediumRegex = new RegExp(
+    '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'
+  );
 
   // Dispatchs data to authslice
   const handleSubmit = (e) => {
@@ -36,6 +39,15 @@ function SignUp() {
     // Checks for matching passwaords
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
+    } else if (password.length < 8) {
+      toast.error('Password must be a minimum of 8 characters');
+    } else if (password.match(mediumRegex)) {
+      toast.error(
+        `Password must have one: 
+          1 lowercase character, 
+          1 uppercase character, 
+          1 special character`
+      );
     } else {
       const userData = {
         username,
@@ -57,7 +69,7 @@ function SignUp() {
   }
 
   return (
-    <div className='bg-gradient-to-t from-slate-900 to-black'>
+    <div className=''>
       <div className='container w-full h-screen py-14 px-10 flex flex-col justify-center text-black max-w-[525px] mx-auto'>
         <h1 className='tracking-wider p-2 text-4xl text-white font-bold uppercase text-center mb-4'>
           Signup

@@ -14,7 +14,7 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <div className='App bg-[black] text-[white]'>
+    <div className='App bg-[black] text-[white] bg-gradient-to-t from-slate-900 to-black'>
       <Router>
         <ScrollToTop />
         <Navbar />
