@@ -2,12 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-// import 'swiper/css/navigation';
-// import { Navigation } from 'swiper';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-// import { Pagination } from 'swiper';
-import { Autoplay, Pagination, Navigation } from 'swiper';
+import 'swiper/css/scrollbar';
+import 'swiper/css/effect-fade';
+import { EffectFade, Autoplay, Scrollbar } from 'swiper';
 import axios from 'axios';
 
 function NowPlaying(props) {
@@ -44,17 +41,15 @@ function NowPlaying(props) {
     <>
       <Swiper
         autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
+          delay: 3000,
+          pauseOnMouseEnter: true,
         }}
-        pagination={{
-          clickable: true,
+        effect={'fade'}
+        scrollbar={{
+          hide: true,
         }}
-        navigation={true}
-        modules={[Autoplay, Navigation, Pagination]}
-        // navigation={true}
-        // modules={[Navigation]}
-        className='mySwiper '
+        modules={[EffectFade, Scrollbar, Autoplay]}
+        className='mySwiper'
       >
         {nowPlayingArr.map((movie, mediaId) => (
           <SwiperSlide key={mediaId}>
