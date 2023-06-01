@@ -2,26 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+// import 'swiper/css/navigation';
+// import { Navigation } from 'swiper';
+import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper';
+// import { Pagination } from 'swiper';
+import { Autoplay, Pagination, Navigation } from 'swiper';
+import axios from 'axios';
 
 function NowPlaying(props) {
   const navigate = useNavigate();
-  let API_IMG = 'https://image.tmdb.org/t/p/original';
+  const API_URL = 'https://api.themoviedb.org/3/movie/now_playing';
+  const API_IMG = 'https://image.tmdb.org/t/p/original';
   const [nowPlayingArr, setNowPlayingArr] = useState([]);
 
   // Fetch movies and store in moviesArr.
   useEffect(() => {
-    const fetchMovies = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${props.api}&page=1&language=en-US`
+    const fetchNowPlaying = async () => {
+      const res = await axios.get(
+        `${API_URL}?api_key=${props.api}&page=1&language=en-US`
       );
-      const data = await res.json();
+      const data = res.data;
       if (data.results) {
         setNowPlayingArr(
           data.results.map((movie) => {
             return {
-              movieid: movie.id,
+              mediaId: movie.id,
               poster: movie.backdrop_path,
               title: movie.title,
               vote: movie.vote_average,
@@ -31,16 +37,29 @@ function NowPlaying(props) {
         );
       }
     };
-    fetchMovies();
+    fetchNowPlaying();
   }, [props.api]);
 
   return (
     <>
-      <Swiper navigation={true} modules={[Navigation]} className='mySwiper'>
-        {nowPlayingArr.map((movie, movieid) => (
-          <SwiperSlide key={movieid}>
+      <Swiper
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Navigation, Pagination]}
+        // navigation={true}
+        // modules={[Navigation]}
+        className='mySwiper '
+      >
+        {nowPlayingArr.map((movie, mediaId) => (
+          <SwiperSlide key={mediaId}>
             <img
-              className='brightness-75'
+              className='brightness-75 object-cover h-full w-full'
               src={API_IMG + movie.poster}
               alt='Your alt text'
             />
@@ -54,7 +73,7 @@ function NowPlaying(props) {
                 {movie.title}
                 <button
                   className=' hover:text-red-500 uppercase text-sm p-2 mx-2 font-normal'
-                  onClick={() => navigate(`/movie/${movie.movieid}`)}
+                  onClick={() => navigate(`/movie/${movie.mediaId}`)}
                 >
                   Visit
                 </button>

@@ -5,40 +5,38 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper';
-
 import axios from 'axios';
 
-function TrendingTv(props) {
-  const API_URL = 'https://api.themoviedb.org/3/trending/tv/week';
-  const [trendingTvArr, setTrendingTvArr] = useState([]);
+function ScifiMovies(props) {
+  const API_URL = 'https://api.themoviedb.org/3/discover/movie/';
+  const [romanticMovies, setRomanticMovies] = useState([]);
 
-  // Fetch shows and store in tvArr.
   useEffect(() => {
-    const fetchTrendingShows = async () => {
+    const fetchRomanticMovies = async () => {
       const res = await axios.get(
-        `${API_URL}?api_key=${props.api}&page=1&language=en-US`
+        `${API_URL}?api_key=${props.api}&include_adult=false&sort_by=vote_average.dsc&with_genres=878`
       );
       const data = res.data;
       if (data.results) {
-        setTrendingTvArr(
-          data.results.map((show) => {
+        setRomanticMovies(
+          data.results.map((movie) => {
             return {
-              key: show.id,
-              mediaId: show.id,
-              poster: show.poster_path,
-              title: show.title,
-              vote: show.vote_average,
+              key: movie.id,
+              mediaId: movie.id,
+              poster: movie.poster_path,
+              title: movie.title,
+              vote: movie.vote_average,
             };
           })
         );
       }
     };
-    fetchTrendingShows();
+    fetchRomanticMovies();
   }, [props.api]);
 
   return (
-    <div className='trending-container p-10'>
-      <h1 className='pb-4 text-2xl'>Trending TV Shows</h1>
+    <div className='romance-container p-10'>
+      <h1 className='pb-4 text-2xl'>SciFi Movies</h1>
       <Swiper
         slidesPerView={2}
         spaceBetween={15}
@@ -73,19 +71,19 @@ function TrendingTv(props) {
         }}
       >
         <div className='relative md:overflow-x-auto'>
-          {trendingTvArr.map((show, mediaId) => (
-            <SwiperSlide key={mediaId} className=''>
-              <Link to={`tv/${show.mediaId}`}>
+          {romanticMovies.map((movie, index) => (
+            <SwiperSlide key={index}>
+              <Link to={`/movie/${movie.key}`}>
                 <img
                   className='object-cover h-full'
-                  src={props.apiImg + show.poster}
+                  src={props.apiImg + movie.poster}
                   alt={`${
-                    show.title === undefined
+                    movie.title === undefined
                       ? 'No title image'
-                      : `${show.title} image`
+                      : `${movie.title} image`
                   }`}
                 />
-                <ReviewBarABS vote={show.vote} />
+                <ReviewBarABS vote={movie.vote} />
               </Link>
             </SwiperSlide>
           ))}
@@ -95,4 +93,4 @@ function TrendingTv(props) {
   );
 }
 
-export default TrendingTv;
+export default ScifiMovies;

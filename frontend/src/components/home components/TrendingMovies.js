@@ -2,25 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ReviewBarABS } from '../../util/utils';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper';
 import 'swiper/css';
-import 'swiper/css/free-mode';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper';
+import axios from 'axios';
 
 function TrendingMovies(props) {
+  const API_URL = 'https://api.themoviedb.org/3/trending/movie/week';
   const [trendingMoviesArr, setTrendingMoviesArr] = useState([]);
 
-  // Fetch movies and store in moviesArr.
   useEffect(() => {
-    const fetchMovies = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/trending/movie/week?api_key=${props.api}&page=1`
+    const fetchTrendingMovies = async () => {
+      const res = await axios.get(
+        `${API_URL}?api_key=${props.api}&page=1&language=en-US`
       );
-      const data = await res.json();
+      const data = res.data;
       if (data.results) {
         setTrendingMoviesArr(
           data.results.map((movie) => {
             return {
               key: movie.id,
+              mediaId: movie.id,
               poster: movie.poster_path,
               title: movie.title,
               vote: movie.vote_average,
@@ -29,17 +31,18 @@ function TrendingMovies(props) {
         );
       }
     };
-    fetchMovies();
+    fetchTrendingMovies();
   }, [props.api]);
 
   return (
-    <div className='trending-container pb-8'>
-      <h1 className='pb-4 px-4 text-2xl'>Trending Movies</h1>
+    <div className='trending-container p-10'>
+      <h1 className='pb-4 text-2xl'>Trending Movies</h1>
       <Swiper
         slidesPerView={2}
         spaceBetween={15}
-        freeMode={true}
-        modules={[FreeMode]}
+        navigation={true}
+        modules={[Navigation]}
+        className='mySwiper'
         breakpoints={{
           510: {
             slidesPerView: 3,
@@ -66,7 +69,6 @@ function TrendingMovies(props) {
             spaceBetween: 25,
           },
         }}
-        className='mySwiper'
       >
         <div className='relative md:overflow-x-auto'>
           {trendingMoviesArr.map((movie, index) => (
