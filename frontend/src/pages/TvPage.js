@@ -124,7 +124,7 @@ function TvPage() {
           style={{
             '--image-url': `url(${BACKDROP_IMG + tvArr.backdrop_path})`,
           }}
-          className='absolute bg-image bg-[image:var(--image-url)] bg-cover top-0 left-0 w-full h-full opacity-[15%]'
+          className='absolute bg-image bg-[image:var(--image-url)] bg-center bg-cover top-0 left-0 w-full h-full opacity-[15%]'
         ></div>
         <div className='top-container mx-auto text-center font-thin flex flex-col md:flex-row md:justify-around'>
           <div className='media-image mx-auto md:w-full max-w-[300px]'>
