@@ -13,6 +13,7 @@ function Navbar() {
   const { user } = useSelector((state) => state.auth);
 
   const [nav, setNav] = useState(true);
+  const [top, setTop] = useState(true);
   const [search, setSearch] = useState(false);
 
   const handleNav = () => {
@@ -47,12 +48,29 @@ function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // sets a background on the nav bar when you begin scrolling
+  useEffect(() => {
+    const scrollHandler = () => {
+      setTop(window.pageYOffset <= 20);
+    };
+    window.addEventListener('scroll', scrollHandler);
+    scrollHandler();
+
+    return () => {
+      window.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
+
   return (
-    <nav className='fixed z-50 w-full min-h-100 text-xl bg-black bg-opacity-50'>
+    <nav
+      className={`fixed z-50 w-full min-h-100 text-md bg-blend-screen ${
+        !top && 'bg-black bg-opacity-40'
+      }`}
+    >
       {/* ********** DESKTOP NAV ********** */}
-      <div className='flex justify-between content-center p-2'>
+      <div className='flex justify-between content-center p-2 md:p-4'>
         <Link to='/'>
-          <h1 className='tracking-wider p-2 text-4xl text-white hover:text-red-700 font-bold'>
+          <h1 className='tracking-wider p-2 text-2xl md:text-4xl text-white hover:text-red-700 font-bold'>
             POPFLIIX
           </h1>
         </Link>
@@ -95,15 +113,9 @@ function Navbar() {
 
             <li className='rounded-full bg-slate-900 ' onClick={handleSeach}>
               {!search ? (
-                <AiOutlineKey
-                  size={25}
-                  className='m-4 font-bold text-white cursor-pointer '
-                />
+                <AiOutlineKey className='m-4 font-bold text-white cursor-pointer text-2xl' />
               ) : (
-                <AiOutlineClose
-                  size={25}
-                  className='m-4 font-bold text-white cursor-pointer '
-                />
+                <AiOutlineClose className='m-4 font-bold text-white cursor-pointer text-2xl' />
               )}
             </li>
           </ul>
@@ -115,32 +127,31 @@ function Navbar() {
         {/* ********** MOBILE NAV ********** */}
         {/* md:hidden - hides at 767px */}
         <div className='p-3 md:hidden' onClick={handleNav}>
-          {!nav ? (
-            <AiOutlineClose
-              size={25}
-              className='m-2 hover:text-red-700 cursor-pointer'
-            />
-          ) : (
-            <AiOutlineMenu
-              size={25}
-              className='m-2 hover:text-red-700 cursor-pointer'
-            />
-          )}
+          <AiOutlineMenu className=' hover:text-red-700 cursor-pointer text-2xl' />
         </div>
       </div>
 
       <div
         className={
           !nav
-            ? 'md:hidden fixed z-50 left-0 top-0 w-[70%] h-full border-r border-r-gray-700 bg-[#0A0A0A] ease-in-out duration-300'
+            ? 'md:hidden fixed z-50 left-0 top-0 w-[100%] h-full border-r border-r-gray-700 bg-[#0A0A0A] transition-all text-center'
             : 'md:hidden fixed left-[-100%]'
         }
       >
-        <Link to='/'>
-          <h1 className='tracking-wider p-4 text-4xl font-bold'>POPFLIIX</h1>
-        </Link>
+        <div className='nav-header flex justify-between content-center'>
+          <Link to='/'>
+            <h1 className='tracking-wider p-6 text-2xl font-bold w-100'>
+              POPFLIIX
+            </h1>
+          </Link>
+          <AiOutlineClose
+            size={25}
+            className='my-auto mx-4 hover:text-red-700 cursor-pointer'
+            onClick={handleNav}
+          />
+        </div>
+
         <ul className='pt-6 uppercase'>
-          {/* <li className='search'>{search && <SearchBar />}</li> */}
           <li
             className='px-6 py-4 border-b border-gray-600 hover:text-red-700 cursor-pointer'
             onClick={() => handleRoute('/')}
