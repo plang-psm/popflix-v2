@@ -39,7 +39,6 @@ function MoviePage() {
   const NO_IMAGE =
     'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
 
-  console.log(moviesArr);
   // Fetch movies and store in moviesArr.
   useEffect(() => {
     const fetchMovies = async () => {
