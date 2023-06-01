@@ -79,7 +79,7 @@ function TvPage() {
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}`
+        `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`
       );
       const data = await res.json();
       setSuggested(data.results);
@@ -119,11 +119,13 @@ function TvPage() {
 
   return (
     <>
-      <div className='container w-100 max-w-[1000px] mx-auto py-36 px-2 md:text-xl lg:text-2xl'>
-        <img
-          src={BACKDROP_IMG + tvArr.backdrop_path}
-          className='top-0 left-0 opacity-[15%] absolute w-full h-full p-0 m-0 object-cover bg-blend-darken'
-        />
+      <div className='container w-100 max-w-[1000px] mx-auto py-24 px-2 md:text-xl lg:text-2xl'>
+        <div
+          style={{
+            '--image-url': `url(${BACKDROP_IMG + tvArr.backdrop_path})`,
+          }}
+          className='absolute bg-image bg-[image:var(--image-url)] bg-cover top-0 left-0 w-full h-full opacity-[15%]'
+        ></div>
         <div className='top-container mx-auto text-center font-thin flex flex-col md:flex-row md:justify-around'>
           <div className='media-image mx-auto md:w-full max-w-[300px]'>
             <img
