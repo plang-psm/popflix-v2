@@ -39,6 +39,7 @@ function MoviePage() {
   const NO_IMAGE =
     'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
 
+  console.log(moviesArr);
   // Fetch movies and store in moviesArr.
   useEffect(() => {
     const fetchMovies = async () => {
@@ -120,7 +121,14 @@ function MoviePage() {
 
   return (
     <>
-      <div className='container w-100 max-w-[1000px] mx-auto py-36 px-2 md:text-xl lg:text-2xl'>
+      {/* <div className='container w-100 max-w-[1000px] mx-auto py-36 px-2 md:text-xl lg:text-2xl'> */}
+      <div
+        className={`container w-100 max-w-[1000px] mx-auto py-24 px-2 md:text-xl lg:text-2xl`}
+      >
+        <img
+          src={BACKDROP_IMG + moviesArr.backdrop_path}
+          className='top-0 left-0 opacity-[15%] absolute w-full h-full p-0 m-0 object-cover bg-blend-darken'
+        />
         <div className='top-container mx-auto text-center font-thin flex flex-col md:flex-row md:justify-around'>
           <div className='media-image mx-auto md:w-full max-w-[300px]'>
             <img
@@ -189,7 +197,7 @@ function MoviePage() {
               </i>
               <i>
                 <Link
-                  to={`https://www.imdb.com/${media.imdb_id}`}
+                  to={`https://www.imdb.com/title/${media.imdb_id}`}
                   target='_blank'
                 >
                   <FaImdb

@@ -8,7 +8,7 @@ import { Navigation } from 'swiper';
 import axios from 'axios';
 
 function ScifiMovies(props) {
-  const API_URL = 'https://api.themoviedb.org/3/discover/movie/';
+  const API_URL = 'https://api.themoviedb.org/3/discover/movie';
   const [romanticMovies, setRomanticMovies] = useState([]);
 
   useEffect(() => {

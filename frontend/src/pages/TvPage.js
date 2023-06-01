@@ -120,6 +120,10 @@ function TvPage() {
   return (
     <>
       <div className='container w-100 max-w-[1000px] mx-auto py-36 px-2 md:text-xl lg:text-2xl'>
+        <img
+          src={BACKDROP_IMG + tvArr.backdrop_path}
+          className='top-0 left-0 opacity-[15%] absolute w-full h-full p-0 m-0 object-cover bg-blend-darken'
+        />
         <div className='top-container mx-auto text-center font-thin flex flex-col md:flex-row md:justify-around'>
           <div className='media-image mx-auto md:w-full max-w-[300px]'>
             <img
