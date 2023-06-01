@@ -18,6 +18,7 @@ function SignUp() {
     password: '',
     confirmPassword: '',
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const { username, email, password, confirmPassword } = form;
 
@@ -28,9 +29,10 @@ function SignUp() {
       [e.target.name]: e.target.value,
     }));
   };
-  const mediumRegex = new RegExp(
-    '^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})'
-  );
+  const lowerCase = /[a-z]/g;
+  const upperCase = /[A-Z]/g;
+  const numbers = /[0-9]/g;
+  const special = '[*.!@#$%^&(){}[]:;<>,.?/~_+-=|]';
 
   // Dispatchs data to authslice
   const handleSubmit = (e) => {
@@ -41,13 +43,14 @@ function SignUp() {
       toast.error('Passwords do not match');
     } else if (password.length < 8) {
       toast.error('Password must be a minimum of 8 characters');
-    } else if (password.match(mediumRegex)) {
-      toast.error(
-        `Password must have one: 
-          1 lowercase character, 
-          1 uppercase character, 
-          1 special character`
-      );
+    } else if (!password.match(lowerCase)) {
+      toast.error(`Password must have 1 lowercase character`);
+    } else if (!password.match(upperCase)) {
+      toast.error(`Password must have 1 uppercase character`);
+    } else if (!password.match(numbers)) {
+      toast.error(`Password must have 1 number`);
+    } else if (!password.match(special)) {
+      toast.error(`Password must have 1 special character`);
     } else {
       const userData = {
         username,
@@ -76,7 +79,7 @@ function SignUp() {
         </h1>
         <form
           onSubmit={handleSubmit}
-          className='flex flex-col justify-center gap-4 w-full'
+          className='flex flex-col justify-center gap-4 w-full relative'
         >
           <input
             type='text'
@@ -97,7 +100,8 @@ function SignUp() {
             required
           />
           <input
-            type='password'
+            // type='password'
+            type={showPassword ? 'text' : 'password'}
             name='password'
             value={password}
             onChange={handleChange}
@@ -105,8 +109,14 @@ function SignUp() {
             className='p-1.5'
             required
           />
+          <button
+            className='text-gray-400 p-2 right-0 absolute'
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            Show
+          </button>
           <input
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             name='confirmPassword'
             value={confirmPassword}
             onChange={handleChange}
@@ -114,6 +124,12 @@ function SignUp() {
             className='p-1.5'
             required
           />
+          <button
+            className='text-gray-400 p-2 right-0 bottom-12 absolute'
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            Show
+          </button>
           <input type='submit' className='p-1.5 bg-red-700 text-white' />
         </form>
         <button

@@ -16,7 +16,7 @@ function LogIn() {
     email: '',
     password: '',
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const { email, password } = form;
 
   // Updates data if any fields are changed.
@@ -55,7 +55,7 @@ function LogIn() {
         </h1>
         <form
           onSubmit={handleSubmit}
-          className='flex flex-col justify-center gap-4 w-full'
+          className='flex flex-col justify-center gap-4 w-full relative'
         >
           <input
             type='email'
@@ -67,7 +67,7 @@ function LogIn() {
             required
           />
           <input
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             name='password'
             value={password}
             onChange={handleChange}
@@ -75,6 +75,12 @@ function LogIn() {
             className='p-1.5'
             required
           />
+          <button
+            className='text-gray-400 p-2 right-0 absolute'
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            Show
+          </button>
           <input type='submit' className='p-1.5 bg-red-700 text-white' />
         </form>
         <button
