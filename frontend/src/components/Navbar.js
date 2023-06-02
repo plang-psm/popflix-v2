@@ -34,19 +34,24 @@ function Navbar() {
     setNav(!nav);
     navigate(link);
   };
+  const handleSearchRoute = (link) => {
+    setSearch(!search);
+    navigate(link);
+  };
+
   // sets search to true when window size is at 767px
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 767) {
-        setSearch(true);
-      } else {
-        setSearch(false);
-      }
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (window.innerWidth < 767) {
+  //       setSearch(true);
+  //     } else {
+  //       setSearch(false);
+  //     }
+  //   };
+  //   handleResize();
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
 
   // sets a background on the nav bar when you begin scrolling
   useEffect(() => {
@@ -111,24 +116,34 @@ function Navbar() {
               </li>
             )}
 
-            <li className='rounded-full bg-slate-900 ' onClick={handleSeach}>
-              {!search ? (
+            <li className='' onClick={handleSeach}>
+              {
                 <AiOutlineKey className='m-4 font-bold text-white cursor-pointer text-2xl' />
-              ) : (
-                <AiOutlineClose className='m-4 font-bold text-white cursor-pointer text-2xl' />
-              )}
+              }
             </li>
           </ul>
-          <div className='search hidden md:flex h-full'>
-            {search && <SearchBar />}
-          </div>
         </div>
 
         {/* ********** MOBILE NAV ********** */}
         {/* md:hidden - hides at 767px */}
-        <div className='p-3 md:hidden' onClick={handleNav}>
-          <AiOutlineMenu className=' hover:text-red-700 cursor-pointer text-2xl' />
+        <div className='p-3 md:hidden flex'>
+          <AiOutlineKey
+            className='mx-2 font-bold text-white cursor-pointer text-2xl'
+            onClick={handleSeach}
+          />
+          <AiOutlineMenu
+            className='mx-2 hover:text-red-700 cursor-pointer text-2xl'
+            onClick={handleNav}
+          />
         </div>
+      </div>
+      <div className='search sm:flex h-full'>
+        {search && (
+          <SearchBar
+            handleSearch={handleSeach}
+            handleSearchRoute={handleSearchRoute}
+          />
+        )}
       </div>
 
       <div
@@ -183,7 +198,6 @@ function Navbar() {
               Log in
             </li>
           )}
-          <li className='search md:hidden'>{search && <SearchBar />}</li>
         </ul>
       </div>
     </nav>

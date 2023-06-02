@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// import {MovieCard} from '../MovieCard';
+import { AiOutlineClose } from 'react-icons/ai';
 
-function SearchBar() {
-  const navigate = useNavigate();
-
+function SearchBar({ handleSearch, handleSearchRoute }) {
   const API_KEY = process.env.REACT_APP_TMDB_KEY;
 
   // Stores data
@@ -35,8 +32,14 @@ function SearchBar() {
   }, [searchInput, typeParam]);
 
   return (
-    <div className='z-40 search-bar absolute top-18 left-0 flex flex-col justify-center items-center w-full opacity-[85%] bg-black'>
-      <div className='input-container w-full md:w-[80%] py-10'>
+    <div className='z-40 search-bar h-screen absolute top-0 left-0 w-full opacity-[85%] bg-black'>
+      <div
+        className='close ml-auto m-4 font-bold text-white cursor-pointer text-2xl'
+        onClick={handleSearch}
+      >
+        <AiOutlineClose className='mx-4 my-8 ml-auto font-bold text-white cursor-pointer text-2xl' />
+      </div>
+      <div className='input-container w-full md:w-[80%] mx-auto'>
         <div className='buttons m-2 text-center'>
           <button
             className={`p-2 mx-2 border-red-700 ${
@@ -62,11 +65,11 @@ function SearchBar() {
           onChange={(event) => setSearchInput(event.target.value)}
         />
 
-        <ul className='movie-container h-screen'>
+        <ul className='movie-container max-h-[400px] overflow-y-scroll'>
           {movieData.map((data) => (
             <li
               className='card-container bg-gray-900 border-t border-gray-500 items-center hover:bg-gray-800 opacity-[80%]'
-              onClick={() => navigate(`/${typeParam}/${data.id}`)}
+              onClick={() => handleSearchRoute(`/${typeParam}/${data.id}`)}
             >
               <div className='title p-1'>
                 <h2 className=''>{data.title}</h2>
