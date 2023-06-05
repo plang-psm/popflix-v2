@@ -15,6 +15,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import { ReviewBar } from '../util/utils';
 import Spinner from '../components/Spinner';
+import MediaCard from '../components/MediaCard';
 
 function TvPage() {
   const dispatch = useDispatch();
@@ -119,7 +120,15 @@ function TvPage() {
 
   return (
     <>
-      <div className='container w-100 max-w-[1000px] mx-auto py-24 px-2 md:text-xl lg:text-2xl'>
+      <MediaCard
+        mediaArr={tvArr}
+        genres={genres}
+        media={media}
+        credits={credits}
+        suggested={suggested}
+        addMedia={() => addShow()}
+      />
+      {/* <div className='container w-100 max-w-[1000px] mx-auto py-24 px-2 md:text-xl lg:text-2xl'>
         <div
           style={{
             '--image-url': `url(${BACKDROP_IMG + tvArr.backdrop_path})`,
@@ -317,7 +326,7 @@ function TvPage() {
             </Swiper>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

@@ -70,7 +70,7 @@ export function ReviewBarABS(props) {
 export function ReviewBar(props) {
   return (
     <CircularProgressbar
-      className='w-[75px]'
+      className='w-[65px]'
       background={true}
       value={`${Math.ceil((props.vote / 10) * 100)}`}
       text={`${Math.ceil((props.vote / 10) * 100)}%`}
