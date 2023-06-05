@@ -29,7 +29,7 @@ app.use('/users', usersRoutes);
 app.use('/watchlist', watchlistRoutes);
 
 // Serve Frontend
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'production') {
   // Set build folder as static
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
