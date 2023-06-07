@@ -5,7 +5,6 @@ const logger = require('morgan');
 const connectDB = require('./config/db');
 const cors = require('cors');
 const { errorHandler } = require('./middleware/errorMiddleware');
-const mainRoutes = require('./routes/main');
 const usersRoutes = require('./routes/users');
 const watchlistRoutes = require('./routes/watchlist');
 
@@ -24,7 +23,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(logger('dev'));
 
-// app.use('/', mainRoutes);
 app.use('/users', usersRoutes);
 app.use('/watchlist', watchlistRoutes);
 
