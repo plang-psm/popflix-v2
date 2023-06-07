@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   AiFillFacebook,
   AiFillInstagram,
@@ -13,7 +13,15 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import { ReviewBar } from '../util/utils';
 
-function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia }) {
+function MediaCard({
+  mediaArr,
+  genres,
+  media,
+  credits,
+  suggested,
+  addMedia,
+  trailerKey,
+}) {
   const BACKDROP_IMG = 'https://image.tmdb.org/t/p/original';
   const POSTER_IMG = 'https://image.tmdb.org/t/p/w200';
   const NO_IMAGE =
@@ -32,7 +40,7 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia }) {
 
   return (
     <>
-      <div className='container w-100 max-w-[1000px] mx-auto py-24 px-2 md:text-xl'>
+      <div className='container w-100 max-w-[1000px] mx-auto pt-24 px-2 md:text-xl'>
         <div className='backdrop-container mx-auto text-center font-thin flex flex-col md:flex-row md:justify-around'>
           <div
             style={{
@@ -41,24 +49,20 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia }) {
             className='absolute bg-image bg-[image:var(--image-url)] bg-center bg-cover top-0 left-0 w-full h-full opacity-[15%]'
           ></div>
         </div>
-
-        {/* Media Descropt */}
-
         <div className='top-container relative px-4'>
-          <div className='media-heading w-full flex flex-col justify-center content-center'>
-            <div className='media-image mx-auto md:w-full max-w-[300px]'>
+          <div className='media-heading w-full flex flex-col justify-center content-center md:flex-row'>
+            <div className='media-image mx-auto w-full'>
               <img
                 src={POSTER_IMG + mediaArr.poster_path}
-                className='w-full max-w-[250px]'
+                className='w-full mx-auto max-w-[300px]'
               />
             </div>
 
-            <div className='media-description my-2 w-full max-w-[450px] mx-auto text-center'>
+            <div className='media-description my-2 md:my-auto w-full mx-auto md:mx-4 text-center md:text-center md:max-w-[500px]'>
               <h1 className='title text-3xl font-bold'>
                 {mediaArr.original_title || mediaArr.name}
               </h1>
-
-              <div className='detail-container my-4 mx-auto flex flex-row flex-wrap justify-around items-center'>
+              <div className='detail-container my-4 mx-auto flex flex-row flex-wrap justify-around items-center md:justify-between max-w-[350px]'>
                 <p className='font-thin'>
                   {getYear(mediaArr.release_date || mediaArr.first_air_date)}
                 </p>
@@ -70,104 +74,152 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia }) {
                     : `${mediaArr.runtime} mins`}
                 </p>
 
-                <button
-                  className=' hover:text-red-600 font-normal'
-                  onClick={addMedia}
-                >
-                  <p className='flex flex-rowitems-center'>
-                    <BsFillPlayFill className='text-2xl' />
-                    Play Trailer
-                  </p>
-                </button>
-
-                {/* <ReviewBar vote={mediaArr.vote_average} /> */}
-              </div>
-
-              <div className='watchlist-button'>
-                <button
-                  className='bg-red-700 hover:bg-red-600 p-2 font-normal my-2 w-full max-w-[300px]'
-                  onClick={addMedia}
-                >
-                  Add to watchlist
+                <button className=' hover:text-red-600 font-normal'>
+                  <Link
+                    to={`https://www.youtube.com/watch?v=${trailerKey}`}
+                    target='_blank'
+                  >
+                    <p className='flex flex-rowitems-center'>
+                      <BsFillPlayFill className='text-2xl' />
+                      Play Trailer
+                    </p>
+                  </Link>
                 </button>
               </div>
 
-              <div className='genre-container my-2 flex flex-row flex-wrap justify-evenly'>
+              <div className='genre-container max-w-[350px] my-2 mx-auto flex flex-row flex-wrap justify-evenly md:justify-around'>
                 {genres.map((genre) => (
-                  <p className='py-1 px-3 m-1 bg-slate-900' key={genre.name}>
+                  <p
+                    className='py-1 px-3 m-1 md:my-[2px] md:ml-0 md:mr-2 bg-slate-900'
+                    key={genre.name}
+                  >
                     {genre.name}
                   </p>
                 ))}
               </div>
 
-              {/* <button
-                  className='bg-red-700 hover:bg-red-600 p-2 font-normal my-4'
+              <div className='watchlist-button'>
+                <button
+                  className='bg-red-700 hover:bg-red-600 p-2 font-normal my-2 w-full max-w-[350px]'
                   onClick={addMedia}
                 >
                   Add to watchlist
                 </button>
-                <button
-                  className=' hover:bg-red-600 p-2 font-normal my-4'
-                  onClick={addMedia}
-                >
-                  Play Trailer
-                </button> */}
+              </div>
+              <div className='media-socials w-full p-4  flex justify-around max-w-[275px] md:max-w-none mx-auto md:mx-0 md:pl-0 md:justify-center'>
+                <i>
+                  <Link
+                    to={`https://www.facebook.com/${media.facebook_id}`}
+                    target='_blank'
+                  >
+                    <AiFillFacebook
+                      size='40px'
+                      className='m-2 md:ml-0 text-gray-300 hover:text-white'
+                    />
+                  </Link>
+                </i>
+                <i>
+                  <Link
+                    to={`https://www.instagram.com/${media.instagram_id}`}
+                    target='_blank'
+                  >
+                    <AiFillInstagram
+                      size='40px'
+                      className='m-2 md:ml-0 text-gray-300 hover:text-white'
+                    />
+                  </Link>
+                </i>
+                <i>
+                  <Link
+                    to={`https://www.twitter.com/${media.twitter_id}`}
+                    target='_blank'
+                  >
+                    <AiFillTwitterSquare
+                      size='40px'
+                      className='m-2 md:ml-0 text-gray-300 hover:text-white'
+                    />
+                  </Link>
+                </i>
+                <i>
+                  <Link
+                    to={`https://www.imdb.com/title/${media.imdb_id}`}
+                    target='_blank'
+                  >
+                    <FaImdb
+                      size='40px'
+                      className='m-2 md:ml-0 text-gray-300 hover:text-white'
+                    />
+                  </Link>
+                </i>
+                {/* <i>
+                  <Link
+                    to={`https://www.imdb.com/title/${media.imdb_id}`}
+                    target='_blank'
+                  >
+                    <FaImdb
+                      size='40px'
+                      className='m-2 md:ml-0 text-gray-300 hover:text-white'
+                    />
+                  </Link>
+                </i> */}
+              </div>
             </div>
-
-            {/* <p>
-                <span className='font-bold'>Release: </span>
-                {mediaArr.release_date || mediaArr.number_of_seasons}
-              </p>
-              <p>
-                <span className='font-bold'>Runtime: </span>
-                {`${mediaArr.runtime} mins` || `${mediaArr.number_of_episodes}`}
-              </p>
-              <ReviewBar vote={mediaArr.vote_average} /> */}
-
-            {/* Media Over */}
-            {/* <div className='overview'>
-              <span className='font-bold  my-2'>Overview: </span>
+          </div>
+          <div className='w-full md:flex md:justify-between items-center'>
+            <div className='overview py-4 pr-4 text-start'>
+              <span className='font-bold'>Overview: </span>
               {mediaArr.overview}
-            </div> */}
+            </div>
+            <div className='side-info-container flex flex-row justify-evenly items-center md:flex-col md:justify-center min-w-[250px] md:w-full my-8 bg-slate-900 rounded-2xl font-thin w-full p-2 md:py-0'>
+              <div className='user-rating max-w-[140px] mx-auto flex justify-around items-center py-4'>
+                <ReviewBar vote={mediaArr.vote_average} />
+                <h2>User Rating</h2>
+              </div>
 
-            {/* Media ADD */}
-            {/* <button
-              className='bg-red-700 hover:bg-red-600 p-2 font-normal my-4'
-              onClick={addMedia}
-            >
-              Add to watchlist
-            </button> */}
-
-            {/* Media */}
+              <div className='status-budget-revenue mx-auto pb-4 text-start'>
+                <p className='md:my-4'>
+                  <span className='font-bold'>Status: </span> {mediaArr.status}
+                </p>
+                <p className='md:my-4'>
+                  <span className='font-bold'>Budget: </span>
+                  {mediaArr.budget || mediaArr.first_air_date}
+                </p>
+                <p className='md:my-4'>
+                  <span className='font-bold'>Revenue: </span>
+                  {mediaArr.revenue || mediaArr.last_air_date}
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Media mid */}
-          <div className='mid-container md:flex my-8'>
-            <div className='credits-container md:max-w-[70%] text-center'>
+          <div className='mid-container my-2 w-full md:flex md:justify-between'>
+            <div className='credits-container text-center md:w-full'>
               {/* Media cast */}
               <h2 className='text-start font-bold mb-2'>Cast</h2>
               <Swiper
                 slidesPerView={2}
-                spaceBetween={10}
+                spaceBetween={5}
                 freeMode={true}
                 modules={[FreeMode]}
                 breakpoints={{
-                  450: {
+                  600: {
                     slidesPerView: 3,
-                    spaceBetween: 10,
+                    spaceBetween: 5,
                   },
-                  640: {
-                    slidesPerView: 4,
+                  900: {
+                    slidesPerView: 5,
                     spaceBetween: 10,
                   },
                 }}
                 className='mySwiper'
               >
+                {' '}
                 {/* Media cred */}
                 {credits.map((credit, index) => (
                   <SwiperSlide key={index}>
                     <img
-                      className='object-cover w-full max-h-[247px]'
+                      className='object-contain w-full h-full'
                       src={
                         credit.profile_path !== null
                           ? POSTER_IMG + credit.profile_path
@@ -179,85 +231,21 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia }) {
                           : `${credit.title} image`
                       }`}
                     />
-                    <h3>{credit.character}</h3>
-                    <h3>
-                      <span className='font-thin'>{credit.original_name}</span>
-                    </h3>
+                    <div
+                      className='h-full w-full
+                    '
+                    >
+                      <h3>{credit.character}</h3>
+                      <h3>
+                        <span className='font-thin'>
+                          {credit.original_name}
+                        </span>
+                      </h3>
+                    </div>
+                    {/* </div> */}
                   </SwiperSlide>
                 ))}
               </Swiper>
-            </div>
-
-            {/* Media side view */}
-            <div className='side-info-container my-8 mx-4 border rounded-2xl font-thin w-full md:pl-4 py-4 md:py-0'>
-              {/* <div className='genre flex justify-between items-center md:flex-col md:items-end'> */}
-              {/* <h2 className='text-start font-bold mb-2'>Genres:</h2> */}
-              {/* {genres.map((genre) => (
-                <p className='py-1 px-4 md:my-1 bg-red-700' key={genre.name}>
-                  {genre.name}
-                </p>
-              ))} */}
-              {/* </div> */}
-              <div className='media-socials p-4 flex justify-evenly max-w-[250px] mx-auto'>
-                <i>
-                  <Link
-                    to={`https://www.facebook.com/${media.facebook_id}`}
-                    target='_blank'
-                  >
-                    <AiFillFacebook
-                      size='40px'
-                      className=' text-gray-300 hover:text-white'
-                    />
-                  </Link>
-                </i>
-                <i>
-                  <Link
-                    to={`https://www.instagram.com/${media.instagram_id}`}
-                    target='_blank'
-                  >
-                    <AiFillInstagram
-                      size='40px'
-                      className=' text-gray-300 hover:text-white'
-                    />
-                  </Link>
-                </i>
-                <i>
-                  <Link
-                    to={`https://www.twitter.com/${media.twitter_id}`}
-                    target='_blank'
-                  >
-                    <AiFillTwitterSquare
-                      size='40px'
-                      className=' text-gray-300 hover:text-white'
-                    />
-                  </Link>
-                </i>
-                <i>
-                  <Link
-                    to={`https://www.imdb.com/title/${media.imdb_id}`}
-                    target='_blank'
-                  >
-                    <FaImdb
-                      size='40px'
-                      className=' text-gray-300 hover:text-white'
-                    />
-                  </Link>
-                </i>
-              </div>
-
-              {/* <div className='status-budget-revenue p-6 md:my-0 flex text-center justify-center md:flex-col md:items-end'>
-              <p className='md:my-4'>
-                <span className='font-bold'>Status: </span> {mediaArr.status}
-              </p>
-              <p className='md:my-4'>
-                <span className='font-bold'>Budget: </span>
-                {mediaArr.budget || mediaArr.first_air_date}
-              </p>
-              <p className='md:my-4'>
-                <span className='font-bold'>Revenue: </span>
-                {mediaArr.revenue || mediaArr.last_air_date}
-              </p>
-            </div> */}
             </div>
           </div>
 

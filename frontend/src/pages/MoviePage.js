@@ -29,24 +29,20 @@ function MoviePage() {
 
   // Holds and sets data
   const [moviesArr, setMoviesArr] = useState([]);
+  const [moviesTrailer, setMoviesTrailer] = useState([]);
   const [genres, setGenres] = useState([]);
   const [media, setMedia] = useState([]);
   const [credits, setCredits] = useState([]);
   const [suggested, setSuggested] = useState([]);
 
-  console.log(moviesArr);
   // URL needed to bring images from TMDB API
   const BACKDROP_IMG = 'https://image.tmdb.org/t/p/original';
-  // const POSTER_IMG = 'https://image.tmdb.org/t/p/w200';
-  // const NO_IMAGE =
-  //   'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
 
-  console.log(moviesArr);
   // Fetch movies and store in moviesArr.
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`
       );
       const data = await res.json();
       setMoviesArr(data);
@@ -54,6 +50,20 @@ function MoviePage() {
     };
     fetchMovies();
   }, [id]);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${process.env.REACT_APP_TMDB_KEY}`
+      );
+      const data = await res.json();
+      const trailers = data.results.filter(
+        (movie) => movie.type.toLowerCase() === 'trailer'
+      );
+      setMoviesTrailer(trailers[0].key);
+    };
+    fetchVideos();
+  }, [id, suggested]);
 
   // Fetch movie socials and store in media.
   useEffect(() => {
@@ -93,8 +103,6 @@ function MoviePage() {
 
   // Function to add media to our watchlist
   const addMovie = () => {
-    // e.preventDefault();
-
     // Checks for user first via state
     if (!user) {
       return toast.error('You need an account to create a watchlist');
@@ -130,6 +138,7 @@ function MoviePage() {
         credits={credits}
         suggested={suggested}
         addMedia={() => addMovie()}
+        trailerKey={moviesTrailer}
       />
     </>
   );
