@@ -9,19 +9,21 @@ import axios from 'axios';
 
 function ScifiMovies(props) {
   const API_URL = 'https://api.themoviedb.org/3/discover/movie';
-  const [romanticMovies, setRomanticMovies] = useState([]);
+  const NO_IMAGE =
+    'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
+  const [scifiMovies, setScifiMovies] = useState([]);
 
   useEffect(() => {
-    const fetchRomanticMovies = async () => {
+    const fetchScifiMovies = async () => {
       const res = await axios.get(
         `${API_URL}?api_key=${props.api}&include_adult=false&sort_by=vote_average.dsc&with_genres=878`
       );
       const data = res.data;
       if (data.results) {
-        setRomanticMovies(
+        setScifiMovies(
           data.results.map((movie) => {
             return {
-              key: movie.id,
+              // key: movie.id,
               mediaId: movie.id,
               poster: movie.poster_path,
               title: movie.title,
@@ -31,7 +33,7 @@ function ScifiMovies(props) {
         );
       }
     };
-    fetchRomanticMovies();
+    fetchScifiMovies();
   }, [props.api]);
 
   return (
@@ -71,12 +73,13 @@ function ScifiMovies(props) {
         }}
       >
         <div className='relative md:overflow-x-auto'>
-          {romanticMovies.map((movie, index) => (
+          {scifiMovies.map((movie, index) => (
             <SwiperSlide key={index}>
               <Link to={`/movie/${movie.key}`}>
                 <img
                   className='object-cover h-full'
-                  src={props.apiImg + movie.poster}
+                  src={`
+                  ${movie.poster ? props.apiImg + movie.poster : NO_IMAGE}`}
                   alt={`${
                     movie.title === undefined
                       ? 'No title image'
