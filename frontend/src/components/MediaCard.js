@@ -151,17 +151,6 @@ function MediaCard({
                     />
                   </Link>
                 </i>
-                {/* <i>
-                  <Link
-                    to={`https://www.imdb.com/title/${media.imdb_id}`}
-                    target='_blank'
-                  >
-                    <FaImdb
-                      size='40px'
-                      className='m-2 md:ml-0 text-gray-300 hover:text-white'
-                    />
-                  </Link>
-                </i> */}
               </div>
             </div>
           </div>

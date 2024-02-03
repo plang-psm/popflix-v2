@@ -58,9 +58,9 @@ function MoviePage() {
       );
       const data = await res.json();
       const trailers = data.results.filter(
-        (movie) => movie.type.toLowerCase() === 'trailer'
+        (movie) => movie.type && movie.type.toLowerCase() === 'trailer'
       );
-      setMoviesTrailer(trailers[0].key);
+      setMoviesTrailer(trailers[0]);
     };
     fetchVideos();
   }, [id, suggested]);
@@ -138,7 +138,7 @@ function MoviePage() {
         credits={credits}
         suggested={suggested}
         addMedia={() => addMovie()}
-        trailerKey={moviesTrailer}
+        trailerKey={moviesTrailer.key}
       />
     </>
   );
