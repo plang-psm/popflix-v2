@@ -9,6 +9,8 @@ import axios from 'axios';
 
 function FamilyMovies(props) {
   const API_URL = 'https://api.themoviedb.org/3/discover/movie';
+  const NO_IMAGE =
+    'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
   const [familyMovies, setFamilyMovies] = useState([]);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ function FamilyMovies(props) {
         setFamilyMovies(
           data.results.map((movie) => {
             return {
-              key: movie.id,
+              // key: movie.id,
               mediaId: movie.id,
               poster: movie.poster_path,
               title: movie.title,
@@ -76,7 +78,8 @@ function FamilyMovies(props) {
               <Link to={`/movie/${movie.key}`}>
                 <img
                   className='object-cover h-full'
-                  src={props.apiImg + movie.poster}
+                  src={`
+                  ${movie.poster ? props.apiImg + movie.poster : NO_IMAGE}`}
                   alt={`${
                     movie.title === undefined
                       ? 'No title image'
