@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReviewBarABS } from '../../util/utils';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,10 +6,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper';
 
-function HomeMovieCarousel({category, movieData, API_IMG, NO_IMAGE}) {  
+function HomeMovieCarousel({ category, movieData, API_IMG, NO_IMAGE }) {
   return (
     <div className='trending-container p-10 '>
       <h1 className='pb-4 text-2xl'>{category}</h1>
+      {/* Swiper configuration settings for carousel */}
       <Swiper
         slidesPerView={2}
         spaceBetween={15}
@@ -64,8 +65,7 @@ function HomeMovieCarousel({category, movieData, API_IMG, NO_IMAGE}) {
         </div>
       </Swiper>
     </div>
-    );
-  }
+  );
+}
 
 export default HomeMovieCarousel;
-

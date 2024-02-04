@@ -7,18 +7,22 @@ import HomeTvCarousel from '../components/home components/HomeTvCarousel';
 
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const API_IMG = 'https://image.tmdb.org/t/p/w200';
+const NO_IMAGE =
+    'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
+
+// Holds URLs for different searchs
 const API_MOVIE_WEEK_URL = 'https://api.themoviedb.org/3/trending/movie/week';
 const API_TV_WEEK_URL = 'https://api.themoviedb.org/3/trending/tv/week';
 const API_DISCOVER_URL = 'https://api.themoviedb.org/3/discover/movie';
 
 function MovieHome() {
+  // States to handle movie/show data
   const [trendingMovieData, setTrendingMovieData] = useState([]);
   const [trendingTvData, setTrendingTvData] = useState([]);
   const [trendingScifiData, setTrendingScifiData] = useState([]);
   const [trendingFamilyData, setTrendingFamilyData] = useState([]);
-  const NO_IMAGE =
-    'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
-
+  
+  // Fetches Trending movies and stores in our state
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       const res = await axios.get(
@@ -42,6 +46,7 @@ function MovieHome() {
     fetchTrendingMovies();
   }, [trendingMovieData]);
 
+    // Fetches Trending shows and stores in our state
   useEffect(() => {
     const fetchTrendingShows = async () => {
       const res = await axios.get(
@@ -65,6 +70,7 @@ function MovieHome() {
     fetchTrendingShows();
   }, [trendingTvData]);
 
+  // Fetches SciFi movies and stores in our state
   useEffect(() => {
     const fetchScifiMovies = async () => {
       const res = await axios.get(
@@ -88,6 +94,7 @@ function MovieHome() {
     fetchScifiMovies();
   }, [trendingScifiData]);
 
+  // Fetches Family movies and stores in our state
   useEffect(() => {
     const fetchFamilyMovies = async () => {
       const res = await axios.get(
