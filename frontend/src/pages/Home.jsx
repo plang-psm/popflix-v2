@@ -74,7 +74,7 @@ function MovieHome() {
   useEffect(() => {
     const fetchScifiMovies = async () => {
       const res = await axios.get(
-        `${API_DISCOVER_URL}?api_key=${API_KEY}&include_adult=false&sort_by=vote_average.dsc&with_genres=878`
+        `${API_DISCOVER_URL}?api_key=${API_KEY}&include_adult=false&sort_by=vote_average.dsc&with_genres=878&language=en-US`
       );
       const data = res.data;
       if (data.results) {
@@ -98,7 +98,7 @@ function MovieHome() {
   useEffect(() => {
     const fetchFamilyMovies = async () => {
       const res = await axios.get(
-        `${API_DISCOVER_URL}?api_key=${API_KEY}&include_adult=false&sort_by=vote_average.dsc&with_genres=10751`
+        `${API_DISCOVER_URL}?api_key=${API_KEY}&include_adult=false&sort_by=vote_average.dsc&with_genres=10751&language=en-US`
       );
       const data = res.data;
       if (data.results) {

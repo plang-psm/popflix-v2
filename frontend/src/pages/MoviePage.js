@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToWatchlist } from '../features/watchlist/watchlistSlice';
 import { toast } from 'react-toastify';
-import {
-  AiFillFacebook,
-  AiFillInstagram,
-  AiFillTwitterSquare,
-} from 'react-icons/ai';
-import { FaImdb } from 'react-icons/fa';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import { ReviewBar } from '../util/utils';
 import Spinner from '../components/Spinner';
 import MediaCard from '../components/MediaCard';
 
@@ -29,7 +20,7 @@ function MoviePage() {
 
   // Holds and sets data
   const [moviesArr, setMoviesArr] = useState([]);
-  const [moviesTrailer, setMoviesTrailer] = useState([]);
+  const [moviesTrailer, setMoviesTrailer] = useState('');
   const [genres, setGenres] = useState([]);
   const [media, setMedia] = useState([]);
   const [credits, setCredits] = useState([]);
@@ -51,6 +42,7 @@ function MoviePage() {
     fetchMovies();
   }, [id]);
 
+  // Fetch trailers from movie id. If not trailers, return null to display "No Trailer" label
   useEffect(() => {
     const fetchVideos = async () => {
       const res = await fetch(
@@ -58,47 +50,51 @@ function MoviePage() {
       );
       const data = await res.json();
       const trailers = data.results.filter(
-        (movie) => movie.type && movie.type.toLowerCase() === 'trailer'
+        (movie) => movie.type.toLowerCase() === 'trailer'
       );
-      setMoviesTrailer(trailers[0]);
+      if (trailers.length > 0) {
+        setMoviesTrailer(trailers[0].key);
+      } else {
+        setMoviesTrailer(null);
+      }
     };
     fetchVideos();
   }, [id, suggested]);
 
   // Fetch movie socials and store in media.
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchMedia = async () => {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${process.env.REACT_APP_TMDB_KEY}`
       );
       const data = await res.json();
       setMedia(data);
     };
-    fetchMovies();
+    fetchMedia();
   }, [id]);
 
   // Fetch movie credits and store in credits.
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchCredits = async () => {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
       );
       const data = await res.json();
       setCredits(data.cast);
     };
-    fetchMovies();
+    fetchCredits();
   }, [id]);
 
   // Fetch movie reccomendations and store in suggested.
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchSuggested = async () => {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`
       );
       const data = await res.json();
       setSuggested(data.results);
     };
-    fetchMovies();
+    fetchSuggested();
   }, [id]);
 
   // Function to add media to our watchlist
@@ -138,7 +134,7 @@ function MoviePage() {
         credits={credits}
         suggested={suggested}
         addMedia={() => addMovie()}
-        trailerKey={moviesTrailer.key}
+        trailerKey={moviesTrailer}
       />
     </>
   );
