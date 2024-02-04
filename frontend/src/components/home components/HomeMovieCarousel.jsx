@@ -5,40 +5,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper';
-import axios from 'axios';
 
-function ScifiMovies(props) {
-  const API_URL = 'https://api.themoviedb.org/3/discover/movie';
-  const NO_IMAGE =
-    'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
-  const [scifiMovies, setScifiMovies] = useState([]);
-
-  useEffect(() => {
-    const fetchScifiMovies = async () => {
-      const res = await axios.get(
-        `${API_URL}?api_key=${props.api}&include_adult=false&sort_by=vote_average.dsc&with_genres=878`
-      );
-      const data = res.data;
-      if (data.results) {
-        setScifiMovies(
-          data.results.map((movie) => {
-            return {
-              // key: movie.id,
-              mediaId: movie.id,
-              poster: movie.poster_path,
-              title: movie.title,
-              vote: movie.vote_average,
-            };
-          })
-        );
-      }
-    };
-    fetchScifiMovies();
-  }, [props.api]);
-
+function HomeMovieCarousel({category, movieData, API_IMG, NO_IMAGE}) {  
   return (
-    <div className='romance-container p-10'>
-      <h1 className='pb-4 text-2xl'>SciFi Movies</h1>
+    <div className='trending-container p-10 '>
+      <h1 className='pb-4 text-2xl'>{category}</h1>
       <Swiper
         slidesPerView={2}
         spaceBetween={15}
@@ -73,13 +44,13 @@ function ScifiMovies(props) {
         }}
       >
         <div className='relative md:overflow-x-auto'>
-          {scifiMovies.map((movie, index) => (
+          {movieData.map((movie, index) => (
             <SwiperSlide key={index}>
-              <Link to={`/movie/${movie.key}`}>
+              <Link to={`/movie/${movie.mediaId}`}>
                 <img
                   className='object-cover h-full'
                   src={`
-                  ${movie.poster ? props.apiImg + movie.poster : NO_IMAGE}`}
+                  ${movie.poster ? API_IMG + movie.poster : NO_IMAGE}`}
                   alt={`${
                     movie.title === undefined
                       ? 'No title image'
@@ -93,7 +64,8 @@ function ScifiMovies(props) {
         </div>
       </Swiper>
     </div>
-  );
-}
+    );
+  }
 
-export default ScifiMovies;
+export default HomeMovieCarousel;
+
