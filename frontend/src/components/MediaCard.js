@@ -74,17 +74,21 @@ function MediaCard({
                     : `${mediaArr.runtime} mins`}
                 </p>
 
-                <button className=' hover:text-red-600 font-normal'>
-                  <Link
-                    to={`https://www.youtube.com/watch?v=${trailerKey}`}
-                    target='_blank'
-                  >
-                    <p className='flex flex-rowitems-center'>
-                      <BsFillPlayFill className='text-2xl' />
-                      Play Trailer
-                    </p>
-                  </Link>
-                </button>
+                {trailerKey === null ? (
+                  <p className='flex flex-rowitems-center'>No Trailer</p>
+                ) : (
+                  <button className=' hover:text-red-600 font-normal'>
+                    <Link
+                      to={`https://www.youtube.com/watch?v=${trailerKey}`}
+                      target='_blank'
+                    >
+                      <p className='flex flex-rowitems-center'>
+                        <BsFillPlayFill className='text-2xl' />
+                        Play Trailer
+                      </p>
+                    </Link>
+                  </button>
+                )}
               </div>
 
               <div className='genre-container max-w-[350px] my-2 mx-auto flex flex-row flex-wrap justify-evenly md:justify-around'>
