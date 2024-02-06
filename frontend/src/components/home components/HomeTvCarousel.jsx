@@ -6,9 +6,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper';
 
-function HomeTvCarousel({ category, tvData, API_IMG, NO_IMAGE }) {
+function HomeTvCarousel({ category, tvData }) {
   return (
-    <div className='trending-container p-10'>
+    <div className='trending-container'>
       <h1 className='pb-4 text-2xl'>{category}</h1>
       {/* Swiper configuration settings for carousel */}
       <Swiper
@@ -48,16 +48,32 @@ function HomeTvCarousel({ category, tvData, API_IMG, NO_IMAGE }) {
           {tvData.map((show, index) => (
             <SwiperSlide key={index}>
               <Link to={`tv/${show.mediaId}`}>
-                <img
-                  className='object-cover h-full'
-                  src={`
-                ${show.poster ? API_IMG + show.poster : NO_IMAGE}`}
-                  alt={`${
-                    show.title === undefined
-                      ? 'No title image'
-                      : `${show.title} image`
-                  }`}
-                />
+                <picture>
+                  <source
+                    type='image/webp'
+                    srcSet={`${show.poster}.webp`}
+                  />
+                  <source
+                    type='image/jpeg'
+                    srcSet={`${show.poster}.jpeg`}
+                  />
+                  <img
+                    className='object-cover w-[1] h-[250px]'
+                    loading='lazy'
+                    fetchpriority="low"
+                    srcSet={`
+                    ${show.poster}.jpg?width=100 100w,
+                    ${show.poster}.jpg?width=200 200w`
+                  }
+                    src={`
+                ${show.poster}`}
+                    alt={`${
+                      show.title === undefined
+                        ? 'No title image'
+                        : `${show.title} image`
+                    }`}
+                  />
+                </picture>
                 <ReviewBarABS vote={show.vote} />
               </Link>
             </SwiperSlide>

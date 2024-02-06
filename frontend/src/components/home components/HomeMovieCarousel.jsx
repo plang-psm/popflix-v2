@@ -6,9 +6,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper';
 
-function HomeMovieCarousel({ category, movieData, API_IMG, NO_IMAGE }) {
+function HomeMovieCarousel({ category, movieData }) {
   return (
-    <div className='trending-container p-10 '>
+    <div className='trending-container py-5'>
       <h1 className='pb-4 text-2xl'>{category}</h1>
       {/* Swiper configuration settings for carousel */}
       <Swiper
@@ -48,16 +48,27 @@ function HomeMovieCarousel({ category, movieData, API_IMG, NO_IMAGE }) {
           {movieData.map((movie, index) => (
             <SwiperSlide key={index}>
               <Link to={`/movie/${movie.mediaId}`}>
-                <img
-                  className='object-cover h-full'
-                  src={`
-                  ${movie.poster ? API_IMG + movie.poster : NO_IMAGE}`}
-                  alt={`${
-                    movie.title === undefined
-                      ? 'No title image'
-                      : `${movie.title} image`
-                  }`}
-                />
+                <picture>
+                  <source type='image/webp' srcSet={`${movie.poster}.webp`} />
+                  <source type='image/jpeg' srcSet={`${movie.poster}.jpeg`} />
+                  <img
+                    className='object-cover w-[167px] h-[250px]'
+                    loading='lazy'
+                    fetchpriority='low'
+                    srcSet={`
+                      ${movie.poster}.jpg?width=100 100w,
+                      ${movie.poster}.jpg?width=200 200w`
+                    }
+                    src={`
+                  ${movie.poster}`}
+                    alt={`${
+                      movie.title === undefined
+                        ? 'No title image'
+                        : `${movie.title} image`
+                    }`}
+                  />
+                </picture>
+
                 <ReviewBarABS vote={movie.vote} />
               </Link>
             </SwiperSlide>

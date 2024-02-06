@@ -5,37 +5,9 @@ import 'swiper/css';
 import 'swiper/css/scrollbar';
 import 'swiper/css/effect-fade';
 import { EffectFade, Autoplay, Scrollbar } from 'swiper';
-import axios from 'axios';
 
-function NowPlaying(props) {
+function NowPlaying({ movieData }) {
   const navigate = useNavigate();
-  const API_URL = 'https://api.themoviedb.org/3/movie/now_playing';
-  const API_IMG = 'https://image.tmdb.org/t/p/original';
-  const [nowPlayingArr, setNowPlayingArr] = useState([]);
-
-  // Fetch movies and store in moviesArr.
-  useEffect(() => {
-    const fetchNowPlaying = async () => {
-      const res = await axios.get(
-        `${API_URL}?api_key=${props.api}&page=1&language=en-US`
-      );
-      const data = res.data;
-      if (data.results) {
-        setNowPlayingArr(
-          data.results.map((movie) => {
-            return {
-              mediaId: movie.id,
-              poster: movie.backdrop_path,
-              title: movie.title,
-              vote: movie.vote_average,
-              overview: movie.overview,
-            };
-          })
-        );
-      }
-    };
-    fetchNowPlaying();
-  }, [props.api]);
 
   return (
     <>
@@ -51,13 +23,23 @@ function NowPlaying(props) {
         modules={[EffectFade, Scrollbar, Autoplay]}
         className='mySwiper'
       >
-        {nowPlayingArr.map((movie, mediaId) => (
+        {movieData.map((movie, mediaId) => (
           <SwiperSlide key={mediaId}>
-            <img
-              className='brightness-75 object-cover h-full w-full'
-              src={API_IMG + movie.poster}
-              alt='Your alt text'
-            />
+            <picture>
+              <source type='image/webp' srcSet={`${movie.poster}.webp`} />
+              <source type='image/jpeg' srcSet={`${movie.poster}.jpeg`} />
+              <img
+                className='object-cover object-top w-full lg:h-[750px]'
+                srcSet={`
+                ${movie.poster}.jpg?width=100 100w,
+                ${movie.poster}.jpg?width=200 200w,
+                ${movie.poster}.jpg?width=400 400w,
+                ${movie.poster}.jpg?width=800 800w
+                `}
+                src={movie.poster}
+                alt='Your alt text'
+              />
+            </picture>
             <div
               className='movie-info z-50 w-full h-[25%] px-6 lg:p-10
                                 absolute text-white 

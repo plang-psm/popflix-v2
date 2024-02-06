@@ -4,24 +4,67 @@ import NowPlaying from '../components/home components/NowPlaying';
 import axios from 'axios';
 import HomeMovieCarousel from '../components/home components/HomeMovieCarousel';
 import HomeTvCarousel from '../components/home components/HomeTvCarousel';
+// import NO_IMAGE from '../images/NO_IMG.jpg';
 
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const API_IMG = 'https://image.tmdb.org/t/p/w200';
+const API_IMG_ORIGINAL = 'https://image.tmdb.org/t/p/w1280';
 const NO_IMAGE =
-    'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
+  'https://unsplash.com/photos/brown-short-coated-dog-in-orange-hoodie-oU6KZTXhuvk';
 
 // Holds URLs for different searchs
+const API_NOW_PLAYING_URL = 'https://api.themoviedb.org/3/movie/now_playing';
 const API_MOVIE_WEEK_URL = 'https://api.themoviedb.org/3/trending/movie/week';
 const API_TV_WEEK_URL = 'https://api.themoviedb.org/3/trending/tv/week';
 const API_DISCOVER_URL = 'https://api.themoviedb.org/3/discover/movie';
 
 function MovieHome() {
   // States to handle movie/show data
+  const [nowPlayingData, setNowPlayingData] = useState([]);
   const [trendingMovieData, setTrendingMovieData] = useState([]);
   const [trendingTvData, setTrendingTvData] = useState([]);
   const [trendingScifiData, setTrendingScifiData] = useState([]);
   const [trendingFamilyData, setTrendingFamilyData] = useState([]);
-  
+
+  // Fetch movies and store in moviesArr.
+  useEffect(() => {
+    const fetchNowPlaying = async () => {
+      const res = await axios.get(
+        `${API_NOW_PLAYING_URL}?api_key=${API_KEY}&page=1&language=en-US`
+      );
+      const data = res.data;
+      const dataCheck = data.results.map((movie) => {
+        return {
+          category: '',
+          mediaId: movie.id,
+          poster: movie.backdrop_path,
+          title: movie.title,
+          vote: movie.vote_average,
+          overview: movie.overview,
+        };
+      });
+      if (data.results && dataCheck !== nowPlayingData) {
+        setNowPlayingData(
+          data.results.map((movie) => {
+            return {
+              category: '',
+              mediaId: movie.id,
+              poster: `${
+                movie.backdrop_path === null
+                  ? NO_IMAGE
+                  : API_IMG_ORIGINAL + movie.backdrop_path
+              }`,
+              title: movie.title,
+              vote: movie.vote_average,
+              overview: movie.overview,
+            };
+          })
+        );
+      }
+    };
+    fetchNowPlaying();
+  }, []);
+
   // Fetches Trending movies and stores in our state
   useEffect(() => {
     const fetchTrendingMovies = async () => {
@@ -29,13 +72,26 @@ function MovieHome() {
         `${API_MOVIE_WEEK_URL}?api_key=${API_KEY}&page=1&language=en-US`
       );
       const data = res.data;
-      if (data.results) {
+      const dataCheck = data.results.map((movie) => {
+        return {
+          category: '',
+          mediaId: movie.id,
+          poster: movie.poster_path,
+          title: movie.title,
+          vote: movie.vote_average,
+        };
+      });
+      if (data.results && dataCheck !== trendingMovieData) {
         setTrendingMovieData(
           data.results.map((movie) => {
             return {
               category: '',
               mediaId: movie.id,
-              poster: movie.poster_path,
+              poster: `${
+                movie.poster_path === null
+                  ? NO_IMAGE
+                  : API_IMG + movie.poster_path
+              }`,
               title: movie.title,
               vote: movie.vote_average,
             };
@@ -43,23 +99,37 @@ function MovieHome() {
         );
       }
     };
-    fetchTrendingMovies();
-  }, [trendingMovieData]);
 
-    // Fetches Trending shows and stores in our state
+    fetchTrendingMovies();
+  }, []);
+
+  // Fetches Trending shows and stores in our state
   useEffect(() => {
     const fetchTrendingShows = async () => {
       const res = await axios.get(
         `${API_TV_WEEK_URL}?api_key=${API_KEY}&page=1&language=en-US`
       );
       const data = res.data;
-      if (data.results) {
+      const dataCheck = data.results.map((show) => {
+        return {
+          category: '',
+          mediaId: show.id,
+          poster: show.poster_path,
+          title: show.title,
+          vote: show.vote_average,
+        };
+      });
+      if (data.results && dataCheck !== trendingTvData) {
         setTrendingTvData(
           data.results.map((show) => {
             return {
               category: '',
               mediaId: show.id,
-              poster: show.poster_path,
+              poster: `${
+                show.poster_path === null
+                  ? NO_IMAGE
+                  : API_IMG + show.poster_path
+              }`,
               title: show.title,
               vote: show.vote_average,
             };
@@ -68,7 +138,7 @@ function MovieHome() {
       }
     };
     fetchTrendingShows();
-  }, [trendingTvData]);
+  }, []);
 
   // Fetches SciFi movies and stores in our state
   useEffect(() => {
@@ -77,13 +147,26 @@ function MovieHome() {
         `${API_DISCOVER_URL}?api_key=${API_KEY}&include_adult=false&sort_by=vote_average.dsc&with_genres=878&language=en-US`
       );
       const data = res.data;
-      if (data.results) {
+      const dataCheck = data.results.map((movie) => {
+        return {
+          category: '',
+          mediaId: movie.id,
+          poster: movie.poster_path,
+          title: movie.title,
+          vote: movie.vote_average,
+        };
+      });
+      if (data.results && dataCheck !== trendingScifiData) {
         setTrendingScifiData(
           data.results.map((movie) => {
             return {
               category: '',
               mediaId: movie.id,
-              poster: movie.poster_path,
+              poster: `${
+                movie.poster_path === null
+                  ? NO_IMAGE
+                  : API_IMG + movie.poster_path
+              }`,
               title: movie.title,
               vote: movie.vote_average,
             };
@@ -92,7 +175,7 @@ function MovieHome() {
       }
     };
     fetchScifiMovies();
-  }, [trendingScifiData]);
+  }, []);
 
   // Fetches Family movies and stores in our state
   useEffect(() => {
@@ -101,13 +184,26 @@ function MovieHome() {
         `${API_DISCOVER_URL}?api_key=${API_KEY}&include_adult=false&sort_by=vote_average.dsc&with_genres=10751&language=en-US`
       );
       const data = res.data;
-      if (data.results) {
+      const dataCheck = data.results.map((movie) => {
+        return {
+          category: '',
+          mediaId: movie.id,
+          poster: movie.poster_path,
+          title: movie.title,
+          vote: movie.vote_average,
+        };
+      });
+      if (data.results && dataCheck !== trendingFamilyData) {
         setTrendingFamilyData(
           data.results.map((movie) => {
             return {
               category: '',
               mediaId: movie.id,
-              poster: movie.poster_path,
+              poster: `${
+                movie.poster_path === null
+                  ? NO_IMAGE
+                  : API_IMG + movie.poster_path
+              }`,
               title: movie.title,
               vote: movie.vote_average,
             };
@@ -116,37 +212,32 @@ function MovieHome() {
       }
     };
     fetchFamilyMovies();
-  }, [trendingFamilyData]);
+  }, []);
 
   return (
-    <div className='min-h-screen pb-14'>
-      <NowPlaying api={API_KEY} apiImg={API_IMG} />
-      <Header />
-      <HomeMovieCarousel
-        category={'Trending Movies'}
-        movieData={trendingMovieData}
-        API_IMG={API_IMG}
-        NO_IMAGE={NO_IMAGE}
-      />
-      <HomeTvCarousel
-        category={'Trending TV Shows'}
-        tvData={trendingTvData}
-        API_IMG={API_IMG}
-        NO_IMAGE={NO_IMAGE}
-      />
-      <HomeMovieCarousel
-        category={'SciFi Movies'}
-        movieData={trendingScifiData}
-        API_IMG={API_IMG}
-        NO_IMAGE={NO_IMAGE}
-      />
-      <HomeMovieCarousel
-        category={'Family Movies'}
-        movieData={trendingFamilyData}
-        API_IMG={API_IMG}
-        NO_IMAGE={NO_IMAGE}
-      />
-    </div>
+    <>
+      <NowPlaying category={'Now Playing'} movieData={nowPlayingData} />
+
+      <div className='min-h-screen pb-14 px-4'>
+        <Header />
+        <HomeMovieCarousel
+          category={'Trending Movies'}
+          movieData={trendingMovieData}
+        />
+        <HomeTvCarousel
+          category={'Trending TV Shows'}
+          tvData={trendingTvData}
+        />
+        <HomeMovieCarousel
+          category={'SciFi Movies'}
+          movieData={trendingScifiData}
+        />
+        <HomeMovieCarousel
+          category={'Family Movies'}
+          movieData={trendingFamilyData}
+        />
+      </div>
+    </>
   );
 }
 
