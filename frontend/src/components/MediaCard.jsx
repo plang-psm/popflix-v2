@@ -51,11 +51,26 @@ function MediaCard({
         </div>
         <div className='top-container relative px-4'>
           <div className='media-heading w-full flex flex-col justify-center content-center md:flex-row'>
-            <div className='media-image mx-auto w-full'>
-              <img
-                src={POSTER_IMG + mediaArr.poster_path}
-                className='w-full mx-auto max-w-[300px]'
-              />
+            <div className='media-image mx-auto'>
+              <picture>
+                <source
+                  type='image/webp'
+                  srcSet={`${POSTER_IMG + mediaArr.poster_path}.webp`}
+                />
+                <source
+                  type='image/jpeg'
+                  srcSet={`${POSTER_IMG + mediaArr.poster_path}.jpeg`}
+                />
+                <img
+                  srcSet={`
+                    ${POSTER_IMG + mediaArr.poster_path}.jpg?width=100 100w,
+                    ${POSTER_IMG + mediaArr.poster_path}.jpg?width=200 200w
+                  `}
+                  src={POSTER_IMG + mediaArr.poster_path}
+                  className=' mx-auto w-[250px] h-[400px]'
+                  loading='lazy'
+                />
+              </picture>
             </div>
 
             <div className='media-description my-2 md:my-auto w-full mx-auto md:mx-4 text-center md:text-center md:max-w-[500px]'>
@@ -196,8 +211,12 @@ function MediaCard({
                 freeMode={true}
                 modules={[FreeMode]}
                 breakpoints={{
-                  600: {
+                  450: {
                     slidesPerView: 3,
+                    spaceBetween: 5,
+                  },
+                  700: {
+                    slidesPerView: 4,
                     spaceBetween: 5,
                   },
                   900: {
@@ -211,19 +230,34 @@ function MediaCard({
                 {/* Media cred */}
                 {credits.map((credit, index) => (
                   <SwiperSlide key={index}>
-                    <img
-                      className='object-contain w-full h-full'
-                      src={
-                        credit.profile_path !== null
-                          ? POSTER_IMG + credit.profile_path
-                          : NO_IMAGE
-                      }
-                      alt={`${
-                        credit.title === undefined
-                          ? 'No title image'
-                          : `${credit.title} image`
-                      }`}
-                    />
+                    <picture>
+                      <source
+                        type='image/webp'
+                        srcSet={`${POSTER_IMG + credit.profile_path}.webp`}
+                      />
+                      <source
+                        type='image/jpeg'
+                        srcSet={`${POSTER_IMG + credit.profile_path}.jpeg`}
+                      />
+                      <img
+                        className='object-cover mx-auto w-[161px] h-[250px]'
+                        loading='lazy'
+                        srcSet={`
+                        ${POSTER_IMG + credit.profile_path}.jpg?width=100 100w,
+                        ${POSTER_IMG + credit.profile_path}.jpg?width=200 200w
+                        `}
+                        src={
+                          credit.profile_path !== null
+                            ? POSTER_IMG + credit.profile_path
+                            : NO_IMAGE
+                        }
+                        alt={`${
+                          credit.title === undefined
+                            ? 'No title image'
+                            : `${credit.title} image`
+                        }`}
+                      />
+                    </picture>
                     <div
                       className='h-full w-full
                     '
@@ -252,13 +286,17 @@ function MediaCard({
                 freeMode={true}
                 modules={[FreeMode]}
                 breakpoints={{
-                  600: {
+                  300: {
                     slidesPerView: 2,
                     spaceBetween: 5,
                   },
-                  900: {
+                  450: {
                     slidesPerView: 3,
                     spaceBetween: 5,
+                  },
+                  700: {
+                    slidesPerView: 4,
+                    spaceBetween: 10,
                   },
                 }}
                 className='mySwiper'
@@ -266,19 +304,34 @@ function MediaCard({
                 {suggested.map((movie, index) => (
                   <SwiperSlide key={index} className='h-full'>
                     <Link to={`/movie/${movie.id}`}>
-                      <img
-                        className='object-cover w-full max-h-[180px]'
-                        src={
-                          movie.backdrop_path
-                            ? BACKDROP_IMG + movie.backdrop_path
-                            : NO_IMAGE
-                        }
-                        alt={`${
-                          movie.title === undefined
-                            ? 'No title image'
-                            : `${movie.title} image`
-                        }`}
-                      />
+                      <picture>
+                        <source
+                          type='image/webp'
+                          srcSet={`${BACKDROP_IMG + movie.backdrop_path}.webp`}
+                        />
+                        <source
+                          type='image/jpeg'
+                          srcSet={`${BACKDROP_IMG + movie.backdrop_path}.jpeg`}
+                        />
+                        <img
+                          className='object-cover w-[230px] h-[200px]'
+                          loading='lazy'
+                          srcSet={`
+                          ${POSTER_IMG + movie.backdrop_path}.jpg?width=100 100w,
+                          ${POSTER_IMG + movie.backdrop_path}.jpg?width=200 200w
+                        `}
+                          src={
+                            movie.backdrop_path
+                              ? BACKDROP_IMG + movie.backdrop_path
+                              : NO_IMAGE
+                          }
+                          alt={`${
+                            movie.title === undefined
+                              ? 'No title image'
+                              : `${movie.title} image`
+                          }`}
+                        />
+                      </picture>
                       <h3>{movie.title}</h3>
                     </Link>
                   </SwiperSlide>
