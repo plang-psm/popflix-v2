@@ -10,6 +10,7 @@ function Footer() {
           to={`https://www.linkedin.com/in/plang-psm/`}
           target='_blank'
           className='p-4'
+          aria-label='Link to personal linkedin page'
         >
           <i>
             <AiFillLinkedin className='text-3xl text-gray-300 hover:text-white' />
@@ -19,6 +20,7 @@ function Footer() {
           to={`https://github.com/plang-psm`}
           target='_blank'
           className='p-4'
+          aria-label='Link to personal github page'
         >
           <i>
             <AiFillGithub className='text-3xl text-gray-300 hover:text-white' />
@@ -28,18 +30,19 @@ function Footer() {
           to={`https://plang-psm.github.io/portfolio/`}
           target='_blank'
           className='p-4'
+          aria-label='Link to personal portfolio page'
         >
           <i>
             <AiFillRocket className='text-3xl text-gray-300 hover:text-white' />
           </i>
         </Link>
       </div>
-      <h3
+      <p
         className='text-md
       '
       >
         Designed and developed by plang-psm
-      </h3>
+      </p>
     </div>
   );
 }
