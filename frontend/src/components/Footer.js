@@ -23,7 +23,7 @@ function Footer() {
           aria-label='Link to personal github page'
         >
           <i>
-            <AiFillGithub className='text-3xl text-gray-300 hover:text-white' />
+            <AiFillGithub className='text-3xl text-gray-300 hover:text-white' />ç
           </i>
         </Link>
         <Link
