@@ -58,6 +58,7 @@ function LogIn() {
           className='flex flex-col justify-center gap-4 w-full relative'
         >
           <input
+            data-test='email-input'
             type='email'
             name='email'
             value={email}
@@ -67,6 +68,7 @@ function LogIn() {
             required
           />
           <input
+            data-test='pwd-input'
             type={showPassword ? 'text' : 'password'}
             name='password'
             value={password}
@@ -81,9 +83,14 @@ function LogIn() {
           >
             Show
           </button>
-          <input type='submit' className='p-1.5 bg-red-700 text-white' />
+          <input
+            data-test='submit-button'
+            type='submit'
+            className='p-1.5 bg-red-700 text-white'
+          />
         </form>
         <button
+          data-test='signup-button'
           className='text-white p-2 my-2 ml-auto'
           onClick={() => navigate('/users/signup')}
         >
