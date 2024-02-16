@@ -5,6 +5,12 @@ import { AiFillLinkedin, AiFillGithub, AiFillRocket } from 'react-icons/ai';
 function Footer() {
   return (
     <div className='min-h-100 py-8 text-center bg-transparent'>
+      <p
+        className='text-md
+      '
+      >
+        Designed and developed by plang-psm
+      </p>
       <div className='socials flex justify-center pt-2'>
         <Link
           to={`https://www.linkedin.com/in/plang-psm/`}
@@ -23,7 +29,7 @@ function Footer() {
           aria-label='Link to personal github page'
         >
           <i>
-            <AiFillGithub className='text-3xl text-gray-300 hover:text-white' />ç
+            <AiFillGithub className='text-3xl text-gray-300 hover:text-white' />
           </i>
         </Link>
         <Link
@@ -37,12 +43,6 @@ function Footer() {
           </i>
         </Link>
       </div>
-      <p
-        className='text-md
-      '
-      >
-        Designed and developed by plang-psm
-      </p>
     </div>
   );
 }
