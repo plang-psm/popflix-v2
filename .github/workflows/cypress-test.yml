@@ -2,21 +2,18 @@ name: Cypress Tests
 
 on: [push]
 
-defaults:
-  run:
-    shell: bash
-    working-directory: frontend
-
 jobs:
  Cypress-Test:
    runs-on: ubuntu-latest
    steps:
      - name: Checkout repo
        uses: actions/checkout@v2
+       with:
+        working-directory: frontend
      - name: Run cypress test
        uses: cypress-io/github-action@v2
        with:
-         working-directory: frontend/cypress
+         working-directory: frontend
+         build: npm run build
          start: npm start
-         test:prod: npm run test:prod
          browser: chrome
