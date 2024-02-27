@@ -16,7 +16,7 @@ describe('Test signup button on Login form', () => {
   beforeEach(() => {
     cy.visit('/users/login');
   });
-  it('Test email login', () => {
+  it('Test signup button', () => {
     cy.getDataTest('signup-button').click()
     cy.location('pathname').should('eq', '/users/signup')
   });
