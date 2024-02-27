@@ -18,6 +18,5 @@ jobs:
        with:
          working-directory: frontend
          start: npm start
-         build: npm build
          test:prod: npm run test:prod
          browser: chrome
