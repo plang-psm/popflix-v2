@@ -10,7 +10,7 @@ jobs:
        uses: actions/checkout@v2
  
      - name: Run cypress test
-       uses: cypress-io/github-action@v4
+       uses: cypress-io/github-action@v2
        with:
          working-directory: frontend
          command: npm run test:prod
