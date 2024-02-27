@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
+    "test:local": "cypress open --config-file dev.config.js",
+    "test:prod": "cypress open --config-file prod.config.js"
   },
   "eslintConfig": {
     "extends": [

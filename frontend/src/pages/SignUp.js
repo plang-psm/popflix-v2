@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-// import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../features/auth/authSlice';
@@ -49,8 +48,8 @@ function SignUp() {
       toast.error(`Password must have 1 uppercase character`);
     } else if (!password.match(numbers)) {
       toast.error(`Password must have 1 number`);
-    } else if (!password.match(special)) {
-      toast.error(`Password must have 1 special character`);
+      // } else if (!password.match(special)) {
+      //   toast.error(`Password must have 1 special character`);
     } else {
       const userData = {
         username,
@@ -82,6 +81,7 @@ function SignUp() {
           className='flex flex-col justify-center gap-4 w-full relative'
         >
           <input
+            data-test='username-input'
             type='text'
             name='username'
             value={username}
@@ -91,6 +91,7 @@ function SignUp() {
             required
           />
           <input
+            data-test='email-input'
             type='email'
             name='email'
             value={email}
@@ -100,7 +101,7 @@ function SignUp() {
             required
           />
           <input
-            // type='password'
+            data-test='pwd-input'
             type={showPassword ? 'text' : 'password'}
             name='password'
             value={password}
@@ -109,13 +110,8 @@ function SignUp() {
             className='p-1.5'
             required
           />
-          <button
-            className='text-gray-400 p-2 right-0 absolute'
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            Show
-          </button>
           <input
+            data-test='confirm-pwd-input'
             type={showPassword ? 'text' : 'password'}
             name='confirmPassword'
             value={confirmPassword}
@@ -124,15 +120,28 @@ function SignUp() {
             className='p-1.5'
             required
           />
+          {/* <button
+
+            className='text-gray-400 p-2 right-0 absolute'
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            Show
+          </button>
+
           <button
             className='text-gray-400 p-2 right-0 bottom-12 absolute'
             onClick={() => setShowPassword(!showPassword)}
           >
             Show
-          </button>
-          <input type='submit' className='p-1.5 bg-red-700 text-white' />
+          </button> */}
+          <input
+            data-test='submit-button'
+            type='submit'
+            className='p-1.5 bg-red-700 text-white'
+          />
         </form>
         <button
+          data-test='login-button'
           className='text-white p-2 my-2 ml-auto'
           onClick={() => navigate('/users/login')}
         >
