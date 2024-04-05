@@ -54,6 +54,7 @@ function Header() {
                       <div className='media-image mx-auto md:w-full max-w-[250px]'>
                         <img
                           src={movie.image}
+                          alt={`${movie.title} poster`} 
                           className='w-full max-w-[250px] h-full object-cover'
                         />
                       </div>
