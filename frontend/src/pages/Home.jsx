@@ -63,7 +63,7 @@ function MovieHome() {
       }
     };
     fetchNowPlaying();
-  }, []);
+  }, [nowPlayingData]);
 
   // Fetches Trending movies and stores in our state
   useEffect(() => {
@@ -101,7 +101,7 @@ function MovieHome() {
     };
 
     fetchTrendingMovies();
-  }, []);
+  }, [trendingMovieData]);
 
   // Fetches Trending shows and stores in our state
   useEffect(() => {
@@ -138,7 +138,7 @@ function MovieHome() {
       }
     };
     fetchTrendingShows();
-  }, []);
+  }, [trendingTvData]);
 
   // Fetches SciFi movies and stores in our state
   useEffect(() => {
@@ -175,7 +175,7 @@ function MovieHome() {
       }
     };
     fetchScifiMovies();
-  }, []);
+  }, [trendingScifiData]);
 
   // Fetches Family movies and stores in our state
   useEffect(() => {
@@ -212,7 +212,7 @@ function MovieHome() {
       }
     };
     fetchFamilyMovies();
-  }, []);
+  }, [trendingFamilyData]);
 
   return (
     <>

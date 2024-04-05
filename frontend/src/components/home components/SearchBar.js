@@ -29,7 +29,7 @@ function SearchBar({ handleSearch, handleSearchRoute }) {
   // Fetches media with the users input.
   useEffect(() => {
     fetchMovies(searchInput);
-  }, [searchInput, typeParam]);
+  }, [searchInput, typeParam, fetchMovies]);
 
   return (
     <div className='z-40 search-bar h-screen absolute top-0 left-0 w-full opacity-[85%] bg-black'>

@@ -31,7 +31,7 @@ function WatchlistMovies() {
           key={media.title}
         >
           <div className='media-container mx-auto md:w-full max-w-[300px]'>
-            <img src={media.image} className='w-full object-cover' />
+            <img src={media.image} className='w-full object-cover' alt={media.title}/>
           </div>
           <div className='media-description w-full my-auto text-sm sm:text-md'>
             <h1 className='title text-xl sm:text-2xl font-normal  m-4'>

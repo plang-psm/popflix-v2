@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   AiFillFacebook,
@@ -69,6 +69,7 @@ function MediaCard({
                   src={POSTER_IMG + mediaArr.poster_path}
                   className=' mx-auto w-[250px] h-[400px]'
                   loading='lazy'
+                  alt={`${mediaArr.original_title || mediaArr.name} Poster`}
                 />
               </picture>
             </div>

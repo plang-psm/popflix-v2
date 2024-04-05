@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToWatchlist } from '../features/watchlist/watchlistSlice';
 import { toast } from 'react-toastify';
-import {
-  AiFillFacebook,
-  AiFillInstagram,
-  AiFillTwitterSquare,
-} from 'react-icons/ai';
-import { FaImdb } from 'react-icons/fa';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import { ReviewBar } from '../util/utils';
 import Spinner from '../components/Spinner';
 import MediaCard from '../components/MediaCard';
 
@@ -37,9 +28,6 @@ function TvPage() {
 
   // URL needed to bring images from TMDB API
   const BACKDROP_IMG = 'https://image.tmdb.org/t/p/original';
-  const POSTER_IMG = 'https://image.tmdb.org/t/p/w200';
-  const NO_IMAGE =
-    'https://images.unsplash.com/photo-1575425186775-b8de9a427e67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80';
 
   // Fetch show socials and store in media.
   useEffect(() => {
