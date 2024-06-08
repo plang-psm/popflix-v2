@@ -14,10 +14,10 @@
   },
   "lint-staged": {
     "/**/*.{js,jsx}": [
-      "eslint --ext .jsx --ext .js ./ --fix"
+      "eslint --ext .jsx --ext .js . --fix"
     ],
     "./**": [
-      "prettier --write ./"
+      "prettier --write ."
     ]
   },
   "husky": {
