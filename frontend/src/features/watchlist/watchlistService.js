@@ -9,11 +9,7 @@ const addToWatchlist = async (mediaData, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.post(
-    API_URL + '/addwatchlist',
-    mediaData,
-    config
-  );
+  const response = await axios.post(API_URL + '/addwatchlist', mediaData, config);
   return response.data;
 };
 

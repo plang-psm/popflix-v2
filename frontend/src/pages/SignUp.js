@@ -71,53 +71,53 @@ function SignUp() {
   }
 
   return (
-    <div className=''>
-      <div className='container w-full h-screen py-14 px-10 flex flex-col justify-center text-black max-w-[525px] mx-auto'>
-        <h1 className='tracking-wider p-2 text-4xl text-white font-bold uppercase text-center mb-4'>
+    <div className="">
+      <div className="container w-full h-screen py-14 px-10 flex flex-col justify-center text-black max-w-[525px] mx-auto">
+        <h1 className="tracking-wider p-2 text-4xl text-white font-bold uppercase text-center mb-4">
           Signup
         </h1>
         <form
           onSubmit={handleSubmit}
-          className='flex flex-col justify-center gap-4 w-full relative'
+          className="flex flex-col justify-center gap-4 w-full relative"
         >
           <input
-            data-test='username-input'
-            type='text'
-            name='username'
+            data-test="username-input"
+            type="text"
+            name="username"
             value={username}
             onChange={handleChange}
-            placeholder='Username'
-            className='p-1.5'
+            placeholder="Username"
+            className="p-1.5"
             required
           />
           <input
-            data-test='email-input'
-            type='email'
-            name='email'
+            data-test="email-input"
+            type="email"
+            name="email"
             value={email}
             onChange={handleChange}
-            placeholder='Email'
-            className='p-1.5'
+            placeholder="Email"
+            className="p-1.5"
             required
           />
           <input
-            data-test='pwd-input'
+            data-test="pwd-input"
             type={showPassword ? 'text' : 'password'}
-            name='password'
+            name="password"
             value={password}
             onChange={handleChange}
-            placeholder='Password'
-            className='p-1.5'
+            placeholder="Password"
+            className="p-1.5"
             required
           />
           <input
-            data-test='confirm-pwd-input'
+            data-test="confirm-pwd-input"
             type={showPassword ? 'text' : 'password'}
-            name='confirmPassword'
+            name="confirmPassword"
             value={confirmPassword}
             onChange={handleChange}
-            placeholder='Password'
-            className='p-1.5'
+            placeholder="Password"
+            className="p-1.5"
             required
           />
           {/* <button
@@ -134,15 +134,11 @@ function SignUp() {
           >
             Show
           </button> */}
-          <input
-            data-test='submit-button'
-            type='submit'
-            className='p-1.5 bg-red-700 text-white'
-          />
+          <input data-test="submit-button" type="submit" className="p-1.5 bg-red-700 text-white" />
         </form>
         <button
-          data-test='login-button'
-          className='text-white p-2 my-2 ml-auto'
+          data-test="login-button"
+          className="text-white p-2 my-2 ml-auto"
           onClick={() => navigate('/users/login')}
         >
           Login

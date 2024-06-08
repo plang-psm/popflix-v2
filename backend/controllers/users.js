@@ -75,9 +75,9 @@ const authCheck = asyncHandler(async (req, res) => {
     id: req.user._id,
     email: req.user.email,
     name: req.user.name,
-  }
-  res.status(200).json(user)
-})
+  };
+  res.status(200).json(user);
+});
 
 // Generate token
 const generateToken = (id) => {

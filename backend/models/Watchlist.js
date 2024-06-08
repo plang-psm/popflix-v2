@@ -26,7 +26,7 @@ const WatchlistSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 module.exports = mongoose.model('Watchlist', WatchlistSchema);

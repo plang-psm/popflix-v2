@@ -28,9 +28,7 @@ function TrendingTvCarousel() {
   const fetchTrendingShows = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(
-        `${API_TV_WEEK_URL}?api_key=${API_KEY}&page=1&language=en-US`
-      );
+      const res = await axios.get(`${API_TV_WEEK_URL}?api_key=${API_KEY}&page=1&language=en-US`);
       const data = res.data;
       if (data.results) {
         setTrendingTvData(data.results);
@@ -43,8 +41,8 @@ function TrendingTvCarousel() {
   };
 
   return (
-    <div className='trending-container'>
-      <h1 className='pb-4 text-2xl'>Trending Shows</h1>
+    <div className="trending-container">
+      <h1 className="pb-4 text-2xl">Trending Shows</h1>
       {/* Swiper configuration settings for carousel */}
       {loading ? (
         <CardSkeleton />
@@ -54,7 +52,7 @@ function TrendingTvCarousel() {
           spaceBetween={15}
           navigation={true}
           modules={[Navigation]}
-          className='mySwiper'
+          className="mySwiper"
           breakpoints={{
             510: {
               slidesPerView: 3,
@@ -82,33 +80,23 @@ function TrendingTvCarousel() {
             },
           }}
         >
-          <div className='relative md:overflow-x-auto'>
+          <div className="relative md:overflow-x-auto">
             {trendingTvData.map(({ id, poster_path, title, vote_average }) => (
               <SwiperSlide key={id}>
                 <Link to={`tv/${id}`}>
                   <picture>
-                    <source
-                      type='image/webp'
-                      srcSet={`${API_IMG + poster_path}.webp`}
-                    />
-                    <source
-                      type='image/jpeg'
-                      srcSet={`${API_IMG + poster_path}.jpeg`}
-                    />
+                    <source type="image/webp" srcSet={`${API_IMG + poster_path}.webp`} />
+                    <source type="image/jpeg" srcSet={`${API_IMG + poster_path}.jpeg`} />
                     <img
-                      className='object-cover w-[1] h-[250px]'
-                      loading='lazy'
-                      fetchpriority='low'
+                      className="object-cover w-[1] h-[250px]"
+                      loading="lazy"
+                      fetchpriority="low"
                       srcSet={`
                   ${API_IMG + poster_path}.jpg?width=100 100w,
                   ${API_IMG + poster_path}.jpg?width=200 200w`}
                       src={`
               ${API_IMG + poster_path}`}
-                      alt={`${
-                        title === undefined
-                          ? 'No title image'
-                          : `${title} image`
-                      }`}
+                      alt={`${title === undefined ? 'No title image' : `${title} image`}`}
                     />
                   </picture>
                   <ReviewBarABS vote={vote_average} />

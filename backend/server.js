@@ -15,7 +15,7 @@ connectDB();
 app.use(
   cors({
     origin: ['https://popfliix.vercel.app', 'http://localhost:3000'],
-  })
+  }),
 );
 // app.use(express.static(path.join(__dirname, '../frontend')));
 app.use(express.json());
