@@ -18,34 +18,28 @@ export const addToWatchlist = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(extractErrorMessage(error));
     }
-  }
+  },
 );
 
 // Get user watchlist media
-export const getWatchlists = createAsyncThunk(
-  'watchlists/getAll',
-  async (_, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await watchlistService.getWatchlists(token);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(extractErrorMessage(error));
-    }
+export const getWatchlists = createAsyncThunk('watchlists/getAll', async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await watchlistService.getWatchlists(token);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(extractErrorMessage(error));
   }
-);
+});
 
 // Delete media
-export const removeFromWatchlist = createAsyncThunk(
-  'watchlists/remove',
-  async (id, thunkAPI) => {
-    try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await watchlistService.removeFromWatchlist(id, token);
-    } catch (error) {
-      return thunkAPI.rejectWithValue(extractErrorMessage(error));
-    }
+export const removeFromWatchlist = createAsyncThunk('watchlists/remove', async (id, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token;
+    return await watchlistService.removeFromWatchlist(id, token);
+  } catch (error) {
+    return thunkAPI.rejectWithValue(extractErrorMessage(error));
   }
-);
+});
 
 export const watchlistSlice = createSlice({
   name: 'watchlist',
@@ -77,7 +71,7 @@ export const watchlistSlice = createSlice({
       })
       .addCase(removeFromWatchlist.fulfilled, (state, action) => {
         state.watchlists = state.watchlists.filter(
-          (watchlist) => watchlist._id !== action.payload.id
+          (watchlist) => watchlist._id !== action.payload.id,
         );
       })
       .addCase(removeFromWatchlist.rejected, (state, action) => {

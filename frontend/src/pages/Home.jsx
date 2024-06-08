@@ -11,7 +11,7 @@ function MovieHome() {
     <>
       <NowPlaying />
 
-      <div className='min-h-screen pb-14 px-4'>
+      <div className="min-h-screen pb-14 px-4">
         <Header />
         <TrendingMovieCarousel />
         <TrendingTvCarousel />

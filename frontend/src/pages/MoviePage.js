@@ -48,7 +48,7 @@ function MoviePage() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`,
       );
       const data = await res.data;
 
@@ -67,13 +67,11 @@ function MoviePage() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${process.env.REACT_APP_TMDB_KEY}`
+        `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${process.env.REACT_APP_TMDB_KEY}`,
       );
 
       const data = await res.data.results;
-      const trailers = data.filter(
-        (movie) => movie.type.toLowerCase() === 'trailer'
-      );
+      const trailers = data.filter((movie) => movie.type.toLowerCase() === 'trailer');
       if (trailers.length > 0) {
         setMoviesTrailer(trailers[0].key);
       } else {
@@ -90,7 +88,7 @@ function MoviePage() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${process.env.REACT_APP_TMDB_KEY}`
+        `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${process.env.REACT_APP_TMDB_KEY}`,
       );
       const data = await res.data;
 
@@ -108,7 +106,7 @@ function MoviePage() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+        `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`,
       );
       const data = await res.data;
 
@@ -126,7 +124,7 @@ function MoviePage() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`,
       );
       const data = await res.data;
 

@@ -29,7 +29,7 @@ function ScifiMovieCarousel() {
     setLoading(true);
     try {
       const res = await axios.get(
-        `${API_DISCOVER_URL}?api_key=${API_KEY}&include_adult=false&sort_by=vote_average.dsc&with_genres=878&language=en-US`
+        `${API_DISCOVER_URL}?api_key=${API_KEY}&include_adult=false&sort_by=vote_average.dsc&with_genres=878&language=en-US`,
       );
       const data = res.data;
       if (data.results) {
@@ -43,8 +43,8 @@ function ScifiMovieCarousel() {
   };
 
   return (
-    <div className='trending-container py-5'>
-      <h1 className='pb-4 text-2xl'>{'Trending Movies'}</h1>
+    <div className="trending-container py-5">
+      <h1 className="pb-4 text-2xl">{'Trending Movies'}</h1>
       {/* Swiper configuration settings for carousel */}
       {loading ? (
         <CardSkeleton />
@@ -54,7 +54,7 @@ function ScifiMovieCarousel() {
           spaceBetween={15}
           navigation={true}
           modules={[Navigation]}
-          className='mySwiper'
+          className="mySwiper"
           breakpoints={{
             510: {
               slidesPerView: 3,
@@ -82,42 +82,32 @@ function ScifiMovieCarousel() {
             },
           }}
         >
-          <div className='relative md:overflow-x-auto'>
-            {trendingScifiData.map(
-              ({ id, poster_path, original_title, vote_average }) => (
-                <SwiperSlide key={id}>
-                  <Link to={`/movie/${id}`}>
-                    <picture>
-                      <source
-                        type='image/webp'
-                        srcSet={`${API_IMG + poster_path}.webp`}
-                      />
-                      <source
-                        type='image/jpeg'
-                        srcSet={`${API_IMG + poster_path}.jpeg`}
-                      />
-                      <img
-                        className='object-cover w-[167px] h-[250px]'
-                        loading='lazy'
-                        fetchpriority='low'
-                        srcSet={`
+          <div className="relative md:overflow-x-auto">
+            {trendingScifiData.map(({ id, poster_path, original_title, vote_average }) => (
+              <SwiperSlide key={id}>
+                <Link to={`/movie/${id}`}>
+                  <picture>
+                    <source type="image/webp" srcSet={`${API_IMG + poster_path}.webp`} />
+                    <source type="image/jpeg" srcSet={`${API_IMG + poster_path}.jpeg`} />
+                    <img
+                      className="object-cover w-[167px] h-[250px]"
+                      loading="lazy"
+                      fetchpriority="low"
+                      srcSet={`
                     ${API_IMG + poster_path}.jpg?width=100 100w,
                     ${API_IMG + poster_path}.jpg?width=200 200w`}
-                        src={`
+                      src={`
                 ${API_IMG + poster_path}`}
-                        alt={`${
-                          original_title === undefined
-                            ? 'No title image'
-                            : `${original_title} image`
-                        }`}
-                      />
-                    </picture>
+                      alt={`${
+                        original_title === undefined ? 'No title image' : `${original_title} image`
+                      }`}
+                    />
+                  </picture>
 
-                    <ReviewBarABS vote={vote_average} />
-                  </Link>
-                </SwiperSlide>
-              )
-            )}
+                  <ReviewBarABS vote={vote_average} />
+                </Link>
+              </SwiperSlide>
+            ))}
           </div>
         </Swiper>
       )}

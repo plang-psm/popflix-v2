@@ -14,22 +14,22 @@ import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
-    <div className='App bg-[black] text-[white] bg-gradient-to-t from-slate-900 to-black'>
+    <div className="App bg-[black] text-[white] bg-gradient-to-t from-slate-900 to-black">
       <Router>
         <ScrollToTop />
         <Navbar />
         <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/watchlist' element={<Watchlist />} />
-          <Route path='/users/signup' element={<SignUp />} />
-          <Route path='/watchlist' element={<Watchlist />} />
-          <Route path='/users/login' element={<Login />} />
-          <Route path='/movie/:id' element={<MoviePage />} />
-          <Route path='/tv/:id' element={<TvPage />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/watchlist" element={<Watchlist />} />
+          <Route path="/users/signup" element={<SignUp />} />
+          <Route path="/watchlist" element={<Watchlist />} />
+          <Route path="/users/login" element={<Login />} />
+          <Route path="/movie/:id" element={<MoviePage />} />
+          <Route path="/tv/:id" element={<TvPage />} />
         </Routes>
         <Footer />
       </Router>
-      <ToastContainer position='top-right' />
+      <ToastContainer position="top-right" />
     </div>
   );
 }

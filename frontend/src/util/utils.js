@@ -9,7 +9,7 @@ export function extractErrorMessage(error) {
 export function ReviewBarABS(props) {
   return (
     <CircularProgressbar
-      className='w-[75px] absolute'
+      className="w-[75px] absolute"
       background={true}
       value={`${Math.ceil((props.vote / 10) * 100)}`}
       text={`${Math.ceil((props.vote / 10) * 100)}%`}
@@ -26,10 +26,8 @@ export function ReviewBarABS(props) {
             Math.ceil((props.vote / 10) * 100) < 55
               ? `rgba(255, 0, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
               : Math.ceil((props.vote / 10) * 100) < 75
-              ? `rgba(255, 165, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
-              : `rgba(60, 179, 113, ${
-                  Math.ceil((props.vote / 10) * 100) / 100
-                }`,
+                ? `rgba(255, 165, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
+                : `rgba(60, 179, 113, ${Math.ceil((props.vote / 10) * 100) / 100}`,
           // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
           strokeLinecap: 'butt',
           // Customize transition animation
@@ -70,7 +68,7 @@ export function ReviewBarABS(props) {
 export function ReviewBar(props) {
   return (
     <CircularProgressbar
-      className='w-[65px]'
+      className="w-[65px]"
       background={true}
       value={`${Math.ceil((props.vote / 10) * 100)}`}
       text={`${Math.ceil((props.vote / 10) * 100)}%`}
@@ -87,10 +85,8 @@ export function ReviewBar(props) {
             Math.ceil((props.vote / 10) * 100) < 55
               ? `rgba(255, 0, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
               : Math.ceil((props.vote / 10) * 100) < 75
-              ? `rgba(255, 165, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
-              : `rgba(60, 179, 113, ${
-                  Math.ceil((props.vote / 10) * 100) / 100
-                }`,
+                ? `rgba(255, 165, 0, ${Math.ceil((props.vote / 10) * 100) / 100}`
+                : `rgba(60, 179, 113, ${Math.ceil((props.vote / 10) * 100) / 100}`,
           // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
           strokeLinecap: 'butt',
           // Customize transition animation

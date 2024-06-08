@@ -73,23 +73,23 @@ function Navbar() {
       }`}
     >
       {/* ********** DESKTOP NAV ********** */}
-      <div className='flex justify-between content-center p-2 md:p-4'>
-        <Link to='/'>
-          <h1 className='tracking-wider p-2 text-2xl md:text-4xl text-white hover:text-red-700 font-bold'>
+      <div className="flex justify-between content-center p-2 md:p-4">
+        <Link to="/">
+          <h1 className="tracking-wider p-2 text-2xl md:text-4xl text-white hover:text-red-700 font-bold">
             POPFLIIX
           </h1>
         </Link>
-        <div className='nav-links'>
-          <ul className='gap-x-4 hidden md:flex'>
+        <div className="nav-links">
+          <ul className="gap-x-4 hidden md:flex">
             <li
-              className='p-4 text-white font-semibold hover:text-red-700 cursor-pointer'
+              className="p-4 text-white font-semibold hover:text-red-700 cursor-pointer"
               onClick={() => navigate('/')}
             >
               Home
             </li>
             {user ? (
               <li
-                className='p-4 text-white font-semibold hover:text-red-700 cursor-pointer'
+                className="p-4 text-white font-semibold hover:text-red-700 cursor-pointer"
                 onClick={() => navigate('/watchlist')}
               >
                 Profile
@@ -101,7 +101,7 @@ function Navbar() {
             {user ? (
               <li>
                 <button
-                  className='p-4 text-white font-semibold hover:text-red-700 cursor-pointer'
+                  className="p-4 text-white font-semibold hover:text-red-700 cursor-pointer"
                   onClick={handleLogout}
                 >
                   Logout
@@ -109,41 +109,34 @@ function Navbar() {
               </li>
             ) : (
               <li
-                className='p-4 text-white font-semibold hover:text-red-700 cursor-pointer'
+                className="p-4 text-white font-semibold hover:text-red-700 cursor-pointer"
                 onClick={() => navigate('/users/login')}
               >
                 Log in
               </li>
             )}
 
-            <li className='' onClick={handleSeach}>
-              {
-                <AiOutlineKey className='m-4 font-bold text-white cursor-pointer text-2xl' />
-              }
+            <li className="" onClick={handleSeach}>
+              {<AiOutlineKey className="m-4 font-bold text-white cursor-pointer text-2xl" />}
             </li>
           </ul>
         </div>
 
         {/* ********** MOBILE NAV ********** */}
         {/* md:hidden - hides at 767px */}
-        <div className='p-3 md:hidden flex'>
+        <div className="p-3 md:hidden flex">
           <AiOutlineKey
-            className='mx-2 font-bold text-white cursor-pointer text-2xl'
+            className="mx-2 font-bold text-white cursor-pointer text-2xl"
             onClick={handleSeach}
           />
           <AiOutlineMenu
-            className='mx-2 hover:text-red-700 cursor-pointer text-2xl'
+            className="mx-2 hover:text-red-700 cursor-pointer text-2xl"
             onClick={handleNav}
           />
         </div>
       </div>
-      <div className='search sm:flex h-full'>
-        {search && (
-          <SearchBar
-            handleSearch={handleSeach}
-            handleSearchRoute={handleSearchRoute}
-          />
-        )}
+      <div className="search sm:flex h-full">
+        {search && <SearchBar handleSearch={handleSeach} handleSearchRoute={handleSearchRoute} />}
       </div>
 
       <div
@@ -153,29 +146,27 @@ function Navbar() {
             : 'md:hidden fixed left-[-100%]'
         }
       >
-        <div className='nav-header flex justify-between content-center'>
-          <Link to='/'>
-            <h1 className='tracking-wider p-6 text-2xl font-bold w-100'>
-              POPFLIIX
-            </h1>
+        <div className="nav-header flex justify-between content-center">
+          <Link to="/">
+            <h1 className="tracking-wider p-6 text-2xl font-bold w-100">POPFLIIX</h1>
           </Link>
           <AiOutlineClose
             size={25}
-            className='my-auto mx-4 hover:text-red-700 cursor-pointer'
+            className="my-auto mx-4 hover:text-red-700 cursor-pointer"
             onClick={handleNav}
           />
         </div>
 
-        <ul className='pt-6 uppercase'>
+        <ul className="pt-6 uppercase">
           <li
-            className='px-6 py-4 border-b border-gray-600 hover:text-red-700 cursor-pointer'
+            className="px-6 py-4 border-b border-gray-600 hover:text-red-700 cursor-pointer"
             onClick={() => handleRoute('/')}
           >
             Home
           </li>
           {user ? (
             <li
-              className='px-6 py-4 border-b border-gray-600  hover:text-red-700 cursor-pointer'
+              className="px-6 py-4 border-b border-gray-600  hover:text-red-700 cursor-pointer"
               onClick={() => handleRoute('/watchlist')}
             >
               Profile
@@ -185,14 +176,14 @@ function Navbar() {
           )}
           {user ? (
             <li
-              className='px-6 py-4 border-b border-gray-600  hover:text-red-700 cursor-pointer'
+              className="px-6 py-4 border-b border-gray-600  hover:text-red-700 cursor-pointer"
               onClick={handleLogout}
             >
               Logout
             </li>
           ) : (
             <li
-              className='px-6 py-4 border-b border-gray-600 hover:text-red-700 cursor-pointer'
+              className="px-6 py-4 border-b border-gray-600 hover:text-red-700 cursor-pointer"
               onClick={() => handleRoute('/users/login')}
             >
               Log in
