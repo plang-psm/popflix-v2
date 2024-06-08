@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   AiFillFacebook,
@@ -30,7 +30,7 @@ function MediaCard({
   // Returns the year for media release dates
   const getYear = (date) => {
     const movieDate = new Date(date);
-    return movieDate.getFullYear();
+    return movieDate.getFullYear().toString();
   };
 
   // Returns seaon or seasons for the tv page.
@@ -107,10 +107,10 @@ function MediaCard({
               </div>
 
               <div className='genre-container max-w-[350px] my-2 mx-auto flex flex-row flex-wrap justify-evenly md:justify-around'>
-                {genres.map((genre) => (
+                {genres.map((genre, index) => (
                   <p
                     className='py-1 px-3 m-1 md:my-[2px] md:ml-0 md:mr-2 bg-slate-900'
-                    key={genre.name}
+                    key={index}
                   >
                     {genre.name}
                   </p>
@@ -226,7 +226,6 @@ function MediaCard({
                 }}
                 className='mySwiper'
               >
-                {' '}
                 {/* Media cred */}
                 {credits.map((credit, index) => (
                   <SwiperSlide key={index}>
@@ -269,7 +268,6 @@ function MediaCard({
                         </span>
                       </h3>
                     </div>
-                    {/* </div> */}
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -301,38 +299,40 @@ function MediaCard({
                 }}
                 className='mySwiper'
               >
-                {suggested.map((movie, index) => (
+                {suggested.map((media, index) => (
                   <SwiperSlide key={index} className='h-full'>
-                    <Link to={`/movie/${movie.id}`}>
+                    <Link to={`/${media.media_type}/${media.id}`}>
                       <picture>
                         <source
                           type='image/webp'
-                          srcSet={`${BACKDROP_IMG + movie.backdrop_path}.webp`}
+                          srcSet={`${BACKDROP_IMG + media.backdrop_path}.webp`}
                         />
                         <source
                           type='image/jpeg'
-                          srcSet={`${BACKDROP_IMG + movie.backdrop_path}.jpeg`}
+                          srcSet={`${BACKDROP_IMG + media.backdrop_path}.jpeg`}
                         />
                         <img
                           className='object-cover w-[230px] h-[200px]'
                           loading='lazy'
                           srcSet={`
-                          ${POSTER_IMG + movie.backdrop_path}.jpg?width=100 100w,
-                          ${POSTER_IMG + movie.backdrop_path}.jpg?width=200 200w
+                          ${
+                            POSTER_IMG + media.backdrop_path
+                          }.jpg?width=100 100w,
+                          ${POSTER_IMG + media.backdrop_path}.jpg?width=200 200w
                         `}
                           src={
-                            movie.backdrop_path
-                              ? BACKDROP_IMG + movie.backdrop_path
+                            media.backdrop_path
+                              ? BACKDROP_IMG + media.backdrop_path
                               : NO_IMAGE
                           }
                           alt={`${
-                            movie.title === undefined
+                            media.title === undefined || media.name
                               ? 'No title image'
-                              : `${movie.title} image`
+                              : `${media.title || media.name} image`
                           }`}
                         />
                       </picture>
-                      <h3>{movie.title}</h3>
+                      <h3>{media.title || media.name}</h3>
                     </Link>
                   </SwiperSlide>
                 ))}
