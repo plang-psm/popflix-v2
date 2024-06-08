@@ -17,7 +17,7 @@
       "eslint --ext .jsx --ext .js ./backend --fix"
     ],
     ".backend/**": [
-      "prettier --write ."
+      "prettier --write ./backend"
     ]
   },
   "husky": {
