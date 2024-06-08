@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToWatchlist } from '../features/watchlist/watchlistSlice';
@@ -7,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import Spinner from '../components/Spinner';
 import MediaCard from '../components/MediaCard';
+import MediaSkeleton from '../components/MediaSkeleton';
 
 function MoviePage() {
   const dispatch = useDispatch();
@@ -25,31 +27,51 @@ function MoviePage() {
   const [media, setMedia] = useState([]);
   const [credits, setCredits] = useState([]);
   const [suggested, setSuggested] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // URL needed to bring images from TMDB API
   const BACKDROP_IMG = 'https://image.tmdb.org/t/p/original';
 
-  // Fetch movies and store in moviesArr.
   useEffect(() => {
-    const fetchMovies = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`
-      );
-      const data = await res.json();
-      setMoviesArr(data);
-      setGenres(data.genres);
-    };
-    fetchMovies();
+    let ignore = false;
+    if (!ignore) {
+      fetchMovies();
+      fetchVideos();
+      fetchMedia();
+      fetchCredits();
+      fetchSuggested();
+    }
+    return () => (ignore = true);
   }, [id]);
 
-  // Fetch trailers from movie id. If not trailers, return null to display "No Trailer" label
-  useEffect(() => {
-    const fetchVideos = async () => {
-      const res = await fetch(
+  const fetchMovies = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`
+      );
+      const data = await res.data;
+
+      if (data) {
+        setMoviesArr(data);
+        setGenres(data.genres);
+        setLoading(false);
+      }
+    } catch (err) {
+      setLoading(false);
+      throw new Error(err);
+    }
+  };
+
+  const fetchVideos = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US&api_key=${process.env.REACT_APP_TMDB_KEY}`
       );
-      const data = await res.json();
-      const trailers = data.results.filter(
+
+      const data = await res.data.results;
+      const trailers = data.filter(
         (movie) => movie.type.toLowerCase() === 'trailer'
       );
       if (trailers.length > 0) {
@@ -57,45 +79,66 @@ function MoviePage() {
       } else {
         setMoviesTrailer(null);
       }
-    };
-    fetchVideos();
-  }, [id, suggested]);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      throw new Error(err);
+    }
+  };
 
-  // Fetch movie socials and store in media.
-  useEffect(() => {
-    const fetchMedia = async () => {
-      const res = await fetch(
+  const fetchMedia = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${process.env.REACT_APP_TMDB_KEY}`
       );
-      const data = await res.json();
-      setMedia(data);
-    };
-    fetchMedia();
-  }, [id]);
+      const data = await res.data;
 
-  // Fetch movie credits and store in credits.
-  useEffect(() => {
-    const fetchCredits = async () => {
-      const res = await fetch(
+      if (data) {
+        setMedia(data);
+        setLoading(false);
+      }
+    } catch (err) {
+      setLoading(false);
+      throw new Error(err);
+    }
+  };
+
+  const fetchCredits = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
       );
-      const data = await res.json();
-      setCredits(data.cast);
-    };
-    fetchCredits();
-  }, [id]);
+      const data = await res.data;
 
-  // Fetch movie reccomendations and store in suggested.
-  useEffect(() => {
-    const fetchSuggested = async () => {
-      const res = await fetch(
+      if (data) {
+        setCredits(data.cast);
+        setLoading(false);
+      }
+    } catch (err) {
+      setLoading(false);
+      throw new Error(err);
+    }
+  };
+
+  const fetchSuggested = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(
         `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false`
       );
-      const data = await res.json();
-      setSuggested(data.results);
-    };
-    fetchSuggested();
-  }, [id]);
+      const data = await res.data;
+
+      if (data) {
+        setSuggested(data.results);
+        setLoading(false);
+      }
+    } catch (err) {
+      setLoading(false);
+      throw new Error(err);
+    }
+  };
 
   // Function to add media to our watchlist
   const addMovie = () => {
@@ -127,15 +170,19 @@ function MoviePage() {
 
   return (
     <>
-      <MediaCard
-        mediaArr={moviesArr}
-        genres={genres}
-        media={media}
-        credits={credits}
-        suggested={suggested}
-        addMedia={() => addMovie()}
-        trailerKey={moviesTrailer}
-      />
+      {loading ? (
+        <MediaSkeleton />
+      ) : (
+        <MediaCard
+          mediaArr={moviesArr}
+          genres={genres}
+          media={media}
+          credits={credits}
+          suggested={suggested}
+          addMedia={() => addMovie()}
+          trailerKey={moviesTrailer}
+        />
+      )}
     </>
   );
 }
