@@ -16,4 +16,4 @@ jobs:
       - name: Run Prettier
         run: |
           cd "frontend"
-          npm run format
+          npm run format:fix
