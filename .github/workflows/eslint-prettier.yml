@@ -24,21 +24,21 @@ jobs:
         run: |
           cd "frontend"
           npm run format:fix
-  prettier-backend:
-    runs-on: ubuntu-latest
-    name: Format Prettier on Backend
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        run: |
-          cd "backend"
-          npm install
-      - name: Run Prettier
-        run: |
-          cd "backend"
-          npm run format:fix
+  # prettier-backend:
+  #   runs-on: ubuntu-latest
+  #   name: Format Prettier on Backend
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18'
+  #     - name: Install dependencies
+  #       run: |
+  #         cd "backend"
+  #         npm install
+  #     - name: Run Prettier
+  #       run: |
+  #         cd "backend"
+  #         npm run format:fix
