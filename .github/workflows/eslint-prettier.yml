@@ -5,7 +5,7 @@ on: [push]
 jobs:
   prettier-frontend:
     runs-on: ubuntu-latest
-    name: Check Prettier on Frontend
+    name: Format Prettier on Frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
           npm run format:fix
   prettier-backend:
     runs-on: ubuntu-latest
-    name: Check Prettier on Backend
+    name: Format Prettier on Backend
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
