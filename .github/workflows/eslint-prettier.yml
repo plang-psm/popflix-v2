@@ -31,3 +31,6 @@ jobs:
         run: |
           cd "backend"
           npm run format:fix
+      - name: List backend directory contents after formatting
+        run: |
+          ls -la backend
