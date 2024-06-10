@@ -18,7 +18,7 @@ function App() {
       <Router>
         <ScrollToTop />
                     <Navbar />
-          <Routes>
+                       <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/watchlist" element={<Watchlist />} />
           <Route path="/users/signup" element={<SignUp />} />
