@@ -22,11 +22,15 @@ function App() {
 =======
                     <Navbar />
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 42aff07 (rename folder path)
         <Routes>
 =======
                  <Routes>
 >>>>>>> 8e96bc5 (rebase)
+=======
+          <Routes>
+>>>>>>> 95fe83b (rebase)
           <Route exact path="/" element={<Home />} />
           <Route exact path="/watchlist" element={<Watchlist />} />
           <Route path="/users/signup" element={<SignUp />} />
