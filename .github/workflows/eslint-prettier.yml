@@ -19,8 +19,8 @@ jobs:
       - name: Prettify code
         uses: creyD/prettier_action@v4.3
         with:
+          working_directory: frontend/src
           # This part is also where you can pass other options, for example:
-          working_directory: "/frontend"
           prettier_options: --write **/*.{js,md}
   # prettier-backend:
   #   runs-on: ubuntu-latest
