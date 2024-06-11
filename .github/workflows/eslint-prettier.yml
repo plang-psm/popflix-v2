@@ -19,23 +19,4 @@ jobs:
       - name: Prettify code
         uses: creyD/prettier_action@v4.3
         with:
-          working-directory: ./frontend
           prettier_options: --write **/*.{js,md}
-  # prettier-backend:
-  #   runs-on: ubuntu-latest
-  #   name: Format Prettier on Backend
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '18'
-  #     - name: Install dependencies
-  #       run: |
-  #         cd "backend"
-  #         npm install
-  #     - name: Run Prettier
-  #       run: |
-  #         cd "backend"
-  #         npm run format:fix
