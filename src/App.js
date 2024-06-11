@@ -19,6 +19,7 @@ function App() {
         <ScrollToTop />
 <<<<<<< HEAD
         <Navbar />
+<<<<<<< HEAD
 =======
                     <Navbar />
 <<<<<<< HEAD
@@ -31,6 +32,13 @@ function App() {
 =======
           <Routes>
 >>>>>>> 95fe83b (rebase)
+=======
+        <Routes>
+=======
+                                    <Navbar />
+          <Routes>
+>>>>>>> f6e5d52 (test)
+>>>>>>> d99af07 (rebase)
           <Route exact path="/" element={<Home />} />
           <Route exact path="/watchlist" element={<Watchlist />} />
           <Route path="/users/signup" element={<SignUp />} />
