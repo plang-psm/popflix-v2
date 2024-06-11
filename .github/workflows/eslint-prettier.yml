@@ -1,7 +1,7 @@
 name: Check the source code
 on: [push]
 jobs:
-  prettier-check-fe:
+  prettier-check-frontend:
     name: Frontend prettier
     runs-on: ubuntu-latest
     steps:
@@ -14,4 +14,19 @@ jobs:
       - name: Run Prettier
         run: |
           cd "frontend"
+          npm run format
+jobs:
+  prettier-check-backend:
+    name: Backend prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          cd "backend"
+          npm install
+      - name: Run Prettier
+        run: |
+          cd "backend"
           npm run format
