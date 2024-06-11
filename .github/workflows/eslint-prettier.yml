@@ -1,22 +1,18 @@
 name: Prettier Check
 
-on:
-  pull_request:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
-  prettier:
     runs-on: ubuntu-latest
-
+    name: Format Prettier on Frontend
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Prettify code
-        uses: creyD/prettier_action@v4.3
-        with:
-          prettier_options: --write **/*.{js,md}
+      - name: Install dependencies
+        run: |
+          cd "frontend"
+          npm install
+      - name: Run Prettier
+        run: |
+          cd "frontend"
+          npm run format
