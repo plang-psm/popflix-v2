@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App bg-[black] text-[white] bg-gradient-to-t from-slate-900 to-black">
       <Router>
-        <ScrollToTop />
+            <ScrollToTop />
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
