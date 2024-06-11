@@ -15,7 +15,7 @@ jobs:
         run: |
           cd "frontend"
           npm run format
-jobs:
+          
   prettier-check-backend:
     name: Backend prettier
     runs-on: ubuntu-latest
