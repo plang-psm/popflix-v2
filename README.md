@@ -3,6 +3,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 
+
 <div align='center'>
     <h1>Popfliix</h1>
     <p>M.E.R.N. w/ Redux Toolkit - Full stack movie watchlist application that allows users to track their favorite movies and tvshows.</p>
@@ -11,33 +12,31 @@
 
 See [v1 Here](https://plang-psm.github.io/popflix/) to see how the project has progressed.
 
-## Table of Contents
 
-- [Description](#description)
-- [Technologies](#technologies)
-- [Images](#images)
-- [Launch](#launch)
-- [Contact](#contact)
-- [Resources](#resources)
+## Table of Contents
+* [Description](#description)
+* [Technologies](#technologies)
+* [Images](#images)
+* [Launch](#launch)
+* [Contact](#contact)
+* [Resources](#resources)
 
 <img width="1328" alt="popfliix" src="https://github.com/plang-psm/popflix-v2/assets/101952500/725e96ca-f191-4994-8e95-c4c0fd0809c7">
 
-## Description
 
+## Description
 Popflix is a fully responsive web application that allows users to browse through movies and shows provided by The Movie Database API. The user can also customize their own personal watchlist by storing or removiing movies from their watchlist.
 
 ## Technologies
-
-- <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React tag"  />
-- ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
-- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-- ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
-- ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-- ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-- ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+* <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React tag"  />
+* ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+* ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+* ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
+* ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+* ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+* ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
 ## Images
-
 <details>
 <summary>Images</summary>
 <br>
@@ -50,14 +49,16 @@ Popflix is a fully responsive web application that allows users to browse throug
 <img width="1328" alt="image" src="https://github.com/plang-psm/popflix-v2/assets/101952500/308ea56b-f823-4679-a4be-e21f9fe0ba72">
 <img width="1328" alt="image" src="https://github.com/plang-psm/popflix-v2/assets/101952500/7143b5ab-f040-4317-8d69-6f8273fc7360">
 
+  
   </details>
 
-## Launch
 
+
+## Launch
 You can open the project here:
 [Popflix](https://popfliix.vercel.app/)
-or
-
+ or
+ 
 <details>
 <summary>Launch</summary>
 <br>
@@ -129,17 +130,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
 # popfliix
-
 </details>
 
 ## Contact
-
 <a href='https://www.linkedin.com/in/plang-psm/' target='_blank'><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn tag" /></a>
 
 ## Resources
-
 Badges: <a href='https://github.com/Ileriayo/markdown-badges' target='_blank'>Copyright (c) 2020 Ileriayo Adebiyi</a>
 
 Header and Layout: <a href='https://github.com/othneildrew/Best-README-Template' target='_blank'>Copyright (c) 2021 Othneil Drew</a>
