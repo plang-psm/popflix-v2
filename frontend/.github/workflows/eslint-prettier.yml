@@ -16,3 +16,24 @@ jobs:
         with:
          working-directory: frontend
          config-file: .prettierrc.js
+name: Check the source code
+on: [push]
+jobs:
+  prettier-frontend:
+    runs-on: ubuntu-latest
+    name: Format Prettier on Frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: |
+          cd "frontend"
+          npm install
+      - name: Run Prettier
+        run: |
+          cd "frontend"
+          npm run format

@@ -13,3 +13,18 @@ jobs:
        with:
          working-directory: frontend
          config-file: prod.config.js
+name: Cypress Tests
+
+on: [push]
+
+jobs:
+ Cypress-Test:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout repo
+       uses: actions/checkout@v3
+     - name: Run cypress test
+       uses: cypress-io/github-action@v6
+       with:
+         working-directory: frontend
+         config-file: prod.config.js
