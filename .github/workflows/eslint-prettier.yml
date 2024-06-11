@@ -1,41 +1,18 @@
-name: Prettier Check
-
-on: [push]
-
+name: Check the source code
+on:
+  pull_request:
+    branches:
+      - main
 jobs:
-  prettier-frontend:
+  test:
+    name: Check the source code
     runs-on: ubuntu-latest
-    name: Format Prettier on Frontend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: npm ci
+      - name: Prettier
+        run: npm run format
         with:
-          node-version: '18'
-      - name: Install dependencies
-        run: |
-          cd "frontend"
-          npm install
-      - name: Run Prettier
-        run: |
-          cd "frontend"
-          npm run format:fix
-  # prettier-backend:
-  #   runs-on: ubuntu-latest
-  #   name: Format Prettier on Backend
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '18'
-  #     - name: Install dependencies
-  #       run: |
-  #         cd "backend"
-  #         npm install
-  #     - name: Run Prettier
-  #       run: |
-  #         cd "backend"
-  #         npm run format:fix
+         working-directory: frontend
+         config-file: .prettierrc.js
