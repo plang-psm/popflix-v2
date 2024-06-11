@@ -19,7 +19,6 @@ jobs:
       - name: Prettify code
         uses: creyD/prettier_action@v4.3
         with:
-          working-directory: ./frontend
           prettier_options: --write **/*.{js,md}
   # prettier-backend:
   #   runs-on: ubuntu-latest
