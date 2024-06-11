@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-    app.use(errorHandler);
+app.use(errorHandler);
 app.listen(process.env.PORT, () => {
   console.log('Server is running, you better catch it!');
 });
