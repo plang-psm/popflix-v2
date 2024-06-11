@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
     runs-on: ubuntu-latest
+    
     name: Format Prettier on Frontend
     steps:
       - name: Checkout code
@@ -12,6 +13,7 @@ jobs:
         run: |
           cd "frontend"
           npm install
+          
       - name: Run Prettier
         run: |
           cd "frontend"
