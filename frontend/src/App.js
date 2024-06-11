@@ -17,8 +17,16 @@ function App() {
     <div className="App bg-[black] text-[white] bg-gradient-to-t from-slate-900 to-black">
       <Router>
         <ScrollToTop />
+<<<<<<< HEAD
         <Navbar />
+=======
+                    <Navbar />
+<<<<<<< HEAD
+>>>>>>> 42aff07 (rename folder path)
         <Routes>
+=======
+                 <Routes>
+>>>>>>> 8e96bc5 (rebase)
           <Route exact path="/" element={<Home />} />
           <Route exact path="/watchlist" element={<Watchlist />} />
           <Route path="/users/signup" element={<SignUp />} />
