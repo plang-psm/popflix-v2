@@ -10,7 +10,21 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --check ./",
-    "format:fix": "prettier --write ./"
+    "format:fix": "prettier --write ./",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --ext .tsx --ext .ts ./src --fix"
+    ],
+    "./src/**": [
+      "prettier --write ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +40,9 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.6",
+    "nodemon": "^2.0.22",
+    "prettier": "^3.3.2"
   }
 }
