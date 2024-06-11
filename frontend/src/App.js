@@ -19,14 +19,26 @@ function App() {
         <ScrollToTop />
 <<<<<<< HEAD
         <Navbar />
+<<<<<<< HEAD
 =======
                     <Navbar />
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 42aff07 (rename folder path)
         <Routes>
 =======
                  <Routes>
 >>>>>>> 8e96bc5 (rebase)
+=======
+          <Routes>
+>>>>>>> 95fe83b (rebase)
+=======
+        <Routes>
+=======
+                                    <Navbar />
+          <Routes>
+>>>>>>> f6e5d52 (test)
+>>>>>>> d99af07 (rebase)
           <Route exact path="/" element={<Home />} />
           <Route exact path="/watchlist" element={<Watchlist />} />
           <Route path="/users/signup" element={<SignUp />} />
