@@ -2,7 +2,7 @@ describe('Test links on the mobile navbar', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.viewport('iphone-x');
-    cy.getDataTest('mobile-hamburger-menu-open').trigger('click')
+    cy.getDataTest('mobile-hamburger-menu-open').trigger('click', { force: true });
   });
   it('Test logo text to direct to home page', () => {
     cy.getDataTest('mobile-nav-title').click();
