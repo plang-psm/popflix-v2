@@ -1,3 +1,9 @@
+// Custom command to log and capture screenshots on failure
+Cypress.on('fail', (error, runnable) => {
+  cy.screenshot();
+  throw error; // throw error to have test still fail
+});
+
 describe('Test links on the mobile navbar', () => {
   beforeEach(() => {
     cy.visit('/');
