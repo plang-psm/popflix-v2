@@ -15,3 +15,10 @@ jobs:
           browser: chrome
           working-directory: frontend
           config-file: prod.config.js
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v2
+        if: failure() # Upload only if tests fail
+          with:
+            working-directory: frontend
+            name: cypress-screenshots
+            path: cypress/screenshots
