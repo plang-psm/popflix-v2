@@ -6,19 +6,19 @@ jobs:
   Cypress-Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+     - name: Checkout repo
+       uses: actions/checkout@v3
 
-      - name: Run cypress test
-        uses: cypress-io/github-action@v6
-        with:
-          working-directory: frontend
-          config-file: prod.config.js
-
-      - name: Upload Cypress screenshots
-        uses: actions/upload-artifact@v2
-        if: failure() # Upload only if tests fail
-          with:
-            working-directory: frontend
-            name: cypress-screenshots
-            path: cypress/screenshots
+     - name: Run cypress test
+       uses: cypress-io/github-action@v6
+       with:
+         working-directory: frontend
+         config-file: prod.config.js
+     
+     - name: Upload Cypress screenshots
+       uses: actions/upload-artifact@v2
+       if: failure() # Upload only if tests fail
+       with:
+         working-directory: frontend
+         name: cypress-screenshots
+         path: cypress/screenshots
