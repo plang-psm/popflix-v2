@@ -1,3 +1,8 @@
+Cypress.on('fail', (error, runnable) => {
+  cy.screenshot();
+  throw error; // throw error to have test still fail
+});
+
 describe('Test links on the mobile navbar', () => {
   beforeEach(() => {
     cy.visit('/');
