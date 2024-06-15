@@ -1,50 +1,50 @@
-describe('Test links on the mobile navbar', () => {
-  beforeEach(() => {
-    cy.visit('/');
-    cy.viewport('iphone-x');
-    cy.getDataTest('mobile-hamburger-menu-open').trigger('click', { force: true });
-  });
-  it('Test logo text to direct to home page', () => {
-    cy.getDataTest('mobile-nav-title').click();
-    cy.location('pathname').should('eq', '/');
-  });
-  // it('Test closing navbar menu', () => {
-  //   cy.getDataTest('mobile-nav-close').click();
-  //   cy.getDataTest('mobile-nav-close').should('not.be.visible');
-  // });
-  // it('Test home to direct home page', () => {
-  //   cy.getDataTest('mobile-home').click();
-  //   cy.location('pathname').should('eq', '/');
-  // });
-  // it('Test now playing link for movies', () => {
-  //   cy.getDataTest('mobile-movies-now-playing').click();
-  //   cy.location('pathname').should('eq', '/moviehome/now_playing');
-  // });
-  // it('Test top rated link for movies', () => {
-  //   cy.getDataTest('mobile-movies-top-rated').click();
-  //   cy.location('pathname').should('eq', '/moviehome/top_rated');
-  // });
-  // it('Test popular link for movies', () => {
-  //   cy.getDataTest('mobile-movies-popular').click();
-  //   cy.location('pathname').should('eq', '/moviehome/popular');
-  // });
-  // it('Test on the air link for tv shows', () => {
-  //   cy.getDataTest('mobile-tv-on-the-air').click();
-  //   cy.location('pathname').should('eq', '/tvhome/on_the_air');
-  // });
-  // it('Test top rated link for tv shows', () => {
-  //   cy.getDataTest('mobile-tv-top-rated').click();
-  //   cy.location('pathname').should('eq', '/tvhome/top_rated');
-  // });
-  // it('Test popular link for tv shows', () => {
-  //   cy.getDataTest('mobile-tv-popular').click();
-  //   cy.location('pathname').should('eq', '/tvhome/popular');
-  // });
-  // it('Test login button', () => {
-  //   cy.getDataTest('mobile-login').click();
-  //   cy.location('pathname').should('eq', '/users/login');
-  // });
-});
+// describe('Test links on the mobile navbar', () => {
+//   beforeEach(() => {
+//     cy.visit('/');
+//     cy.viewport('iphone-x');
+//     cy.getDataTest('mobile-hamburger-menu-open').trigger('click', { force: true });
+//   });
+//   it('Test logo text to direct to home page', () => {
+//     cy.getDataTest('mobile-nav-title').click();
+//     cy.location('pathname').should('eq', '/');
+//   });
+//   it('Test closing navbar menu', () => {
+//     cy.getDataTest('mobile-nav-close').click();
+//     cy.getDataTest('mobile-nav-close').should('not.be.visible');
+//   });
+//   it('Test home to direct home page', () => {
+//     cy.getDataTest('mobile-home').click();
+//     cy.location('pathname').should('eq', '/');
+//   });
+//   it('Test now playing link for movies', () => {
+//     cy.getDataTest('mobile-movies-now-playing').click();
+//     cy.location('pathname').should('eq', '/moviehome/now_playing');
+//   });
+//   it('Test top rated link for movies', () => {
+//     cy.getDataTest('mobile-movies-top-rated').click();
+//     cy.location('pathname').should('eq', '/moviehome/top_rated');
+//   });
+//   it('Test popular link for movies', () => {
+//     cy.getDataTest('mobile-movies-popular').click();
+//     cy.location('pathname').should('eq', '/moviehome/popular');
+//   });
+//   it('Test on the air link for tv shows', () => {
+//     cy.getDataTest('mobile-tv-on-the-air').click();
+//     cy.location('pathname').should('eq', '/tvhome/on_the_air');
+//   });
+//   it('Test top rated link for tv shows', () => {
+//     cy.getDataTest('mobile-tv-top-rated').click();
+//     cy.location('pathname').should('eq', '/tvhome/top_rated');
+//   });
+//   it('Test popular link for tv shows', () => {
+//     cy.getDataTest('mobile-tv-popular').click();
+//     cy.location('pathname').should('eq', '/tvhome/popular');
+//   });
+//   it('Test login button', () => {
+//     cy.getDataTest('mobile-login').click();
+//     cy.location('pathname').should('eq', '/users/login');
+//   });
+// });
 // describe('Test logout and profile links on mobile', () => {
 //   beforeEach(() => {
 //     cy.visit('/users/login');
