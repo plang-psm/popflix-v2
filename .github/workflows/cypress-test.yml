@@ -13,8 +13,8 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           working-directory: frontend
-          browser: chrome
           config-file: prod.config.js
+
       - name: Upload Cypress screenshots
         uses: actions/upload-artifact@v2
         if: failure() # Upload only if tests fail
