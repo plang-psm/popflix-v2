@@ -63,7 +63,7 @@ function Navbar() {
         <Link to="/">
           <h1
             className="tracking-wider p-2 text-2xl md:text-4xl text-white hover:text-red-700 font-bold"
-            data-test="desktop-nav-title"
+            data-test="nav-title"
           >
             POPFLIIX
           </h1>
@@ -82,7 +82,7 @@ function Navbar() {
             >
               Movies
               <div
-                className="dropdown-movie  hidden group-hover:block relative"
+                className="dropdown-movie hidden group-hover:block relative"
                 data-test="desktop-movies-dropdown"
               >
                 <ul className="absolute bg-slate-900 p-4 w-[175px]">
@@ -203,11 +203,11 @@ function Navbar() {
         {/* md:hidden - hides at 767px */}
         <div className="p-3 md:hidden flex">
           <AiOutlineKey
-            className="mx-2 font-bold text-white cursor-pointer text-2xl"
+            className="searchbar-icon mx-2 font-bold text-white cursor-pointer text-2xl"
             onClick={handleSeach}
           />
           <AiOutlineMenu
-            className="mx-2 hover:text-red-700 cursor-pointer text-2xl"
+            className="mobile-hamburger-menu mx-2 hover:text-red-700 cursor-pointer text-2xl"
             onClick={handleNav}
             data-test="mobile-hamburger-menu-open"
           />
@@ -225,18 +225,18 @@ function Navbar() {
         }
       >
         <div className="nav-header flex justify-between content-center">
-          <Link to="/">
-            <h1
-              className="tracking-wider p-6 text-2xl font-bold w-100"
-              data-test="mobile-nav-title"
-            >
-              POPFLIIX
-            </h1>
-          </Link>
+          <h1
+            className="tracking-wider p-6 text-2xl font-bold w-100"
+            onClick={() => handleRoute('/')}
+            data-test="mobile-nav-title"
+          >
+            POPFLIIX
+          </h1>
           <AiOutlineClose
             size={25}
             className="my-auto mx-4 hover:text-red-700 cursor-pointer"
             onClick={handleNav}
+            data-test="mobile-nav-close"
           />
         </div>
 
@@ -295,7 +295,7 @@ function Navbar() {
                     On The Air
                   </a>
                 </li>
-                <li className="py-1">
+                <li className="py-2">
                   <a
                     href="/tvhome/top_rated"
                     className="text-white hover:text-red-500"
@@ -304,7 +304,7 @@ function Navbar() {
                     Top Rated
                   </a>
                 </li>
-                <li className="py-1">
+                <li className="py-2">
                   <a
                     href="/tvhome/popular"
                     className="text-white hover:text-red-500"

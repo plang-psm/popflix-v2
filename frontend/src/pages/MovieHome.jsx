@@ -21,7 +21,6 @@ const MovieHome = () => {
 
   const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`;
 
-  console.log(moviesArr);
   const fetchMovies = async () => {
     setLoading(true);
     try {
