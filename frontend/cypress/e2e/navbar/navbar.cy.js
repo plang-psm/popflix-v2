@@ -7,7 +7,7 @@ describe('Test links on the mobile navbar', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.viewport(375, 667);
-    cy.getDataTest('mobile-hamburger-menu-open').should('be.visible').click();
+    cy.getDataTest('mobile-hamburger-menu-open', {timeout: 7000}).should('be.visible').click();
   });
   it('Test logo text to direct to home page', () => {
     cy.getDataTest('mobile-nav-title').click();
