@@ -32,12 +32,18 @@ function SearchBar({ handleSearch, handleSearchRoute }) {
   }, [searchInput, typeParam]);
 
   return (
-    <div className="z-40 search-bar h-screen absolute top-0 left-0 w-full opacity-[85%] bg-black">
+    <div
+      className="z-40 search-bar h-screen absolute top-0 left-0 w-full opacity-[85%] bg-black"
+      data-test="searchbar"
+    >
       <div
         className="close ml-auto m-4 font-bold text-white cursor-pointer text-2xl"
         onClick={handleSearch}
       >
-        <AiOutlineClose className="mx-4 my-8 ml-auto font-bold text-white cursor-pointer text-2xl" />
+        <AiOutlineClose
+          className="mx-4 my-8 ml-auto font-bold text-white cursor-pointer text-2xl"
+          data-test="close-searchbar"
+        />
       </div>
       <div className="input-container w-full md:w-[80%] mx-auto">
         <div className="buttons m-2 text-center">
