@@ -1,10 +1,12 @@
 import Home from '../src/pages/Home';
-import SignUp from '../src/pages/SignUp';
+import SignUp from './pages/SignUp';
 import Watchlist from '../src/pages/Watchlist';
-import Login from '../src/pages/Login';
+import Login from './pages/Login';
 import Navbar from '../src/components/Navbar';
 import MoviePage from '../src/pages/MoviePage';
 import TvPage from '../src/pages/TvPage';
+import MovieHome from '../src/pages/MovieHome';
+import TvHome from '../src/pages/TvHome';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import Footer from '../src/components/Footer';
@@ -24,7 +26,9 @@ function App() {
           <Route path="/users/signup" element={<SignUp />} />
           <Route path="/watchlist" element={<Watchlist />} />
           <Route path="/users/login" element={<Login />} />
+          <Route path="/moviehome/:id" element={<MovieHome />} />
           <Route path="/movie/:id" element={<MoviePage />} />
+          <Route path="/tvhome/:id" element={<TvHome />} />
           <Route path="/tv/:id" element={<TvPage />} />
         </Routes>
         <Footer />

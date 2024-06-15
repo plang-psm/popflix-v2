@@ -138,9 +138,7 @@ function MoviePage() {
     }
   };
 
-  // Function to add media to our watchlist
   const addMovie = () => {
-    // Checks for user first via state
     if (!user) {
       return toast.error('You need an account to create a watchlist');
     }
@@ -152,7 +150,6 @@ function MoviePage() {
       type: 'movie',
       user: user._id,
     };
-    // dispatch the data to watchlistslice
     dispatch(addToWatchlist(movieData))
       .unwrap()
       .then(() => {
