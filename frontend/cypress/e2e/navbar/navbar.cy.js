@@ -1,13 +1,8 @@
-Cypress.on('fail', (error, runnable) => {
-  cy.screenshot();
-  throw error; // throw error to have test still fail
-});
-
 describe('Test links on the mobile navbar', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.viewport(375, 667);
-    cy.getDataTest('mobile-hamburger-menu-open', {timeout: 7000}).should('be.visible').click();
+    cy.viewport('iphone-x');
+    cy.getDataTest('mobile-hamburger-menu-open').should('be.visible').click();
   });
   it('Test logo text to direct to home page', () => {
     cy.getDataTest('mobile-nav-title').click();
@@ -16,7 +11,6 @@ describe('Test links on the mobile navbar', () => {
   it('Test closing navbar menu', () => {
     cy.getDataTest('mobile-nav-close').click();
     cy.getDataTest('mobile-nav-close').should('not.be.visible');
-
   });
   it('Test home to direct home page', () => {
     cy.getDataTest('mobile-home').click();
@@ -79,7 +73,6 @@ describe('Test logout and profile links on mobile', () => {
 describe('Test links on desktop navbar', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.viewport(1280, 720);
   });
   it('Test logo to direct home page', () => {
     cy.getDataTest('nav-title').click();
