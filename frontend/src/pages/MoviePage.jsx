@@ -30,7 +30,7 @@ function MoviePage() {
   const [loading, setLoading] = useState(false);
 
   // URL needed to bring images from TMDB API
-  const BACKDROP_IMG = 'https://image.tmdb.org/t/p/original';
+  const BACKDROP_IMG = 'https://image.tmdb.org/t/p/w500';
 
   useEffect(() => {
     let ignore = false;

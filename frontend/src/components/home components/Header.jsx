@@ -76,7 +76,7 @@ function Header() {
           )}
         </div>
       ) : (
-        <div className="title p-5 text-center">
+        <div className="title p-5 text-center h-full">
           <h1 className="my-2 text-6xl font-bold uppercase text-red-700">Welcome</h1>
           <h2 className="my-2 text-xl uppercase">Grab some popcorn and</h2>
           <h3 className="my-2 text-xl uppercase">
