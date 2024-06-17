@@ -10,14 +10,11 @@ function MovieHome() {
   return (
     <>
       <NowPlaying />
-
-      <div className="min-h-screen pb-14 px-4">
-        <Header />
-        <TrendingMovieCarousel />
-        <TrendingTvCarousel />
-        <ScifiMovieCarousel />
-        <FamilyMovieCarousel />
-      </div>
+      <Header />
+      <TrendingMovieCarousel />
+      <TrendingTvCarousel />
+      <ScifiMovieCarousel />
+      <FamilyMovieCarousel />
     </>
   );
 }

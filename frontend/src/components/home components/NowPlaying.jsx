@@ -12,8 +12,8 @@ function NowPlaying() {
   const API_NOW_PLAYING_URL = 'https://api.themoviedb.org/3/movie/now_playing';
   const API_KEY = process.env.REACT_APP_TMDB_KEY;
   const API_IMG_ORIGINAL = 'https://image.tmdb.org/t/p/w1280';
-  const NO_IMAGE =
-    'https://unsplash.com/photos/brown-short-coated-dog-in-orange-hoodie-oU6KZTXhuvk';
+  const NOIMAGE =
+    'https://images.unsplash.com/photo-1469982866068-278880140412?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
 
   const navigate = useNavigate();
   const [nowPlayingData, setNowPlayingData] = useState([]);
@@ -58,22 +58,28 @@ function NowPlaying() {
             hide: true,
           }}
           modules={[EffectFade, Scrollbar, Autoplay]}
-          className="mySwiper"
+          className="mySwiper h-[60vw]"
         >
           {nowPlayingData.map(({ id, backdrop_path, title, vote_average, overview }) => (
             <SwiperSlide key={id}>
-              <picture>
-                <source type="image/webp" srcSet={`${API_IMG_ORIGINAL + backdrop_path}.webp`} />
-                <source type="image/jpeg" srcSet={`${API_IMG_ORIGINAL + backdrop_path}.jpeg`} />
+              <picture fetchpriority="high">
+                <source
+                  type="image/webp"
+                  srcSet={`${backdrop_path == null ? NOIMAGE : API_IMG_ORIGINAL + backdrop_path}.webp`}
+                />
+                <source
+                  type="image/jpeg"
+                  srcSet={`${backdrop_path == null ? NOIMAGE : API_IMG_ORIGINAL + backdrop_path}.jpeg`}
+                />
                 <img
-                  className="object-cover object-top w-full lg:h-[750px]"
+                  className="object-cover object-top w-screen h-full"
                   srcSet={`
-            ${API_IMG_ORIGINAL + backdrop_path}.jpg?width=100 100w,
-            ${API_IMG_ORIGINAL + backdrop_path}.jpg?width=200 200w,
-            ${API_IMG_ORIGINAL + backdrop_path}.jpg?width=400 400w,
-            ${API_IMG_ORIGINAL + backdrop_path}.jpg?width=800 800w
+            ${backdrop_path == null ? NOIMAGE : API_IMG_ORIGINAL + backdrop_path}.jpg?width=100 100w,
+            ${backdrop_path == null ? NOIMAGE : API_IMG_ORIGINAL + backdrop_path}.jpg?width=200 200w,
+            ${backdrop_path == null ? NOIMAGE : API_IMG_ORIGINAL + backdrop_path}.jpg?width=400 400w,
+            ${backdrop_path == null ? NOIMAGE : API_IMG_ORIGINAL + backdrop_path}.jpg?width=800 800w
             `}
-                  src={API_IMG_ORIGINAL + backdrop_path}
+                  src={backdrop_path == null ? NOIMAGE : API_IMG_ORIGINAL + backdrop_path}
                   alt="Your alt text"
                 />
               </picture>
