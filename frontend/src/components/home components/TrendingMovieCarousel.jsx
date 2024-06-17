@@ -41,9 +41,9 @@ function TrendingMovieCarousel() {
   };
 
   return (
-    <div className="trending-container py-5">
+    <div className="trending-container h-[338px] py-5">
       <h1 className="pb-4 text-2xl">{'Trending Movies'}</h1>
-      <div className="h-[250px]">
+      <div className="">
         {/* Swiper configuration settings for carousel */}
         {loading ? (
           <CardSkeleton />

@@ -42,10 +42,10 @@ function FamilyMovieCarousel() {
   };
 
   return (
-    <div className="trending-container py-5">
+    <div className="trending-container h-[338px] py-5">
       <h1 className="pb-4 text-2xl">{'Trending Movies'}</h1>
       {/* Swiper configuration settings for carousel */}
-      <div className="h-[250px]">
+      <div className="">
         {loading ? (
           <CardSkeleton />
         ) : (

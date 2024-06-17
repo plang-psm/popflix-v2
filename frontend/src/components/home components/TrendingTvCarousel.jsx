@@ -41,9 +41,9 @@ function TrendingTvCarousel() {
   };
 
   return (
-    <div className="trending-container">
+    <div className="trending-container h-[338px]">
       <h1 className="pb-4 text-2xl">Trending Shows</h1>
-      <div className="h-[250px]">
+      <div className="">
         {/* Swiper configuration settings for carousel */}
         {loading ? (
           <CardSkeleton />
