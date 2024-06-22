@@ -5,8 +5,8 @@ import { FreeMode } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import { useSelector, useDispatch } from 'react-redux';
-import { getWatchlists } from '../../features/watchlist/watchlistSlice';
-import EmptyWatchlist from '../EmptyWatchlist';
+import { getWatchlists } from '../features/watchlist/watchlistSlice';
+import EmptyWatchlist from '../views/EmptyWatchlist';
 
 function Header() {
   const { user } = useSelector((state) => state.auth);
@@ -76,23 +76,24 @@ function Header() {
           )}
         </div>
       ) : (
-        <div className="title p-5 text-center h-[400px]">
-          <h1 className="my-2 text-6xl font-bold uppercase text-red-700">Welcome</h1>
-          <h2 className="my-2 text-xl uppercase">Grab some popcorn and</h2>
-          <h3 className="my-2 text-xl uppercase">
-            <span className="text-4xl uppercase text-red-700 font-semibold">Browse</span>
-            through your favorite movies and shows
-          </h3>
-          <h2 className="my-2 text-xl uppercase">
-            Create your own
-            <span className="text-4xl uppercase text-red-700 font-semibold">Watchlist</span>
-          </h2>
-          <button
-            className="p-3 my-2 border-2 border-red-700 hover:bg-red-700 uppercase"
-            onClick={() => navigate('/users/signup')}
-          >
-            Sign up
-          </button>
+        <div className="title relative text-center h-[400px] max-w-[1200px] mx-auto overflow-hidden">
+          <img
+            className="absolute top-0 h-[300px] object-cover object-center w-full blur-[2px] opacity-80"
+            src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
+          <div className="absolute top-[5%] my-2 text-center right-0 left-0">
+            <h2 className="text-3xl lg:text-6xl font-bold">Your Ticket to the Best Films!</h2>
+            <p className="text-lg md:text-xl lg:text-3xl">Join Our Exclusive Movie Watchlist</p>
+          </div>
+          <div className="absolute bottom-[5%] left-0 right-0">
+            <button
+              className=" p-3 my-2 bg-red-700 hover:bg-red-700/80 uppercase"
+              onClick={() => navigate('/users/signup')}
+            >
+              Sign up
+            </button>
+          </div>
         </div>
       )}
     </div>

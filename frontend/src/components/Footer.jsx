@@ -4,7 +4,7 @@ import { AiFillLinkedin, AiFillGithub, AiFillRocket } from 'react-icons/ai';
 
 function Footer() {
   return (
-    <div className="min-h-100 py-8 text-center bg-transparent">
+    <div className="h-[300px] py-8 text-center flex flex-col justify-center items-center bg-transparent">
       <p
         className="text-md
       "

@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/scrollbar';
 import 'swiper/css/effect-fade';
 import { EffectFade, Autoplay, Scrollbar } from 'swiper';
-import HeroSkeleton from './HeroSkeleton';
+import HeroSkeleton from './skeletons/HeroSkeleton';
 
 function NowPlaying() {
   const API_NOW_PLAYING_URL = 'https://api.themoviedb.org/3/movie/now_playing';

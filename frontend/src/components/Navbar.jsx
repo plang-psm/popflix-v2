@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu, AiOutlineKey } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import SearchBar from './home components/SearchBar';
+import SearchBar from '../components/SearchBar';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../features/auth/authSlice';
 
@@ -76,10 +76,7 @@ function Navbar() {
             >
               Home
             </li>
-            <li
-              className="p-4 text-white font-semibold cursor-pointer group block"
-              onClick={() => navigate('/')}
-            >
+            <li className="p-4 text-white font-semibold cursor-pointer group block">
               Movies
               <div
                 className="dropdown-movie hidden group-hover:block relative"
@@ -116,10 +113,7 @@ function Navbar() {
                 </ul>
               </div>
             </li>
-            <li
-              className="p-4 text-white font-semibold cursor-pointer group block"
-              onClick={() => navigate('/')}
-            >
+            <li className="p-4 text-white font-semibold cursor-pointer group block">
               TV
               <div
                 className="dropdown-tv  hidden group-hover:block relative"

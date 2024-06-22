@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getWatchlists } from '../features/watchlist/watchlistSlice';
 import { logout } from '../features/auth/authSlice';
-import EmptyWatchlist from '../components/EmptyWatchlist';
-import WatchlistMovies from '../components/WatchlistMovies';
+import EmptyWatchlist from '../views/WatchlistMovies';
+import WatchlistMovies from '../views/EmptyWatchlist';
 
 function Watchlist() {
   // Pull user/isLoading from state

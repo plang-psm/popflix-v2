@@ -16,7 +16,6 @@ function LogIn() {
     email: '',
     password: '',
   });
-  const [showPassword, setShowPassword] = useState(false);
   const { email, password } = form;
 
   // Updates data if any fields are changed.
@@ -64,25 +63,21 @@ function LogIn() {
             value={email}
             onChange={handleChange}
             placeholder="Email"
+            autoComplete="email"
             className="p-1.5"
             required
           />
           <input
             data-test="pwd-input"
-            type={showPassword ? 'text' : 'password'}
+            type="password"
             name="password"
             value={password}
             onChange={handleChange}
             placeholder="Password"
+            autoComplete="current-password"
             className="p-1.5"
             required
           />
-          <button
-            className="text-gray-400 p-2 right-0 absolute"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            Show
-          </button>
           <input data-test="submit-button" type="submit" className="p-1.5 bg-red-700 text-white" />
         </form>
         <button

@@ -8,7 +8,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import Spinner from '../components/Spinner';
 import MediaCard from '../components/MediaCard';
-import MediaSkeleton from '../components/MediaSkeleton';
+import MediaSkeleton from '../views/skeletons/MediaSkeleton';
 
 function MoviePage() {
   const dispatch = useDispatch();
