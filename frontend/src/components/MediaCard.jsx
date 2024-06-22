@@ -56,7 +56,7 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia, trai
             </picture>
           </div>
         </div>
-        <div className="max-w-[1000px] mx-auto">
+        <div className="max-w-[1100px] mx-auto">
           <div className="top-container relative pt-24 px-4">
             <div className="media-heading w-full flex flex-col justify-center content-center md:flex-row">
               <div className="media-image mx-auto">
@@ -170,7 +170,7 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia, trai
                 <span className="font-bold ">Overview: </span>
                 {mediaArr.overview ? mediaArr.overview : 'No overview found'}
               </div>
-              <div className="side-info-container flex flex-row justify-evenly items-center md:flex-col md:justify-center min-w-[250px] md:w-full my-8 bg-slate-900 rounded-2xl font-thin w-full p-2 md:py-0">
+              <div className="side-info-container flex flex-row justify-evenly items-center md:flex-col md:justify-center min-w-[250px] md:max-w-[350px] md:w-full my-8 bg-slate-900 rounded-2xl font-thin w-full p-2 md:py-0">
                 <div className="user-rating max-w-[140px] mx-auto flex justify-around items-center py-4">
                   <ReviewBar vote={mediaArr.vote_average} />
                   <h2>User Rating</h2>
@@ -196,7 +196,7 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia, trai
             <div className="mid-container my-2 w-full md:flex md:justify-between">
               <div className="credits-container text-center md:w-full">
                 {/* Media cast */}
-                <h2 className="text-start font-bold mb-2">Casting</h2>
+                <h2 className="text-start pb-4 text-2xl font-bold">Casting</h2>
                 {credits.length === 0 ? (
                   <div className="h-[250px] w-full flex justify-center items-center">
                     <h2> No Cast Members</h2>
@@ -236,7 +236,7 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia, trai
                             srcSet={`${credit.profile_path === null ? NOIMAGE : POSTER_IMG + credit.profile_path}.jpeg`}
                           />
                           <img
-                            className="object-cover mx-auto w-[161px] h-[250px]"
+                            className="object-cover mx-auto w-full h-[250px]"
                             loading="lazy"
                             srcSet={`
                           ${credit.profile_path === null ? NOIMAGE : POSTER_IMG + credit.profile_path}.jpg?width=100 100w,
@@ -274,7 +274,7 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia, trai
             {/* Media suggest */}
             <div className="bottom-container w-full md:flex my-8 border-t-[.001px] py-8 border-gray-100">
               <div className="suggestion-container text-center w-full">
-                <h2 className="text-start font-bold mb-2">Suggestions</h2>
+                <h2 className="text-start pb-4 text-2xl font-bold">Suggestions</h2>
                 {suggested.length === 0 ? (
                   <div className="h-[200px] flex justify-center items-center">
                     <h2> No Suggested Movies</h2>
@@ -314,7 +314,7 @@ function MediaCard({ mediaArr, genres, media, credits, suggested, addMedia, trai
                               srcSet={`${media.backdrop_path === null ? NOIMAGE : BACKDROP_IMG + media.backdrop_path}.jpeg`}
                             />
                             <img
-                              className="object-cover w-[230px] h-[200px]"
+                              className="object-cover w-full h-[200px]"
                               loading="lazy"
                               srcSet={`
                           ${media.backdrop_path === null ? NOIMAGE : BACKDROP_IMG + media.backdrop_path}.jpg?width=100 100w,

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { ReviewBarABS } from '../../util/utils';
+import { ReviewBarABS } from '../util/utils';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper';
-import CardSkeleton from './CardSkeleton';
+import CardSkeleton from './skeletons/CardSkeleton';
 
 function TrendingMovieCarousel() {
   const API_KEY = process.env.REACT_APP_TMDB_KEY;
@@ -41,8 +41,8 @@ function TrendingMovieCarousel() {
   };
 
   return (
-    <div className="trending-container h-[338px] py-5">
-      <h1 className="pb-4 text-2xl">{'Trending Movies'}</h1>
+    <div className="trending-container mx-auto max-w-[1200px] h-[338px] p-6">
+      <h1 className="pb-4 text-2xl font-bold">Trending Movies</h1>
       <div className="">
         {/* Swiper configuration settings for carousel */}
         {loading ? (
@@ -50,34 +50,22 @@ function TrendingMovieCarousel() {
         ) : (
           <Swiper
             slidesPerView={2}
-            spaceBetween={15}
+            spaceBetween={10}
             navigation={true}
             modules={[Navigation]}
             className="mySwiper"
             breakpoints={{
               510: {
                 slidesPerView: 3,
-                spaceBetween: 15,
+                spaceBetween: 10,
               },
               768: {
                 slidesPerView: 4,
-                spaceBetween: 15,
+                spaceBetween: 10,
               },
-              1024: {
+              900: {
                 slidesPerView: 6,
-                spaceBetween: 20,
-              },
-              1300: {
-                slidesPerView: 6,
-                spaceBetween: 20,
-              },
-              1500: {
-                slidesPerView: 8,
-                spaceBetween: 20,
-              },
-              2000: {
-                slidesPerView: 10,
-                spaceBetween: 25,
+                spaceBetween: 10,
               },
             }}
           >
@@ -85,7 +73,7 @@ function TrendingMovieCarousel() {
               {trendingMovieData.map(({ id, poster_path, original_title, vote_average }) => (
                 <SwiperSlide key={id}>
                   <Link to={`/movie/${id}`}>
-                    <picture>
+                    <picture className="group block">
                       <source
                         type="image/webp"
                         srcSet={`${poster_path == null ? NOIMAGE : API_IMG + poster_path}.webp`}
@@ -95,7 +83,7 @@ function TrendingMovieCarousel() {
                         srcSet={`${poster_path === null ? NOIMAGE : API_IMG + poster_path}.jpeg`}
                       />
                       <img
-                        className="object-cover w-[167px] h-[250px]"
+                        className="object-cover w-full h-[250px]"
                         loading="lazy"
                         fetchpriority="low"
                         srcSet={`
@@ -109,6 +97,9 @@ function TrendingMovieCarousel() {
                             : `${original_title} image`
                         }`}
                       />
+                      <div className="absolute hidden inset-0 group-hover:flex items-center justify-center cursor-pointer bg-slate-800/90">
+                        <p className="font-semibold text-xl text-center px-2">{original_title}</p>
+                      </div>
                     </picture>
 
                     <ReviewBarABS vote={vote_average} />

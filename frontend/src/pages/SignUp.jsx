@@ -87,6 +87,7 @@ function SignUp() {
             value={username}
             onChange={handleChange}
             placeholder="Username"
+            autoComplete="username"
             className="p-1.5"
             required
           />
@@ -97,6 +98,7 @@ function SignUp() {
             value={email}
             onChange={handleChange}
             placeholder="Email"
+            autoComplete="email"
             className="p-1.5"
             required
           />
@@ -107,6 +109,7 @@ function SignUp() {
             value={password}
             onChange={handleChange}
             placeholder="Password"
+            autoComplete="new-password"
             className="p-1.5"
             required
           />
@@ -117,23 +120,10 @@ function SignUp() {
             value={confirmPassword}
             onChange={handleChange}
             placeholder="Password"
+            autoComplete="new-password"
             className="p-1.5"
             required
           />
-          {/* <button
-
-            className='text-gray-400 p-2 right-0 absolute'
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            Show
-          </button>
-
-          <button
-            className='text-gray-400 p-2 right-0 bottom-12 absolute'
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            Show
-          </button> */}
           <input data-test="submit-button" type="submit" className="p-1.5 bg-red-700 text-white" />
         </form>
         <button

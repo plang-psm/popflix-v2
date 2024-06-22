@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import MovieAndTvSkeleton from './MovieAndTvSkeleton';
+import MovieAndTvSkeleton from './skeletons/MovieAndTvSkeleton';
 
 const MovieHome = () => {
   const [moviesArr, setMoviesArr] = useState([]);

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import MediaCard from '../components/MediaCard';
-import MediaSkeleton from '../components/MediaSkeleton';
+import MediaSkeleton from '../views/skeletons/MediaSkeleton';
 
 function TvPage() {
   const dispatch = useDispatch();

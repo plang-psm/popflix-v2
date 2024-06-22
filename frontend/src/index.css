@@ -5,12 +5,21 @@
 html {
   -webkit-tap-highlight-color: transparent;
 }
-
+.swiper-button-next {
+  background-color: white;
+  opacity: 70%;
+  border-radius: 100%;
+}
+.swiper-button-prev {
+  background-color: white;
+  opacity: 70%;
+  border-radius: 100%;
+}
 .swiper-button-next::after {
-  font-size: 40px !important;
-  color: white;
+  font-size: 30px !important;
+  color: black;
 }
 .swiper-button-prev::after {
-  font-size: 40px !important;
-  color: white;
+  font-size: 30px !important;
+  color: black;
 }

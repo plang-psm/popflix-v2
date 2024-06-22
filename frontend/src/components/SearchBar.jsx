@@ -33,7 +33,7 @@ function SearchBar({ handleSearch, handleSearchRoute }) {
 
   return (
     <div
-      className="z-40 search-bar h-screen absolute top-0 left-0 w-full opacity-[85%] bg-black"
+      className="z-40 search-bar h-screen absolute top-0 left-0 w-full opacity-[95%] bg-black"
       data-test="searchbar"
     >
       <div
@@ -70,7 +70,8 @@ function SearchBar({ handleSearch, handleSearchRoute }) {
         <ul className="movie-container max-h-[400px] overflow-y-scroll">
           {movieData.map((data) => (
             <li
-              className="card-container bg-gray-900 border-t border-gray-500 items-center hover:bg-gray-800 opacity-[80%]"
+              key={data.id}
+              className="card-container bg-gray-900 border-t border-gray-500 items-center hover:bg-gray-800 opacity-[95%]"
               onClick={() => handleSearchRoute(`/${typeParam}/${data.id}`)}
             >
               <div className="title p-1">
