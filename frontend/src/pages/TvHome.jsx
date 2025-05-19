@@ -5,7 +5,9 @@ import { toast } from 'react-toastify';
 import MovieAndTvSkeleton from './skeletons/MovieAndTvSkeleton';
 
 const TvHome = () => {
+  const tvShowsPerPage = 12;
   const [tvShowArr, setTvShowArr] = useState([]);
+  const [currPage, setCurrPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const BACKDROP_IMG = 'https://image.tmdb.org/t/p/w500';
   const { id } = useParams();
@@ -13,6 +15,18 @@ const TvHome = () => {
   const pageTitle = id.trim().toUpperCase().replace('_', ' ');
   const NOIMAGE =
     'https://images.unsplash.com/photo-1469982866068-278880140412?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+
+  const maxTvPages = Math.ceil(tvShowArr.length / tvShowsPerPage);
+  const startIndex = (currPage - 1) * tvShowsPerPage;
+  const endIndex = startIndex + tvShowsPerPage;
+  const currTvShows = tvShowArr.slice(startIndex, endIndex);
+
+  const previousPageIndex = () => {
+    setCurrPage(Math.max(currPage - 1, 1));
+  };
+  const nextPageIndex = () => {
+    setCurrPage(Math.min(currPage + 1, maxTvPages));
+  };
 
   useEffect(() => {
     let ignore = false;
@@ -46,11 +60,11 @@ const TvHome = () => {
       ) : (
         <div className="container w-full max-w-[1200px] mx-auto pt-24 px-2 md:text-xl">
           <h1 className="text-3xl font-bold text-center pb-12">{pageTitle}</h1>
-          <div className="flex flex-wrap gap-4">
-            {tvShowArr.map((show) => {
+          <div className="grid justify-around gap-[2em] md:grid-cols-2 lg:grid-cols-3 ">
+            {currTvShows.map((show) => {
               return (
                 <div
-                  className="relative lg:basis-[21%] mx-auto"
+                  className="relative mx-auto"
                   key={show.id}
                   onClick={() => navigate(`/tv/${show.id}`)}
                 >
@@ -84,6 +98,25 @@ const TvHome = () => {
                 </div>
               );
             })}
+          </div>
+          <div className="text-center mt-10">
+            <button
+              className="p-4 hover:text-red-500 cursor-pointer"
+              onClick={previousPageIndex}
+              disabled={currPage === 1}
+            >
+              Previous
+            </button>
+            <span>
+              Page <span className="text-red-500">{currPage}</span> of {maxTvPages}
+            </span>
+            <button
+              className="p-4 hover:text-red-500 cursor-pointer"
+              onClick={nextPageIndex}
+              disabled={currPage === maxTvPages}
+            >
+              Next
+            </button>
           </div>
         </div>
       )}
