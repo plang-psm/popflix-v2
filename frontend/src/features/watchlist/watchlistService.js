@@ -32,7 +32,7 @@ const removeFromWatchlist = async (id, token) => {
     },
   };
   await axios.delete(API_URL + '/' + id, config);
-  return {id};
+  return { id };
 };
 
 const watchlistService = {
