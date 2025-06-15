@@ -21,9 +21,9 @@ function Header() {
   }, [dispatch]);
 
   return (
-    <div className="header-container my-8">
+    <div className="header-container max-w-[1200px] mx-auto mt-6">
       {user ? (
-        <div className="my-watchlist-container mb-8 p-10">
+        <div className="my-watchlist-container px-4">
           <h1 className="pb-4 text-2xl content-center">My Movies</h1>
           {watchlists.length !== 0 ? (
             <Swiper
@@ -42,29 +42,26 @@ function Header() {
                 },
 
                 1024: {
-                  slidesPerView: 5,
-                  spaceBetween: 10,
+                  slidesPerView: 4,
+                  spaceBetween: 5,
                 },
               }}
             >
               <div className="container">
                 {watchlists.map((movie) => (
                   <SwiperSlide key={movie.title}>
-                    <div className="container max-w-[250px] rounded-lg bg-slate-900 bg-blend-normal mx-auto mb-4 p-2 text-center font-thin">
-                      <div className="media-image mx-auto md:w-full max-w-[250px]">
-                        <img
-                          src={movie.image}
-                          className="w-full max-w-[250px] h-full object-cover"
-                        />
+                    <div className="container rounded-lg bg-slate-900 bg-blend-normal mx-auto my-4 p-8 md:p-4 text-center font-thin">
+                      <div className="media-image mx-auto">
+                        <img src={movie.image} className="w-full h-full object-cover" />
                       </div>
-                      <div className="media-description w-full h-100 min-h-[80px] text-sm sm:text-md">
-                        <h1 className="title text-xl py-1 font-normal">{movie.title}</h1>
-                      </div>
+                      <h2 className="title md:h-[5em] p-2 md:p-4 text-xl font-normal">
+                        {movie.title}
+                      </h2>
                       <button
-                        className="bg-gray-700 hover:bg-red-600 uppercase p-2 my-2 font-normal"
+                        className="bg-gray-700 hover:bg-red-600 uppercase p-2 md:p-4 font-normal m-4"
                         onClick={() => navigate(`/${movie.type}/${movie.mediaId}`)}
                       >
-                        Visit Content
+                        Visit Page
                       </button>
                     </div>
                   </SwiperSlide>
