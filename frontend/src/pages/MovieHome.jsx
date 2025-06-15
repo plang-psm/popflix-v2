@@ -53,8 +53,6 @@ const MovieHome = () => {
     }
   };
 
-  console.log(moviesArr);
-
   return (
     <>
       {loading ? (

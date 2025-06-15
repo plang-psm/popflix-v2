@@ -3,10 +3,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { extractErrorMessage } from '../../util/utils';
 import watchlistService from './watchlistService';
 
-const initialState = {
-  watchlists: [],
-  isLoading: false,
-};
+// const initialState = {
+//   watchlists: [],
+//   isLoading: false,
+// };
 
 // Add media to watchlist
 export const addToWatchlist = createAsyncThunk(
@@ -43,7 +43,10 @@ export const removeFromWatchlist = createAsyncThunk('watchlists/remove', async (
 
 export const watchlistSlice = createSlice({
   name: 'watchlist',
-  initialState,
+  initialState: {
+    watchlists: [],
+    isLoading: false,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(addToWatchlist.pending, (state) => {

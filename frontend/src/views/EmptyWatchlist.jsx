@@ -4,7 +4,7 @@ import React from 'react';
 function EmptyWatchlist() {
   return (
     <div className="text-center">
-      <h1 className="text-3xl">Watchlist is empty...</h1>
+      <h1 className="text-3xl my-20">Watchlist is empty...</h1>
     </div>
   );
 }
